@@ -1,0 +1,111 @@
+@import '../bower_components/bootstrap/less/bootstrap.less';
+@import '../bower_components/font-awesome/less/font-awesome.less';
+
+@icon-font-path: '../bower_components/bootstrap/fonts/';
+@fa-font-path: '../bower_components/font-awesome/fonts/';
+
+@import url(//fonts.googleapis.com/css?family=Roboto:300,400,500,700);
+
+@brand-primary: #55a67f;
+@brand-primary-light: lighten(@brand-primary, 20%);
+@brand-primary-dark: darken(@brand-primary, 5%);
+@brand-accent: @brand-primary-light;
+@brand-gray-dark: rgb(75, 75, 75);
+@brand-gray-light: rgb(250, 250, 250);
+
+html {
+  overflow-y: scroll;
+}
+
+// Font
+body {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  background-color: @brand-gray-light;
+  color: @brand-gray-dark;
+}
+
+html, body {
+  height: 100%; // necessary for 100% mapheight with leaflet
+}
+
+a {
+  color: @brand-gray-dark;
+}
+
+a:hover {
+  color: @brand-accent;
+  text-decoration: none;
+}
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+.stretch {
+  background-color: @brand-accent;
+  color: white;
+}
+
+.chart-container {
+  canvas {
+    display: block; // fixes resizing issue, see https://github.com/nnnick/Chart.js/issues/1006
+  }
+}
+
+.card {
+
+  color: lighten(@brand-gray-light, 20%);
+  background-color: white;
+  border: 1px solid darken(@brand-gray-light, 5%);
+
+  .card-content {
+    padding: 15px;
+    height: 220px;
+    text-align: center;
+
+  }
+
+  .card-title {
+    font-size: 16px;
+  }
+
+}
+
+h1 {
+  padding: 0px;
+  font-size: 20px;
+  color: darken(@brand-gray-light, 50%);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  padding: 0px;
+  font-size: 16px;
+  color: darken(@brand-gray-light, 50%);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.loading {
+  padding-top: 200px;
+
+  i {
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+// angular-punch-card
+
+// injector
+@import 'bootstrap-adaptions.less';
+@import 'main/main.less';
+@import 'mixins.less';
+@import 'navbar.less';
+@import '../components/footer/footer.less';
+@import '../components/modal/modal.less';
+// endinjector
