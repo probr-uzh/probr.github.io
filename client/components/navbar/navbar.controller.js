@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('probrSiteApp')
-  .controller('NavbarCtrl', function ($scope) {
+  .controller('NavbarCtrl', function ($scope, $location) {
 
     $scope.menu = [
       {

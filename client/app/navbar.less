@@ -10,7 +10,13 @@
 
   .navbar-brand {
     padding-left: 15px;
-    color: @brand-gray-dark;
+    color: @brand-primary;
+
+    font-family: 'Nunito';
+    font-weight: 300;
+    letter-spacing: 1px;
+    font-size: 12px;
+    text-transform: uppercase;
 
     img {
       height: 25px;
@@ -20,7 +26,7 @@
 
   .active {
     color: @activeNavBarFontColor;
-    background-color: @activeNavBarBG;
+    background-color: @brand-gray-dark;
   }
 
   .navbar-text {
@@ -29,6 +35,21 @@
 
   .navbar-collapse {
     border-color: @activeNavBarBG;
+  }
+
+  .navbar-nav > .active > a {
+    color: @brand-primary;
+    background-color: @brand-gray-dark;
+  }
+
+  .navbar-nav > .active > a:hover {
+    color: @brand-primary;
+    background-color: @brand-gray-dark;
+  }
+
+  .navbar-nav > .active > a:focus {
+    color: @brand-primary;
+    background-color: @brand-gray-dark;
   }
 
   .navbar-nav {
@@ -44,7 +65,7 @@
     li {
       a {
         color: @brand-gray-light;
-        background-color: @activeNavBarBG;
+        background-color: @brand-gray-dark;
       }
 
       a:hover {
@@ -56,12 +77,7 @@
         color: @brand-primary;
         background-color: @brand-gray-dark;
       }
-    }
 
-    li {
-      .active {
-        color: @brand-primary;
-      }
     }
 
   }

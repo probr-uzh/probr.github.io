@@ -1,57 +1,63 @@
 <navbar></navbar>
 
 <header class="hero-unit" id="banner">
-  <div class="container">
-    <img src="assets/images/probrlogo_light.png">
+    <div class="container">
+        <img style="height: 125px" src="assets/images/probrlogo_light.png">
 
-    <p class="lead">a generic wifi tracking system</p>
-  </div>
+        <p class="lead">a generic wifi tracking system</p>
+    </div>
 </header>
 
 <div class="container content" id="whatisprobr">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">What is Probr?</h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">probr-core</h1>
 
-      <p>
-        Probr lets you set-up a distributed WiFi sniffing and analysis infrastructure. After installing probr to your machine, you are able to add
-        devices and set up a remote execution infrastructure through the web interface. This allows you to remotely execute commands on multiple devices and therefore
-        start sniffing packet data from heterogeneous sources.
-        You can add devices and set-up a remote execution infrastructure through the Probr web interface with ease.
-        You can remotely execute commands on your sniffing devices and remotely start and stop WiFi sniffing from the Probr web interface.
-      </p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">How does it work?</h1>
+            <h2 class="page-header">setup using python and pip</h2>
 
-      <p>
-        Probr uses a distributed architecture. The central component probr-core serves as a management and storage server for all the sniffing devices participating in the system.
-        The sniffing devices are the ones that actually collect the WiFi packets and report them to the central component.
-      </p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Do I need to know how the WiFi protocol works, or how to write sniffing scripts?</h1>
+            <p>
+                Install <code>Python 2.7</code> and <code>PIP</code>.
+                We highly recommended to use <a href="https://virtualenv.pypa.io/en/latest/" target="_blank">Virtualenv</a> to manage the python environment for probr-core.
+                After cloning the project, create a virtual environment for probr outside the probr-core directory:
+                <code>virtualenv .env_probr</code>
+            </p>
 
-      <p>
-        No! That's the beauty of it. Probr comes with predefined command templates for sniffing WiFi probe requests and
-        uploading them to Probr's database, from where you can use the packets to do any analysis you want on them.
-      </p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Which devices are supported as sniffing stations?</h1>
+            <p>
+                Activate the virtualenv: <code>source .env_probr/bin/activate</code>. After this, use <code>pip install -r requirements.txt</code> in the projects directory and install all required
+                environments.
+            </p>
 
-      <p>
-        A device you wish to use with probr for sniffing should run a OS that allows to execute a bash shell and should have tools like wget and tcpdump installed on it.
-        Also it should have a WiFi interface that supports monitor mode. So in essence, you can use Raspberry Pis, ODROIDs, Linux machines, Macs as sniffing stations.
-      </p>
+            <p>
+                Now use <code>bower install</code> to install the dependencies for the web frontend. All that is left to do now, is to create the initial databases for probr.
+                Use <code>python manage.py migrate</code>. You will be asked to set your password upon your first login.
+            </p>
+
+            <h2 class="page-header">setup using docker</h2>
+
+            <p>
+                Install <a href="https://www.docker.com/" target="_blank">Docker</a>. Setup all necessary services using <code>sh install/docker/setup.sh</code>. As soon as the command has finished,
+                use <code>sh install/docker/deploy.sh</code>.
+            </p>
+
+        </div>
     </div>
-  </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">probr-analysis</h1>
+
+            <h2 class="page-header">setup</h2>
+
+            <p>
+
+            </p>
+
+            <h2 class="page-header">configuration</h2>
+
+            <p>
+
+            </p>
+        </div>
+    </div>
 </div>
 
 <footer></footer>
