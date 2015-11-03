@@ -9,8 +9,6 @@ angular.module('probrSiteApp', [
   'ui.bootstrap'
 ])
   .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
-    $urlRouterProvider
-      .otherwise('/');
-
+    $urlRouterProvider.otherwise('/overview');
     $locationProvider.html5Mode(true);
   });

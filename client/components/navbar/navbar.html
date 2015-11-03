@@ -1,19 +1,21 @@
-<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
-  <div class="navbar-header">
-    <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a ng-href="/analysis/" class="navbar-brand"><img src="assets/images/probrlogo_light.png"></a>
-  </div>
-  <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-    <ul class="nav navbar-nav">
-      <li ng-repeat="item in menu" ng-class="{active: isActiveRoot(item.link)}">
-        <a ui-sref="{{ item.link }}">{{ item.title }}</a>
-      </li>
-      <li ng-show="isAdmin()" ng-class="{active: isActiveRoot('/admin')}"><a href="/admin">Admin</a></li>
-    </ul>
+<div class="navbar navbar-inverse navbar-static-top" role="navigation" ng-controller="NavbarCtrl">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a ng-href="/analysis/" class="navbar-brand"><img src="assets/images/probrlogo_light.png"></a>
+    </div>
+    <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-repeat="item in menu" ng-class="{active: isActiveRoot(item.link)}">
+          <a ui-sref="{{ item.link }}">{{ item.title }}</a>
+        </li>
+        <li><a href="http://github.com/probr"><i class="fa fa-github"></i> Github</a></li>
+      </ul>
+    </div>
   </div>
 </div>

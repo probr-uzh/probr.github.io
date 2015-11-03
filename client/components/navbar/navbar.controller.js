@@ -4,10 +4,18 @@ angular.module('probrSiteApp')
   .controller('NavbarCtrl', function ($scope) {
 
     $scope.menu = [
-      /*{
-       'title': 'What is probr?',
-       'state': 'whatisprobr'
-       }*/
+      {
+        'title': 'Overview',
+        'link': 'overview'
+      },
+      {
+        'title': 'Documentation',
+        'link': 'docs'
+      },
+      {
+        'title': 'FAQ',
+        'link': 'faq'
+      }
     ];
 
     $scope.isCollapsed = true;

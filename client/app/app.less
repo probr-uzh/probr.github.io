@@ -4,7 +4,8 @@
 @icon-font-path: '../bower_components/bootstrap/fonts/';
 @fa-font-path: '../bower_components/font-awesome/fonts/';
 
-@import url(//fonts.googleapis.com/css?family=Roboto:300,400,500,700);
+@import url(//fonts.googleapis.com/css?family=Open+Sans:300,400,500,700);
+@import url(//fonts.googleapis.com/css?family=Nunito:300,400,500,700);
 
 @brand-primary: #55a67f;
 @brand-primary-light: lighten(@brand-primary, 20%);
@@ -19,7 +20,7 @@ html {
 
 // Font
 body {
-  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
   background-color: @brand-gray-light;
   color: @brand-gray-dark;
 }
@@ -99,13 +100,20 @@ h2 {
   }
 }
 
+.content {
+  p {
+    font-size: 16px;
+  }
+}
+
 // angular-punch-card
 
 // injector
 @import 'bootstrap-adaptions.less';
-@import 'main/main.less';
+@import 'documentation/documentation.less';
 @import 'mixins.less';
 @import 'navbar.less';
+@import 'overview/overview.less';
 @import '../components/footer/footer.less';
 @import '../components/modal/modal.less';
 // endinjector
