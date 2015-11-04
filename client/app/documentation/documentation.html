@@ -1,63 +1,20 @@
 <navbar></navbar>
 
 <header class="hero-unit" id="banner">
-    <div class="container">
-        <img style="height: 125px" src="assets/images/probrlogo_light.png">
+  <div class="container">
+    <img style="height: 125px" src="assets/images/probrlogo_light.png">
 
-        <p class="lead">a generic wifi tracking system</p>
-    </div>
+    <p class="lead">a generic wifi tracking system</p>
+  </div>
 </header>
 
 <div class="container content" id="whatisprobr">
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">probr-core</h1>
-
-            <h2 class="page-header">setup using python and pip</h2>
-
-            <p>
-                Install <code>Python 2.7</code> and <code>PIP</code>.
-                We highly recommended to use <a href="https://virtualenv.pypa.io/en/latest/" target="_blank">Virtualenv</a> to manage the python environment for probr-core.
-                After cloning the project, create a virtual environment for probr outside the probr-core directory:
-                <code>virtualenv .env_probr</code>
-            </p>
-
-            <p>
-                Activate the virtualenv: <code>source .env_probr/bin/activate</code>. After this, use <code>pip install -r requirements.txt</code> in the projects directory and install all required
-                environments.
-            </p>
-
-            <p>
-                Now use <code>bower install</code> to install the dependencies for the web frontend. All that is left to do now, is to create the initial databases for probr.
-                Use <code>python manage.py migrate</code>. You will be asked to set your password upon your first login.
-            </p>
-
-            <h2 class="page-header">setup using docker</h2>
-
-            <p>
-                Install <a href="https://www.docker.com/" target="_blank">Docker</a>. Setup all necessary services using <code>sh install/docker/setup.sh</code>. As soon as the command has finished,
-                use <code>sh install/docker/deploy.sh</code>.
-            </p>
-
-        </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">probr-core</h1>
+      <div marked="probrCoreMarkdown"></div>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">probr-analysis</h1>
-
-            <h2 class="page-header">setup</h2>
-
-            <p>
-
-            </p>
-
-            <h2 class="page-header">configuration</h2>
-
-            <p>
-
-            </p>
-        </div>
-    </div>
+  </div>
 </div>
 
 <footer></footer>
