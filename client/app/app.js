@@ -10,6 +10,6 @@ angular.module('probrSiteApp', [
     'hc.marked'
   ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
-    $urlRouterProvider.otherwise('/overview');
-    $locationProvider.html5Mode(true);
+    $urlRouterProvider.otherwise('overview');
+    $locationProvider.html5Mode(false);
   });
