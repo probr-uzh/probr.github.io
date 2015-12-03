@@ -26,11 +26,6 @@ angular.module('probrSiteApp')
               },
               "polygon": {
                 "nb_sides": 5
-              },
-              "image": {
-                "src": "img/github.svg",
-                "width": 100,
-                "height": 100
               }
             },
             "opacity": {
@@ -62,7 +57,7 @@ angular.module('probrSiteApp')
             },
             "move": {
               "enable": true,
-              "speed": 1,
+              "speed": 0.5,
               "direction": "none",
               "random": false,
               "straight": false,

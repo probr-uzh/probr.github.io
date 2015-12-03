@@ -10,9 +10,11 @@
 @brand-primary: #55a67f;
 @brand-primary-light: lighten(@brand-primary, 20%);
 @brand-primary-dark: darken(@brand-primary, 5%);
-@brand-accent: @brand-primary-light;
+@brand-accent: lighten(@brand-primary-light, 20);
 @brand-gray-dark: rgb(75, 75, 75);
 @brand-gray-light: rgb(250, 250, 250);
+
+@font-size-base: 16px;
 
 html {
   overflow-y: scroll;
@@ -30,11 +32,15 @@ html, body {
 }
 
 a {
-  color: @brand-gray-dark;
+  color: @brand-primary;
 }
 
 a:hover {
   color: @brand-accent;
+}
+
+a:hover {
+  color: @brand-primary-light;
   text-decoration: none;
 }
 
@@ -45,40 +51,10 @@ a:hover {
   padding: 0.2em 0;
 }
 
-.stretch {
-  background-color: @brand-accent;
-  color: white;
-}
-
-.chart-container {
-  canvas {
-    display: block; // fixes resizing issue, see https://github.com/nnnick/Chart.js/issues/1006
-  }
-}
-
-.card {
-
-  color: lighten(@brand-gray-light, 20%);
-  background-color: white;
-  border: 1px solid darken(@brand-gray-light, 5%);
-
-  .card-content {
-    padding: 15px;
-    height: 220px;
-    text-align: center;
-
-  }
-
-  .card-title {
-    font-size: 16px;
-  }
-
-}
-
 h1 {
   padding: 0px;
   font-size: 20px;
-  color: darken(@brand-gray-light, 50%);
+  color: @brand-gray-dark;
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -86,34 +62,18 @@ h1 {
 h2 {
   padding: 0px;
   font-size: 16px;
-  color: darken(@brand-gray-light, 50%);
+  color: @brand-gray-dark;
   margin-top: 10px;
   margin-bottom: 10px;
-}
-
-.loading {
-  padding-top: 200px;
-
-  i {
-    display: block;
-    margin-bottom: 20px;
-  }
-}
-
-.content {
-  p {
-    font-size: 16px;
-  }
 }
 
 .title {
-  padding: 0px;
+  padding: 20px 0;
   font-size: 40px;
-  color: darken(@brand-gray-light, 50%);
+  color: @brand-gray-dark;
   margin-top: 10px;
   margin-bottom: 10px;
 }
-
 
 // angular-punch-card
 
@@ -125,6 +85,7 @@ h2 {
 @import 'mixins.less';
 @import 'navbar.less';
 @import 'overview/overview.less';
+@import 'usecase/usecase.less';
 @import '../components/footer/footer.less';
 @import '../components/modal/modal.less';
 @import '../components/particlesjs/particlesjs.less';

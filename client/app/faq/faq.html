@@ -1,71 +1,78 @@
 <navbar></navbar>
 
 <div class="particles-bg" id="particles" particles>
-  <header class="hero-unit" id="banner">
-    <div class="container">
-      <img src="assets/images/probrlogo_white.png">
-      <p class="lead">a generic wifi tracking system</p>
-    </div>
-  </header>
+    <header class="hero-unit" id="banner">
+        <div class="container">
+            <img src="assets/images/probrlogo_white.png">
+            <h4 class="lead centered">a generic wifi tracking system</h4>
+        </div>
+    </header>
 </div>
 
 <div class="container content">
-  <br>
-  <h1 class="title" align="center" >FAQ</h1>
+    <h1 class="title">Frequently Asked Questions</h1>
 
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Which devices are supported?</h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Which devices are supported?</h1>
 
-      <p>
-        Probr was designed to support every device with a *NIX (Linux, Mac OS, UNIX) operating system, a wireless interface capable of monitor mode and internet access.
-        The system was tested with:
-        <ul>
-          <li><a href="http://www.hardkernel.com/main/products/prdt_info.php">ODROID C1</a> with Ubuntu</li>
-          <li><a href="https://www.raspberrypi.org/products/model-b/">Raspberry Pi B</a> with Raspbian </li>
-          <li><a href="http://www.tp-link.com/at/products/details/?model=TL-MR3020">TP-Link TL-MR3020</a> with OpenWRT</li>
-          <li>Mac OS X</li>
-          <li>Ubuntu 14.04</li>
-        </ul>
-      But Probr is not limited to these devices. Any device satisfying the requirements can be used:
-      <ul>
-        <li>bash shell</li>
-        <li>wget</li>
-        <li>tcpdump</li>
-      </ul>
-      </p>
+            <p>
+                Probr was designed to support every device with a *NIX (Linux, Mac OS, UNIX) operating system, a wireless interface capable of monitor mode and internet access.
+                The system was tested with:
+            </p>
+
+            <ul>
+                <li><a href="http://www.hardkernel.com/main/products/prdt_info.php">ODROID C1</a> with Ubuntu</li>
+                <li><a href="https://www.raspberrypi.org/products/model-b/">Raspberry Pi B</a> with Raspbian</li>
+                <li><a href="http://www.tp-link.com/at/products/details/?model=TL-MR3020">TP-Link TL-MR3020</a> with OpenWRT</li>
+                <li>Mac OS X</li>
+                <li>Ubuntu 14.04</li>
+            </ul>
+
+            <p>
+                But Probr is not limited to these devices. Any device satisfying the requirements can be used:
+            </p>
+
+            <ul>
+                <li>bash shell</li>
+                <li>wget</li>
+                <li>tcpdump</li>
+            </ul>
+        </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Which databases are supported?</h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Which databases are supported?</h1>
 
-      <p>
-        Out-of-the box, Probr supports the following databases for storage of sniffed packets:
+            <p>
+                Out-of-the box, Probr supports the following databases for storage of sniffed packets:
+            </p>
 
-        <ul>
-          <li><a href="https://www.mongodb.org/">MongoDB</a></li>
-          <li><a href="https://influxdb.com/">InfluxDB</a></li>
-        </ul>
+            <ul>
+                <li><a href="https://www.mongodb.org/">MongoDB</a></li>
+                <li><a href="https://influxdb.com/">InfluxDB</a></li>
+            </ul>
 
-        If you want to use any other database for your use case, you can extend Probr easily to do so, just by adding a handler.
-        You can take the handlers for the existing databases as an example (<a href="https://github.com/probr/probr-core/blob/master/handlers/handlers.py">here</a> ).
-        Then, you need to add your handler into the config variable "PROBR_HANDLERS" in <a href="https://github.com/probr/probr-core/blob/master/probr/base_settings.py">here</a>.
-      </p>
+            <p>
+                If you want to use any other database for your use case, you can extend Probr easily to do so, just by adding a handler.
+                You can take the handlers for the existing databases as an example (<a href="https://github.com/probr/probr-core/blob/master/handlers/handlers.py">here</a> ).
+                Then, you need to add your handler into the config variable "PROBR_HANDLERS" in <a href="https://github.com/probr/probr-core/blob/master/probr/base_settings.py">here</a>.
+            </p>
 
+        </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Do I need to know how the WiFi protocol works, or how to write sniffing scripts?</h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Do I need to know how the WiFi protocol works, or how to write sniffing scripts?</h1>
 
-      <p>
-        No! That's the beauty of it. Probr comes with predefined command templates for sniffing WiFi probe requests and
-        uploading them to Probr's database, from where you can use the packets to do any analysis you want on them.
-      </p>
+            <p>
+                No! That's the beauty of it. Probr comes with predefined command templates for sniffing WiFi probe requests and
+                uploading them to Probr's database, from where you can use the packets to do any analysis you want on them.
+            </p>
+
+        </div>
     </div>
-  </div>
 </div>
 
 <footer></footer>

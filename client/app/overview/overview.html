@@ -1,53 +1,47 @@
 <navbar></navbar>
 
 <div class="particles-bg" id="particles" particles>
-  <header class="hero-unit" id="banner">
-    <div class="container">
-      <img src="assets/images/probrlogo_white.png">
-      <p class="lead">a generic wifi tracking system</p>
-    </div>
-  </header>
+    <header class="hero-unit" id="banner">
+        <div class="container">
+            <img src="assets/images/probrlogo_white.png">
+            <h4 class="lead centered">a generic wifi tracking system</h4>
+        </div>
+    </header>
 </div>
 
 <div class="container content" id="whatisprobr">
-  <br>
-  <h1 class="title" align="center" >Overview</h1>
+    <h1 class="title">Overview</h1>
 
-  <div class="row">
-    <div class="col-lg-12">
-      <h1>Why Probr?</h1>
-      <ul>
-        <li>Out-of-the-box WiFi sniffing</li>
-        <li>Start sniffing with the press of a button</li>
-        <li>No knowledge about WiFi protocols required</li>
-        <li>Free and open-source</li>
-        <li>Remote execution and device management</li>
-        <li>Supports great variety of sniffing devices</li>
-        <li>Supports different databases for storage</li>
-      </ul>
-      <br>
-      <br>
-      <h1>More on Probr</h1>
-      <p>
-        Probr lets you set-up a distributed WiFi sniffing and analysis infrastructure. After installing probr to your machine, you are able to add
-        devices and set up a remote execution infrastructure through the web interface. This allows you to remotely execute commands on multiple devices and therefore
-        start sniffing packet data from heterogeneous sources.
-        You can add devices and set-up a remote execution infrastructure through the Probr web interface with ease.
-        You can remotely execute commands on your sniffing devices and remotely start and stop WiFi sniffing from the Probr web interface.
-      </p>
-      <p>
-        Probr uses a distributed architecture. The central component probr-core serves as a management and storage server for all the sniffing devices participating in the system.
-        The sniffing devices are the ones that actually collect the WiFi packets and report them to the central component.
-      </p>
+    <marked>
+        # Welcome!
 
-      <br>
-      <br>
-      <h1>Getting Started</h1>
-      <a href="/#/docs">Installation</a>
-      <br>
-      <a href="/#/faq">Frequently asked questions</a>
-    </div>
-  </div>
+        Probr is a generic and distributed wifi-tracking system, built and developed over the course of a masters project at the University of Zurich. It's aim is to make it easier
+        to conduct research-project in the domain of wireless sniffing, tracking and analysis. The project is split into two completely independent parts.
+
+        ## core
+
+        [probr-core](#/docs/core) is a python-django based system for remote device administration. It allows to setup basic *NIX devices to use for various tasks, including
+        but not limited to sniffing.
+
+        ### how it works
+
+        Probr uses a distributed architecture. The central component called probr-core serves as a management and storage server. First, all sniffing devices register themselves on the server and
+        can be remotely managed. They are able to relay their sniffing-results (or result of any other given task) to the server which will process the received payload through a flexible handler-system.
+        The system is currently able to process *.pcap files and to store its contents into a database of your choice. New database adapters can also be written easily and registered in probr-core.
+
+        ### advantages
+
+        Using probr-core gives you a headstart when building your own sniffing architecture. Data collection is therefore easy, and faulty devices can be remotely administrated. This allows
+        you to concentrate on your actual research project instead of rebuilding the same system for different use cases over and over again.
+
+        probr-core can be used for the following purposes:
+
+        * Out-of-the-box WiFi sniffing and monitoring
+        * Included templates to sniff on a wide range of devices, given tcpdump is installed
+        * No knowledge about WiFi protocols required
+        * Free to use and completely open-source
+        * Supports a range of different databases for storage, such as MongoDB or InfluxDB
+    </marked>
 
 </div>
 
