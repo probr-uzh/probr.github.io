@@ -1,0 +1,50 @@
+<navbar></navbar>
+
+<div class="container content">
+
+    <h1>Probr-Analysis: Installation</h1>
+
+    <div class="row">
+        <div class="col-xs-6 install-block">
+            <a ng-click="installation = 'docker'">
+                <i class="icon-install icon-docker" ng-class="{ 'icon-active': installation === 'docker' }"></i>
+            </a>
+        </div>
+        <div class="col-xs-6 install-block" ng-click="installation == 'python'">
+            <a ng-click="installation = 'nodejs'">
+                <i class="icon-install icon-nodejs" ng-class="{ 'icon-active': installation === 'nodejs' }"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="row" ng-show="installation ==='docker'">
+        <marked>
+            TODO
+        </marked>
+    </div>
+
+    <div class="row" ng-show="installation ==='nodejs'">
+        <marked>
+            ## Requirements
+
+            * [NodeJS](https://nodejs.org/en/)
+            * [MongoDB](https://www.mongodb.org/)
+
+            ## Installation
+
+            After cloning the project, install its dependencies:
+
+            ```
+            bower install && npm install
+            ```
+
+            Now, start the analysis-frontend:
+
+            ```
+            grunt serve
+            ```
+        </marked>
+    </div>
+</div>
+
+<footer></footer>

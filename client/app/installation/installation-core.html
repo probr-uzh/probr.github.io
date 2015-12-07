@@ -1,0 +1,122 @@
+<navbar></navbar>
+
+<div class="container content">
+
+    <h1>Probr-Core: Installation</h1>
+
+    <div class="row">
+        <div class="col-xs-6 install-block">
+            <a ng-click="installation = 'docker'">
+                <i class="icon-install icon-docker" ng-class="{ 'icon-active': installation === 'docker' }"></i>
+            </a>
+        </div>
+        <div class="col-xs-6 install-block" ng-click="installation == 'python'">
+            <a ng-click="installation = 'python'">
+                <i class="icon-install icon-python" ng-class="{ 'icon-active': installation === 'python' }"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="row" ng-show="installation ==='docker'">
+        <marked>
+            ## Requirements
+
+            * [Docker](http://docker.com/)
+            * [Docker-Compose](https://docs.docker.com/compose/)
+
+            ## Installation
+            Clone probr-core and head into its directory. Now let docker-compose start your probr-core instance:
+
+            ```
+            docker-compose up -d
+            ```
+
+            This will setup a functioning probr-core installation, as well as MongoDB and InfluxDB and its corresponding handlers.
+        </marked>
+    </div>
+
+    <div class="row" ng-show="installation ==='python'">
+        <marked>
+            ## Requirements
+
+            * [Python 2.7](https://www.python.org/download/releases/2.7/)
+            * [VirtualEnv](https://virtualenv.pypa.io/en/latest/)
+            * [Redis](http://redis.io/)
+            * [PostgreSQL](http://www.postgresql.org/)
+            * (optional) [MongoDB](https://www.mongodb.org/)
+            * (optional) [InfluxDB](https://influxdb.com/)
+
+            ## Installation
+
+            After cloning the project, create a virtual environment for probr outside the probr-core directory:
+
+            ```
+            virtualenv .env_probr
+            ```
+
+            Activate the virtual python environment:
+
+            ```
+            source .env_probr/bin/activate
+            ```
+
+            Navigate into the `probr-core` directory.
+            Now install the python dependencies of the project:
+
+            ```
+            pip install -r requirements.txt
+            ```
+
+            Now, install the frontend and web dependencies using bower:
+
+            ```
+            bower install
+            ```
+
+            You're pretty much set to start probr-core at this moment. What is left to do is to setup your database using:
+
+            ```
+            python manage.py migrate
+            ```
+
+            Create an admin user for the Django webproject:
+
+            ```
+            python manage.py createsuperuser
+            ```
+
+            Now, depending on your chosen database, make sure the mongodb daemon is running:
+
+            ```
+            mongod &
+            ```
+
+            Also, the redis-server must be running before you can use probr-core
+
+            ```
+            redis-server &
+            ```
+
+
+            ## Start-up
+
+            Finally, you're ready to start your probr-core server by running:
+
+            ```
+            python manage.py runserver
+
+            ```
+
+            In order for the data to be processed and entered into the database, you need to start
+            the celery worker:
+
+            ```
+            celery worker -A probr
+            ```
+
+            And you can check it out by visiting `http://localhost:8000`.
+        </marked>
+    </div>
+</div>
+
+<footer></footer>

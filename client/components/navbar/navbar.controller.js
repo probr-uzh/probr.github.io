@@ -5,8 +5,8 @@ angular.module('probrSiteApp')
 
         $scope.menu = [
             {
-                'title': 'Overview',
-                'link': 'overview'
+                'title': 'Getting Started',
+                'link': 'installation'
             },
             {
                 'title': 'Documentation',
@@ -29,8 +29,9 @@ angular.module('probrSiteApp')
         };
 
         $scope.isActiveRoot = function (route) {
+            route = route.toLowerCase();
             var subStr = $location.path().split("/")[1];
-            return route.indexOf(subStr.substr(0, subStr.length - 1)) !== -1;
+            return route.slice(0, subStr.length) == subStr;
         };
 
     });
