@@ -377,6 +377,7 @@ module.exports = function (grunt) {
     // HTTP-Copy Readme-Files
     curl: {
       '<%= yeoman.client %>/assets/readme/core.md': 'https://raw.githubusercontent.com/probr/probr-core/master/README.md',
+      '<%= yeoman.client %>/assets/readme/analysis.md':'https://raw.githubusercontent.com/probr/probr-analysis/master/README.md'
     },
 
     buildcontrol: {

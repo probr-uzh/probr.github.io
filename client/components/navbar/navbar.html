@@ -11,9 +11,20 @@
     </div>
     <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav navbar-right">
+
         <li ng-repeat="item in menu" ng-class="{active: isActiveRoot(item.link)}">
           <a ui-sref="{{ item.link }}">{{ item.title }}</a>
         </li>
+
+        <li dropdown>
+          <a href="#" dropdown-toggle>{{ dropdown.title }}<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li ng-repeat="entry in dropdown.links">
+              <a ui-sref="{{ entry.link }}">{{ entry.name }}</a>
+            </li>
+          </ul>
+        </li>
+
         <li><a href="http://github.com/probr"><i class="fa fa-github"></i> Github</a></li>
       </ul>
     </div>

@@ -6,21 +6,32 @@ angular.module('probrSiteApp')
         $scope.menu = [
             {
                 'title': 'Overview',
-                'link': 'overview'
-            },
-            {
-                'title': 'Documentation',
-                'link': 'docs'
+                'link': 'overview',
             },
             {
                 'title': 'FAQ',
-                'link': 'faq'
+                'link': 'faq',
             },
             {
                 'title': 'Usecase',
-                'link': 'usecase'
+                'link': 'usecase',
             }
         ];
+
+        $scope.dropdown = {
+            'title': 'Documentation',
+            'links':[
+              {
+                'name': 'probr-core',
+                'link': 'docs-core'
+              },
+              {
+                'name': 'probr-analysis',
+                'link': 'docs-analysis'
+              }
+            ]
+        };
+
 
         $scope.isCollapsed = true;
 
