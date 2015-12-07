@@ -3,24 +3,44 @@
 angular.module('probrSiteApp')
     .controller('NavbarCtrl', function ($scope, $location) {
 
+        $scope.isArray = angular.isArray;
         $scope.menu = [
             {
                 'title': 'Getting Started',
-                'link': 'installation'
+                'link': [
+                    {
+                        'name': 'probr-core',
+                        'link': 'installation-core'
+                    },
+                    {
+                        'name': 'probr-analysis',
+                        'link': 'installation-analysis'
+                    }
+                ],
             },
             {
                 'title': 'Documentation',
-                'link': 'docs'
+                'link': [
+                    {
+                        'name': 'probr-core',
+                        'link': 'docs-core'
+                    },
+                    {
+                        'name': 'probr-analysis',
+                        'link': 'docs-analysis'
+                    }
+                ]
             },
             {
                 'title': 'FAQ',
-                'link': 'faq'
+                'link': 'faq',
             },
             {
                 'title': 'Usecase',
-                'link': 'usecase'
+                'link': 'usecase',
             }
         ];
+
 
         $scope.isCollapsed = true;
 
@@ -29,6 +49,7 @@ angular.module('probrSiteApp')
         };
 
         $scope.isActiveRoot = function (route) {
+            if (angular.isArray(route)) return false;
             route = route.toLowerCase();
             var subStr = $location.path().split("/")[1];
             return route.slice(0, subStr.length) == subStr;
