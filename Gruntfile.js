@@ -264,7 +264,8 @@ module.exports = function (grunt) {
       options: {
         assetsDirs: [
           '<%= yeoman.dist %>/client',
-          '<%= yeoman.dist %>/client/assets/images'
+          '<%= yeoman.dist %>/client/assets/images',
+          '<%= yeoman.dist %>/client/assets/fonts',
         ],
         // This is so we update image references in our ng-templates
         patterns: {

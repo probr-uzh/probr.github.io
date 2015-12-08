@@ -2,133 +2,118 @@
 
 <div class="container content">
 
-  <h1>Probr-Core: Installation</h1>
+    <h1>Probr-Core: Installation</h1>
 
-  <div class="row">
-    <div class="col-xs-6 install-block">
-      <a ng-click="installation = 'docker'">
-        <i class="icon-install icon-docker" ng-class="{ 'icon-active': installation === 'docker' }"></i>
-      </a>
+    <div class="row">
+        <div class="col-xs-6 install-block">
+            <a ng-click="installation = 'docker'">
+                <i class="icon-install icon-docker" ng-class="{ 'icon-active': installation === 'docker' }"></i>
+            </a>
+        </div>
+        <div class="col-xs-6 install-block" ng-click="installation == 'python'">
+            <a ng-click="installation = 'python'">
+                <i class="icon-install icon-python" ng-class="{ 'icon-active': installation === 'python' }"></i>
+            </a>
+        </div>
     </div>
-    <div class="col-xs-6 install-block" ng-click="installation == 'python'">
-      <a ng-click="installation = 'python'">
-        <i class="icon-install icon-python" ng-class="{ 'icon-active': installation === 'python' }"></i>
-      </a>
+
+    <div class="row" ng-show="installation ==='docker'">
+        <h2>Requirements</h2>
+
+        <ul>
+            <li><a href="http://docker.com/" target="_blank">Docker</a></li>
+            <li><a href="https://docs.docker.com/compose/" target="_blank">Docker-Compose</a></li>
+        </ul>
+
+        <h2>Installation</h2>
+
+        <p>Clone probr-core and head into its directory. Now let docker-compose start your probr-core instance:</p>
+
+        <pre><code>docker-compose up -d</code></pre>
+
+        <p>This will setup a functioning probr-core installation, as well as MongoDB and InfluxDB and its corresponding handlers.</p>
+
     </div>
-  </div>
 
-  <div class="row" ng-show="installation ==='docker'">
-    <marked>
-      ## Requirements
+    <div class="row" ng-show="installation ==='python'">
 
-      * [Docker](http://docker.com/)
-      * [Docker-Compose](https://docs.docker.com/compose/)
+        <p>The frameworks, languages, tools and technologies used and required in the probr-core project are:</p>
 
-      ## Installation
-      Clone probr-core and head into its directory. Now let docker-compose start your probr-core instance:
+        <ul>
+            <li>Python 2.7</li>
+            <li><a href="https://www.djangoproject.com/">Django</a></li>
+            <li><a href="http://bower.io/">Bower</a></li>
+            <li><a href="https://pip.pypa.io/en/latest/installing.html">PIP</a></li>
+        </ul>
 
-      ```
-      docker-compose up -d
-      ```
+        <h3><a id="user-content-devices" class="anchor" href="#devices" aria-hidden="true"><span class="octicon octicon-link"></span></a>Devices</h3>
 
-      This will setup a functioning probr-core installation, as well as MongoDB and InfluxDB and its corresponding
-      handlers.
-    </marked>
-  </div>
+        <p>The devices used for sniffing WiFi packets must fulfill the following requirements:</p>
 
-  <div class="row" ng-show="installation ==='python'">
+        <ul>
+            <li>*NIX operating system or simliar (Debian, Ubuntu, OpenWRT, Mac OS X, Raspbian etc.)</li>
+            <li>wget installed</li>
+            <li>tcpdump installed</li>
+            <li>internet access</li>
+            <li>wireless interface with monitor mode capabilities</li>
+        </ul>
 
-    <p>The frameworks, languages, tools and technologies used and required in the probr-core project are:</p>
+        <h2><a id="user-content-installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
 
-    <ul>
-      <li>Python 2.7</li>
-      <li><a href="https://www.djangoproject.com/">Django</a></li>
-      <li><a href="http://bower.io/">Bower</a></li>
-      <li><a href="https://pip.pypa.io/en/latest/installing.html">PIP</a></li>
-    </ul>
+        <p>We highly recommended to use <a href="https://virtualenv.pypa.io/en/latest/">Virtualenv</a> to manage the python environment for probr-core.</p>
 
-    <h3><a id="user-content-devices" class="anchor" href="#devices" aria-hidden="true"><span class="octicon octicon-link"></span></a>Devices</h3>
+        <p>After cloning the project, create a virtual environment for probr outside the probr-core directory:</p>
 
-    <p>The devices used for sniffing WiFi packets must fulfill the following requirements:</p>
+        <pre><code>virtualenv .env_probr</code></pre>
 
-    <ul>
-      <li>*NIX operating system or simliar (Debian, Ubuntu, OpenWRT, Mac OS X, Raspbian etc.)</li>
-      <li>wget installed</li>
-      <li>tcpdump installed</li>
-      <li>internet access</li>
-      <li>wireless interface with monitor mode capabilities</li>
-    </ul>
+        <p>Activate the virtual python environment:</p>
 
-    <h2><a id="user-content-installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+        <pre><code>source .env_probr/bin/activate</code></pre>
 
-    <p>We highly recommended to use <a href="https://virtualenv.pypa.io/en/latest/">Virtualenv</a> to manage the python environment for probr-core.</p>
+        <p>Go into the
+        <pre><code>probr-core</code></pre>
+        directory.Now install the python dependencies of the project:</p>
 
-    <p>After cloning the project, create a virtual environment for probr outside the probr-core directory:</p>
+        <pre><code>pip install -r requirements.txt</code></pre>
 
-    <pre><code>virtualenv .env_probr
+        <p>Now, install the frontend and web dependencies using bower:</p>
 
-    </code></pre>
+        <pre><code>bower install</code></pre>
 
-    <p>Activate the virtual python environment:</p>
+        <p>You're pretty much set to start probr-core at this moment. What is left to do is:</p>
 
-    <pre><code>source .env_probr/bin/activate
+        <p>Create the DB tables:</p>
 
-    </code></pre>
+        <pre><code>python manage.py migrate</code></pre>
 
-    <p>Go into the <code>probr-core</code> directory.
-      Now install the python dependencies of the project:</p>
+        <p>Create an admin user for the Django webproject:</p>
 
-    <pre><code>pip install -r requirements.txt
+        <pre><code>python manage.py createsuperuser</code></pre>
 
-    </code></pre>
+        <p>Make sure the mongodb deamon is running:</p>
 
-    <p>Now, install the frontend and web dependencies using bower:</p>
+        <pre><code>mongod &amp; </code></pre>
 
-    <pre><code>bower install
+        <p>Also, the redis-server must be running before you can use probr-core</p>
 
-    </code></pre>
+        <pre><code>redis-server &amp;</code></pre>
 
-    <p>You're pretty much set to start probr-core at this moment. What is left to do is:</p>
+        <h2><a id="user-content-start-up" class="anchor" href="#start-up" aria-hidden="true"><span class="octicon octicon-link"></span></a>Start-up</h2>
 
-    <p>Create the DB tables:</p>
+        <p>Finally, you're ready to start your probr-core server by running:</p>
 
-    <pre><code>python manage.py migrate
+        <pre><code>python manage.py runserver</code></pre>
 
-    </code></pre>
+        <p>In order for the data to be processed and entered into the database, you need to start
+            the celery worker:</p>
 
-    <p>Create an admin user for the Django webproject:</p>
+        <pre><code>celery worker -A probr</code></pre>
 
-    <pre><code>python manage.py createsuperuser
+        <p>And you can check it out by visiting
+        <pre><code>http://localhost:8000</code></pre>
+        .</p>
 
-    </code></pre>
-
-    <p>Make sure the mongodb deamon is running:</p>
-
-    <pre><code>mongod &amp;
-    </code></pre>
-
-    <p>Also, the redis-server must be running before you can use probr-core</p>
-
-    <pre><code>redis-server &amp;
-    </code></pre>
-
-    <h2><a id="user-content-start-up" class="anchor" href="#start-up" aria-hidden="true"><span class="octicon octicon-link"></span></a>Start-up</h2>
-
-    <p>Finally, you're ready to start your probr-core server by running:</p>
-
-    <pre><code>python manage.py runserver
-
-    </code></pre>
-
-    <p>In order for the data to be processed and entered into the database, you need to start
-      the celery worker:</p>
-
-    <pre><code>celery worker -A probr
-    </code></pre>
-
-    <p>And you can check it out by visiting <code>http://localhost:8000</code>.</p>
-
-  </div>
+    </div>
 </div>
 
 <footer></footer>

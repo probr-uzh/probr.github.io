@@ -19,5 +19,8 @@
   },
   "devDependencies": {
     "angular-mocks": "~1.4.0"
+  },
+  "resolutions": {
+    "angular-marked": "~1.0.1"
   }
 }
