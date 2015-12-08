@@ -24,60 +24,61 @@
     </div>
 
     <div class="row" ng-show="installation ==='nodejs'">
-        <marked>
-          ### Technology
 
-          To build and run the application you will need:
+      <h3><a id="user-content-technology" class="anchor" href="#technology" aria-hidden="true"><span
+        class="octicon octicon-link"></span></a>Technology</h3>
 
-          * [NodeJS version 0.10](https://nodejs.org/en/)
-          * [NPM](https://www.npmjs.com/)
-          * [Bower](http://bower.io/)
-          * [MongoDB](https://www.mongodb.org/)
-          * [Redis](http://redis.io/)
+      <p>To build and run the application you will need:</p>
 
+      <ul>
+        <li><a href="https://nodejs.org/en/">NodeJS version 0.10</a></li>
+        <li><a href="https://www.npmjs.com/">NPM</a></li>
+        <li><a href="http://bower.io/">Bower</a></li>
+        <li><a href="https://www.mongodb.org/">MongoDB</a></li>
+        <li><a href="http://redis.io/">Redis</a></li>
+      </ul>
 
-          ## Getting started
-          Make sure probr-core runs and collects data.
+      <p>Also, to have the best user experience, including live modes and analysis, you should have a running set-up of
+        probr-core, as described <a href="https://github.com/probr/probr-core">here</a>.</p>
 
+      <h2><a id="user-content-getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span
+        class="octicon octicon-link"></span></a>Getting started</h2>
 
-          Make sure your mongo deamon runs:
+      <p>Make sure probr-core runs and collects data.</p>
 
-          ```
-          mongod &
-          ```
+      <p>Make sure your mongo deamon runs:</p>
 
-          Also, start your redis server:
+    <pre><code>mongod &amp;
+    </code></pre>
 
-          ```
-          redis-server &
-          ```
+      <p>Also, start your redis server:</p>
 
-          After cloning the repo and going into the `probr-analysis` directory:
+    <pre><code>redis-server &amp;
+    </code></pre>
 
-          ```
-          npm install
-          ```
+      <p>After cloning the repo and going into the <code>probr-analysis</code> directory:</p>
 
-          After the installation of the npm dependencies has finished, install the bower dependencies:
+    <pre><code>npm install
+    </code></pre>
 
-          ```
-          bower install
-          ```
+      <p>After the installation of the npm dependencies has finished, install the bower dependencies:</p>
 
-          These steps will also install [Grunt](http://gruntjs.com/). Our project comes with preconfigured grunt tasks, so you can run:
+    <pre><code>bower install
+    </code></pre>
 
-          ```
-          grunt build
-          ```
+      <p>These steps will also install <a href="http://gruntjs.com/">Grunt</a>. Our project comes with preconfigured grunt
+        tasks, so you can run:</p>
 
-          To start the application, run:
+    <pre><code>grunt build
+    </code></pre>
 
-          ```
-          grunt serve
-          ```
+      <p>To start the application, run:</p>
 
-          The application should now be reachable under [http://localhost:9000](http://localhost:9000).
-        </marked>
+    <pre><code>grunt serve
+    </code></pre>
+
+      <p>The application should now be reachable under <a href="http://localhost:9000">http://localhost:9000</a>.</p>
+
     </div>
 </div>
 
