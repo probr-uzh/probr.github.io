@@ -33,6 +33,12 @@
 
         <p>This will setup a functioning probr-core installation, as well as MongoDB and InfluxDB and its corresponding handlers.</p>
 
+        <p>In order to have a login for probr-core, you have to set-up a superuser for the application:</p>
+
+        <pre><code>docker exec -ti probrcore_web_1 python manage.py createsuperuser</code></pre>
+
+        <p> Now you can log in to the probr-core web application and manage your devices or start sniffing.</p>
+
     </div>
 
     <div class="row" ng-show="installation ==='python'">
