@@ -25,24 +25,58 @@
 
     <div class="row" ng-show="installation ==='nodejs'">
         <marked>
-            ## Requirements
+          ### Technology
 
-            * [NodeJS](https://nodejs.org/en/)
-            * [MongoDB](https://www.mongodb.org/)
+          To build and run the application you will need:
 
-            ## Installation
+          * [NodeJS version 0.10](https://nodejs.org/en/)
+          * [NPM](https://www.npmjs.com/)
+          * [Bower](http://bower.io/)
+          * [MongoDB](https://www.mongodb.org/)
+          * [Redis](http://redis.io/)
 
-            After cloning the project, install its dependencies:
 
-            ```
-            bower install && npm install
-            ```
+          ## Getting started
+          Make sure probr-core runs and collects data.
 
-            Now, start the analysis-frontend:
 
-            ```
-            grunt serve
-            ```
+          Make sure your mongo deamon runs:
+
+          ```
+          mongod &
+          ```
+
+          Also, start your redis server:
+
+          ```
+          redis-server &
+          ```
+
+          After cloning the repo and going into the `probr-analysis` directory:
+
+          ```
+          npm install
+          ```
+
+          After the installation of the npm dependencies has finished, install the bower dependencies:
+
+          ```
+          bower install
+          ```
+
+          These steps will also install [Grunt](http://gruntjs.com/). Our project comes with preconfigured grunt tasks, so you can run:
+
+          ```
+          grunt build
+          ```
+
+          To start the application, run:
+
+          ```
+          grunt serve
+          ```
+
+          The application should now be reachable under [http://localhost:9000](http://localhost:9000).
         </marked>
     </div>
 </div>

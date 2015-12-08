@@ -32,6 +32,19 @@ angular.module('probrSiteApp')
                 ]
             },
             {
+                'title': 'Usage',
+                'link': [
+                    {
+                      'name': 'probr-core',
+                      'link': 'usage-core'
+                    },
+                    {
+                      'name': 'probr-analysis',
+                      'link': 'usage-analysis'
+                    }
+                ]
+            },
+            {
                 'title': 'FAQ',
                 'link': 'faq',
             },
