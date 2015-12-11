@@ -2,10 +2,99 @@
 
 <div class="container content">
 
-  <h1>Documentation</h1>
+  <h1>Documentation: probr-core</h1>
 
   <div class="col-lg-12">
-    <h1 class="page-header">probr-core</h1>
+
+    <div class="row">
+      <h2>Architecture</h2>
+
+      The image below shows the architecture of probr-core. Also, the used technologies are indicated in the respective
+      components.
+
+
+      <div class="col-lg-12">
+        <br>
+        <br>
+        <br>
+        <img class="img-responsive center-block" src="assets/images/core.png" width="700" height="440">
+        <br>
+        <br>
+        <br>
+      </div>
+
+
+      probr-core is built mainly in Python as a Django web application. It serves a frontend for the user written in
+      HTML 5
+      and AngularJS. Through the front end interface, the user can set up sniffing devices, enter sniffing commands,
+      upload existing
+      pcap files containing packets and manage or check the status of the attached sniffing devices. The probr-core
+      Django application uses a PostgreSQL database internally as a backend to store and manage the different sniffing
+      devices,
+      commands, statuses and uploads.
+      <br>
+      The Django back-end component provides the REST API endpoints for the front end, and
+      more importantly, also provides the REST API endpoints for the sniffing devices. Through those API endpoints the
+      devices
+      receive their commands to execute (e.g. start sniffing, start uploading packets, or any other unix command) and
+      also report
+      status data such as CPU and memory on a regular basis. The sniffing devices upload the sniffed data in pcap files
+      to
+      the capture endpoint on the Django back-end. There, the system takes the pcap files and gives them to the Celery
+      worker
+      handlers which entpack the pcap file into an appropriate structure for the respective storage. Out of the box,
+      probr-core
+      has built-in handlers for MongoDB and InfluxDB, but it is designed to be easily extensible. Instructions on how to
+      write
+      handlers for the data storage systems of your choosing can be found <a href="#/faq">here</a>.
+
+      <br>
+
+    </div>
+    <br>
+
+    <div class="row">
+      <h2>Front-end</h2>
+
+      The web frontend is the main component in contact with the user. It is written entirely in HTML5 and JavaScript
+      (with Angular).
+      It provides the following views:
+
+      <ul>
+        <li>Devices view</li>
+        <ul style="list-style-type: none">
+          <li>Path: /web/devices</li>
+          <li>Lets the user add new devices through the device wizard.</li>
+          <li>Lets the user see all registered devices and their status.</li>
+          <li>Lets the user open the device detail view of a device.</li>
+          <li>Allows deletion devices from the probr system.</li>
+          <li>Allows bulk-execution of a command on multiple devices at once</li>
+        </ul>
+        <br>
+        <li>Device detail view</li>
+        <ul style="list-style-type: none">
+          <li>Path: /web/device/{device-uuid}</li>
+          <li>Lets the user to execute commands in the web terminal of a device</li>
+          <li>Allows to start sniffing and upload packets from predefined command templates</li>
+          <li>Allows to update the device client code for probr.</li>
+        </ul>
+        <br>
+        <li>Captures view</li>
+        <ul style="list-style-type: none">
+          <li>Path: /captures</li>
+          <li>Allows to see the uploaded pcap files and download them</li>
+          <li>The user can upload pcap files by hand to integrate into the system.</li>
+        </ul>
+        <br>
+      </ul>
+    </div>
+    <br>
+
+    <div class="row">
+      <h2>REST API endpoints</h2>
+    </div>
+
+
   </div>
 </div>
 
