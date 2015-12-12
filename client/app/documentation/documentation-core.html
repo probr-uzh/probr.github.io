@@ -51,6 +51,7 @@
       <br>
 
     </div>
+
     <br>
 
     <div class="row">
@@ -88,14 +89,43 @@
         <br>
       </ul>
     </div>
+
     <br>
 
     <div class="row">
-      <h2>REST API endpoints</h2>
+      <h2>REST API and authentication</h2>
+
+      The diagram below shows the endpoints of the REST API available in probr-core:
+      <br>
+
+      <div class="col-lg-12">
+        <br>
+        <br>
+        <img style="img-responsive center-block" src="assets/images/rest_core.png" width="1200" height="300"/>
+        <br>
+        <br>
+      </div>
+
+
+      The API endpoints starting with api-device/ are the ones that are accessed solely by the sniffing devices. Those
+      can only be accessed with a valid api-key. A sniffing device receives an api-key on set-up through the device
+      wizard
+      in the web frontend.
+      <br>
+      The endpoints starting with api/ are accessed by the probr-core web frontend. Those can only be accessed with a
+      valid
+      JSON WebToken (JWT). The JWT authentication is integrated with the Django user administration. For more info,
+      check out
+      the respective <a href="http://getblimp.github.io/django-rest-framework-jwt/">pip module</a>.
+      <br>
     </div>
 
-
   </div>
+
+
+
+
+
 </div>
 
 </div>
