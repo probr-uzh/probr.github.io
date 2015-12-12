@@ -1,13 +1,38 @@
 <navbar></navbar>
 
+<div class="row">
+
 <div class="container content">
+  <div class="row">
 
-  <h1>Documentation: probr-core</h1>
+  <div class="col-lg-3 side-nav-col">
+    <h1>Index</h1>
+    <ul class="class="nav navbar-nav side-nav">
+    <li><a href="/#/docs/core#architecture">Architecture</a></li>
+    <li><a href="/#/docs/core#frontend">Front-End</a></li>
+    <li><a href="/#/docs/core#rest">REST API</a></li>
+      <ul>
+        <li><a href="/#/docs/core#rest-frontend">Frontend API</a></li>
+        <li><a href="/#/docs/core#rest-device">Devices API</a></li>
+      </ul>
+    <li><a href="/#/docs/core#authentication">Authentication</a></li>
+    <li><a href="/#/docs/core#remote-execution">Remote execution</a></li>
+    <li><a href="/#/docs/core#handlers">Custom handlers</a></li>
+    <li><a href="/#/docs/core#usage">Usage</a></li>
+    <ul>
+      <li><a href="/#/docs/core#add-device">Add device</a></li>
+      <li><a href="/#/docs/core#upload-capture">Upload capture</a></li>
+    </ul>
 
-  <div class="col-lg-12">
+
+    </ul>
+  </div>
+
+  <div class="col-lg-9">
 
     <div class="row">
-      <h2>Architecture</h2>
+      <h1>Documentation: probr-core</h1>
+      <h2><a name="architecture">Architecture</a></h2>
 
       The image below shows the architecture of probr-core. Also, the used technologies are indicated in the respective
       components.
@@ -55,7 +80,7 @@
     <br>
 
     <div class="row">
-      <h2>Front-end</h2>
+      <h2><a name="frontend">Front-end</a></h2>
 
       The web frontend is the main component in contact with the user. It is written entirely in HTML5 and JavaScript
       (with Angular).
@@ -99,7 +124,7 @@
     <br>
 
     <div class="row">
-      <h2>REST API and authentication</h2>
+      <h2><a name="rest">REST API</a></h2>
 
       The diagram below shows the endpoints of the REST API available in probr-core:
       <br>
@@ -112,6 +137,7 @@
         <br>
       </div>
 
+      <h3><a name="rest-frontend">API endpoints frontend</a></h3>
       The endpoints starting with api/ are accessed by the probr-core web frontend. Those can only be accessed with a
       valid
       JSON WebToken (JWT). The JWT authentication is integrated with the Django user administration. For more info,
@@ -119,7 +145,7 @@
       the respective <a href="http://getblimp.github.io/django-rest-framework-jwt/">pip module</a>.
       <br>
 
-      <h3>API endpoints frontend</h3>
+
       <ul>
         <li>Devices:</li>
         <ul style="list-style-type: none">
@@ -173,6 +199,7 @@
 
       </ul>
 
+      <h3><a name="rest-devices">API endpoints devices</a></h3>
       The API endpoints starting with api-device/ are the ones that are accessed solely by the sniffing devices. Those
       can only be accessed with a valid api-key. A sniffing device receives an api-key on set-up through the device
       wizard
@@ -214,11 +241,42 @@
       </ul>
     </div>
 
+    <div class="row">
+      <h2><a name="authentication">Authentication</a></h2>
+
+    </div>
+
+    <div class="row">
+      <h2><a name="remote-execution">Remote command execution</a></h2>
+
+    </div>
+
+    <div class="row">
+      <h2><a name="handlers">Writing custom handlers</a></h2>
+
+    </div>
+
+    <div class="row">
+      <h2><a name="usage">Usage samples</a></h2>
+
+        <h3><a name="add-device">Adding a sniffing device</a></h3>
+        The gif below shows how you can use the device wizard to add a sniffing device. The terminal on the right is a ssh connection to the device which shall be set up.
+        <br>
+        <br>
+        <img src="assets/images/gifs/add_device_wizard.gif" alt="Adding a device." style="display:block; margin:auto;" width="800" height="400"/>
+
+        <h3><a name="upload-capture">Upload capture by hand</a></h3>
+        <br>
+        <br>
+        <img src="assets/images/gifs/upload_pcap.gif" alt="Uploading a pcap by hand." style="  display:block; margin:auto;" width="800" height="400"/>
+
+
+    </div>
+
   </div>
 
-
+  </div>
 </div>
 
 </div>
-
 <footer></footer>
