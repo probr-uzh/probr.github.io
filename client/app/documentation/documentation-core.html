@@ -62,9 +62,11 @@
       It provides the following views:
 
       <ul>
-        <li>Devices view</li>
+        <li>Devices view:</li>
         <ul style="list-style-type: none">
-          <li>Path: /web/devices</li>
+          <li>
+            <pre style="display: inline-block"><code>/web/devices</code></pre>
+          </li>
           <li>Lets the user add new devices through the device wizard.</li>
           <li>Lets the user see all registered devices and their status.</li>
           <li>Lets the user open the device detail view of a device.</li>
@@ -72,9 +74,11 @@
           <li>Allows bulk-execution of a command on multiple devices at once</li>
         </ul>
         <br>
-        <li>Device detail view</li>
+        <li>Device detail view:</li>
         <ul style="list-style-type: none">
-          <li>Path: /web/device/{device-uuid}</li>
+          <li>
+            <pre style="display: inline-block"><code>/web/device/{device-uuid}</code></pre>
+          </li>
           <li>Lets the user to execute commands in the web terminal of a device</li>
           <li>Allows to start sniffing and upload packets from predefined command templates</li>
           <li>Allows to update the device client code for probr.</li>
@@ -82,7 +86,9 @@
         <br>
         <li>Captures view</li>
         <ul style="list-style-type: none">
-          <li>Path: /captures</li>
+          <li>
+            <pre style="display: inline-block"><code>/web/captures</code></pre>
+          </li>
           <li>Allows to see the uploaded pcap files and download them</li>
           <li>The user can upload pcap files by hand to integrate into the system.</li>
         </ul>
@@ -106,24 +112,109 @@
         <br>
       </div>
 
-
-      The API endpoints starting with api-device/ are the ones that are accessed solely by the sniffing devices. Those
-      can only be accessed with a valid api-key. A sniffing device receives an api-key on set-up through the device
-      wizard
-      in the web frontend.
-      <br>
       The endpoints starting with api/ are accessed by the probr-core web frontend. Those can only be accessed with a
       valid
       JSON WebToken (JWT). The JWT authentication is integrated with the Django user administration. For more info,
       check out
       the respective <a href="http://getblimp.github.io/django-rest-framework-jwt/">pip module</a>.
       <br>
+
+      <h3>API endpoints frontend</h3>
+      <ul>
+        <li>Devices:</li>
+        <ul style="list-style-type: none">
+          <li>
+            <pre style="display: inline-block"><code>/api/device <br>GET: JSON list of devices [{device1},{device2},{device3}...] <br>POST: Create new device; PAYLOAD: JSON device object </code></pre>
+          </li>
+        </ul>
+        <br>
+        <li>Device details:</li>
+        <ul style="list-style-type: none">
+          <li>
+            <pre style="display: inline-block"><code>/api/device/{device-uuid} <br>GET: device details in JSON <br>POST: Alter device details; PAYLOAD: JSON device object <br>DELETE: Delete device</code></pre>
+          </li>
+        </ul>
+        <br>
+        <li>Statuses:</li>
+        <ul style="list-style-type: none">
+          <li>
+            <pre style="display: inline-block"><code>/api/statuses <br>GET: return JSON list of statuses </code></pre>
+          </li>
+        </ul>
+        <br>
+        <li>Commands:</li>
+        <ul style="list-style-type: none">
+          <li>
+            <pre style="display: inline-block"><code>/api/commands <br>GET: return JSON list of commands <br>POST: Create new command; PAYLOAD: command JSON object</code></pre>
+          </li>
+        </ul>
+        <br>
+        <li>Command details:</li>
+        <ul style="list-style-type: none">
+          <li>
+            <pre style="display: inline-block"><code>/api/commands/{uuid} <br>GET: return JSON representation of command object <br>POST: update command result and status; PAYLOAD: JSON representation of command with new values</code></pre>
+          </li>
+        </ul>
+        <br>
+        <li>Commandtemplates:</li>
+        <ul style="list-style-type: none">
+          <li>
+            <pre style="display: inline-block"><code>/api/commandtemplates <br>GET: return JSON list of commandtemplates <br>POST: create new command template; PAYLOAD: JSON representation of commandtemplate object </code></pre>
+          </li>
+        </ul>
+        <br>
+        <li>Commandtemplate details:</li>
+        <ul style="list-style-type: none">
+          <li>
+            <pre style="display: inline-block"><code>/api/commandtemplates <br>GET: return JSON representation of commandtemplate object <br>POST: update commandtemplate parameters; PAYLOAD: PAYLOAD: JSON representation of commandtemplate with new values</code></pre>
+          </li>
+        </ul>
+        <br>
+
+      </ul>
+
+      The API endpoints starting with api-device/ are the ones that are accessed solely by the sniffing devices. Those
+      can only be accessed with a valid api-key. A sniffing device receives an api-key on set-up through the device
+      wizard
+      in the web frontend. Setting up a device is only possible if the user is logged in via Django user administration/JWTAuth. The api-key also identifies the device
+      that sends the requests.
+      <br>
+      <br>
+
+      <h3>API endpoints devices</h3>
+      <ul>
+        <li>Captures:</li>
+        <ul style="list-style-type: none">
+          <li>
+            <pre style="display: inline-block"><code>/api-device/captures <br>POST: Upload capture together with pcap file </code></pre>
+          </li>
+        </ul>
+        <br>
+        <li>Statuses:</li>
+        <ul style="list-style-type: none">
+          <li>
+            <pre style="display: inline-block"><code>/api-device/statuses <br>GET: return JSON list of statuses <br>POST: create new status; PAYLOAD: JSON representation of status object</code></pre>
+          </li>
+        </ul>
+        <br>
+        <li>Commands:</li>
+        <ul style="list-style-type: none">
+          <li>
+            <pre style="display: inline-block"><code>/api-device/commands <br>GET: return JSON list of commands <br>POST: create new command; PAYLOAD: JSON representation of command object</code></pre>
+          </li>
+        </ul>
+        <br>
+        <li>Command details:</li>
+        <ul style="list-style-type: none">
+          <li>
+            <pre style="display: inline-block"><code>/api-device/commands/{command-uuid} <br>GET: command details in JSON <br>POST: Alter command details; PAYLOAD: JSON command object </code></pre>
+          </li>
+        </ul>
+        <br>
+      </ul>
     </div>
 
   </div>
-
-
-
 
 
 </div>
