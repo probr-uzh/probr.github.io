@@ -17,8 +17,7 @@ module.exports = function (grunt) {
     cdnify: 'grunt-google-cdn',
     protractor: 'grunt-protractor-runner',
     buildcontrol: 'grunt-build-control',
-    istanbul_check_coverage: 'grunt-mocha-istanbul',
-    curl: 'grunt-curl'
+    istanbul_check_coverage: 'grunt-mocha-istanbul'
   });
 
   // Time how long tasks take. Can help when optimizing build times
@@ -241,7 +240,8 @@ module.exports = function (grunt) {
         src: [
           '<%= yeoman.dist %>/client/!(bower_components){,*/}*.{js,css}',
           '<%= yeoman.dist %>/client/assets/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg,md}',
-          '<%= yeoman.dist %>/client/assets/fonts/*'
+          '!<%= yeoman.dist %>/public/bower_components/particles.js', // fix for .js ending folder-name, see https://github.com/cbas/grunt-rev/issues/29
+          '!<%= yeoman.dist %>/client/assets/fonts/*' // ignore fonts when caching
         ]
       }
     },
@@ -260,7 +260,10 @@ module.exports = function (grunt) {
     usemin: {
       html: ['<%= yeoman.dist %>/client/!(bower_components){,*/}*.html'],
       css: ['<%= yeoman.dist %>/client/!(bower_components){,*/}*.css'],
-      js: ['<%= yeoman.dist %>/client/!(bower_components){,*/}*.js'],
+      js: [
+        '<%= yeoman.dist %>/client/!(bower_components){,*/}*.js',
+        '!<%= yeoman.dist %>/public/bower_components/particles.js' // fix for .js ending folder-name, see https://github.com/cbas/grunt-rev/issues/29
+      ],
       options: {
         assetsDirs: [
           '<%= yeoman.dist %>/client',
@@ -374,12 +377,6 @@ module.exports = function (grunt) {
         dest: '.tmp/',
         src: ['{app,components}/**/*.css']
       }
-    },
-
-    // HTTP-Copy Readme-Files
-    curl: {
-      '<%= yeoman.client %>/assets/readme/core.md': 'https://raw.githubusercontent.com/probr/probr-core/master/README.md',
-      '<%= yeoman.client %>/assets/readme/analysis.md':'https://raw.githubusercontent.com/probr/probr-analysis/master/README.md'
     },
 
     buildcontrol: {
@@ -606,7 +603,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
-      return grunt.task.run(['build', 'env:all', 'env:prod', 'express:prod', 'wait', 'open', 'express-keepalive']);
+      return grunt.task.run(['build', 'env:all', 'env:prod', 'express:prod', 'wait', 'express-keepalive']);
     }
 
     if (target === 'debug') {
@@ -632,7 +629,6 @@ module.exports = function (grunt) {
       'postcss',
       'express:dev',
       'wait',
-      'open',
       'watch'
     ]);
   });
@@ -745,7 +741,6 @@ module.exports = function (grunt) {
     'ngtemplates',
     'concat',
     'ngAnnotate',
-    'curl',
     'copy:dist',
     'cdnify',
     'cssmin',
