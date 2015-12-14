@@ -2,280 +2,194 @@
 
 <div class="row">
 
-<div class="container content">
-  <div class="row">
+    <div class="container content">
+        <div class="row">
 
-  <div class="col-lg-3 side-nav-col">
-    <h1>Index</h1>
-    <ul class="class="nav navbar-nav side-nav">
-    <li><a href="/#/docs/core#architecture">Architecture</a></li>
-    <li><a href="/#/docs/core#frontend">Front-End</a></li>
-    <li><a href="/#/docs/core#rest">REST API</a></li>
-      <ul>
-        <li><a href="/#/docs/core#rest-frontend">Frontend API</a></li>
-        <li><a href="/#/docs/core#rest-device">Devices API</a></li>
-      </ul>
-    <li><a href="/#/docs/core#authentication">Authentication</a></li>
-    <li><a href="/#/docs/core#remote-execution">Remote execution</a></li>
-    <li><a href="/#/docs/core#handlers">Custom handlers</a></li>
-    <li><a href="/#/docs/core#usage">Usage</a></li>
-    <ul>
-      <li><a href="/#/docs/core#add-device">Add device</a></li>
-      <li><a href="/#/docs/core#upload-capture">Upload capture</a></li>
-    </ul>
+            <div class="col-lg-3 side-nav-col">
+                <section sticky-nav>
+                    <h1>Contents</h1>
+                    <ul class="nav nav-pills nav-stacked">
 
+                        <li><a href="/#/docs/core#architecture">Architecture</a></li>
+                        <li><a href="/#/docs/core#frontend">Front-End</a></li>
 
-    </ul>
-  </div>
+                        <h3>REST API</h3>
+                        <li><a href="/#/docs/core#rest-frontend">Frontend API</a></li>
+                        <li><a href="/#/docs/core#rest-device">Devices API</a></li>
 
-  <div class="col-lg-9">
+                        <h3>Customizing</h3>
+                        <li><a href="/#/docs/core#authentication">Authentication</a></li>
+                        <li><a href="/#/docs/core#remote-execution">Remote execution</a></li>
+                        <li><a href="/#/docs/core#handlers">Custom handlers</a></li>
 
-    <div class="row">
-      <h1>Documentation: probr-core</h1>
-      <h2><a name="architecture">Architecture</a></h2>
+                        <h3>Usage</h3>
+                        <li><a href="/#/docs/core#add-device">Add device</a></li>
+                        <li><a href="/#/docs/core#upload-capture">Upload capture</a></li>
 
-      The image below shows the architecture of probr-core. Also, the used technologies are indicated in the respective
-      components.
+                    </ul>
+                </section>
+            </div>
 
+            <div class="col-lg-9">
 
-      <div class="col-lg-12">
-        <br>
-        <br>
-        <br>
-        <img class="img-responsive center-block" src="assets/images/core.png" width="700" height="440">
-        <br>
-        <br>
-        <br>
-      </div>
+                <h1>Documentation: probr-core</h1>
 
+                <h2><a name="architecture">Architecture</a></h2>
 
-      probr-core is built mainly in Python as a Django web application. It serves a frontend for the user written in
-      HTML 5
-      and AngularJS. Through the front end interface, the user can set up sniffing devices, enter sniffing commands,
-      upload existing
-      pcap files containing packets and manage or check the status of the attached sniffing devices. The probr-core
-      Django application uses a PostgreSQL database internally as a backend to store and manage the different sniffing
-      devices,
-      commands, statuses and uploads.
-      <br>
-      The Django back-end component provides the REST API endpoints for the front end, and
-      more importantly, also provides the REST API endpoints for the sniffing devices. Through those API endpoints the
-      devices
-      receive their commands to execute (e.g. start sniffing, start uploading packets, or any other unix command) and
-      also report
-      status data such as CPU and memory on a regular basis. The sniffing devices upload the sniffed data in pcap files
-      to
-      the capture endpoint on the Django back-end. There, the system takes the pcap files and gives them to the Celery
-      worker
-      handlers which entpack the pcap file into an appropriate structure for the respective storage. Out of the box,
-      probr-core
-      has built-in handlers for MongoDB and InfluxDB, but it is designed to be easily extensible. Instructions on how to
-      write
-      handlers for the data storage systems of your choosing can be found <a href="#/faq">here</a>.
+                <p>
+                    The image below shows the architecture of probr-core. Also, the used technologies are indicated in the respective
+                    components.
+                </p>
 
-      <br>
+                <img class="doc-img img-responsive" src="assets/images/core.png">
 
-    </div>
+                <p>
+                    probr-core is built mainly in Python as a Django web application. It serves a frontend for the user written in
+                    HTML 5 and AngularJS. Through the front end interface, the user can set up sniffing devices, enter sniffing commands,
+                    upload existing pcap files containing packets and manage or check the status of the attached sniffing devices. The probr-core
+                    Django application uses a PostgreSQL database internally as a backend to store and manage the different sniffing
+                    devices, commands, statuses and uploads.
+                </p>
 
-    <br>
+                <p>
+                    The Django back-end component provides the REST API endpoints for the front end, and
+                    more importantly, also provides the REST API endpoints for the sniffing devices. Through those API endpoints the
+                    devices receive their commands to execute (e.g. start sniffing, start uploading packets, or any other unix command) and
+                    also report status data such as CPU and memory on a regular basis. The sniffing devices upload the sniffed data in pcap files
+                    to the capture endpoint on the Django back-end. There, the system takes the pcap files and gives them to the Celery
+                    worker handlers which entpack the pcap file into an appropriate structure for the respective storage. Out of the box,
+                    probr-core has built-in handlers for MongoDB and InfluxDB, but it is designed to be easily extensible. Instructions on how to
+                    write handlers for the data storage systems of your choosing can be found <a href="#/faq">here</a>.
+                </p>
 
-    <div class="row">
-      <h2><a name="frontend">Front-end</a></h2>
+                <h2><a name="frontend">Front-end</a></h2>
 
-      The web frontend is the main component in contact with the user. It is written entirely in HTML5 and JavaScript
-      (with Angular).
-      It provides the following views:
+                The web frontend is the main component in contact with the user. It is written entirely in HTML5 and JavaScript
+                (with Angular).
+                It provides the following views:
 
-      <ul>
-        <li>Devices view:</li>
-        <ul style="list-style-type: none">
-          <li>
-            <pre style="display: inline-block"><code>/web/devices</code></pre>
-          </li>
-          <li>Lets the user add new devices through the device wizard.</li>
-          <li>Lets the user see all registered devices and their status.</li>
-          <li>Lets the user open the device detail view of a device.</li>
-          <li>Allows deletion devices from the probr system.</li>
-          <li>Allows bulk-execution of a command on multiple devices at once</li>
-        </ul>
-        <br>
-        <li>Device detail view:</li>
-        <ul style="list-style-type: none">
-          <li>
-            <pre style="display: inline-block"><code>/web/device/{device-uuid}</code></pre>
-          </li>
-          <li>Lets the user to execute commands in the web terminal of a device</li>
-          <li>Allows to start sniffing and upload packets from predefined command templates</li>
-          <li>Allows to update the device client code for probr.</li>
-        </ul>
-        <br>
-        <li>Captures view</li>
-        <ul style="list-style-type: none">
-          <li>
-            <pre style="display: inline-block"><code>/web/captures</code></pre>
-          </li>
-          <li>Allows to see the uploaded pcap files and download them</li>
-          <li>The user can upload pcap files by hand to integrate into the system.</li>
-        </ul>
-        <br>
-      </ul>
-    </div>
+                <h3>Devices View</h3>
+                <small>
+                    <pre><code>/web/devices</code></pre>
+                </small>
+                <ul>
+                    <li>Lets the user add new devices through the device wizard.</li>
+                    <li>Lets the user see all registered devices and their status.</li>
+                    <li>Lets the user open the device detail view of a device.</li>
+                    <li>Allows deletion devices from the probr system.</li>
+                    <li>Allows bulk-execution of a command on multiple devices at once</li>
+                </ul>
 
-    <br>
+                <h3>Devices Detail View</h3>
+                <small>
+                    <pre><code>/web/device/{device-uuid}</code></pre>
+                </small>
+                <ul>
+                    <li>Lets the user to execute commands in the web terminal of a device</li>
+                    <li>Allows to start sniffing and upload packets from predefined command templates</li>
+                    <li>Allows to update the device client code for probr.</li>
+                </ul>
 
-    <div class="row">
-      <h2><a name="rest">REST API</a></h2>
+                <h3>Captures View</h3>
+                <small>
+                    <pre><code>/web/captures</code></pre>
+                </small>
+                <ul>
+                    <li>Allows to see the uploaded pcap files and download them</li>
+                    <li>The user can upload pcap files by hand to integrate into the system.</li>
+                </ul>
 
-      The diagram below shows the endpoints of the REST API available in probr-core:
-      <br>
+                <h2><a name="rest">REST API</a></h2>
 
-      <div class="col-lg-12">
-        <br>
-        <br>
-        <img style="img-responsive center-block" src="assets/images/rest_core.png" width="1200" height="300"/>
-        <br>
-        <br>
-      </div>
+                The diagram below shows the endpoints of the REST API available in probr-core:
+                <br>
 
-      <h3><a name="rest-frontend">API endpoints frontend</a></h3>
-      The endpoints starting with api/ are accessed by the probr-core web frontend. Those can only be accessed with a
-      valid
-      JSON WebToken (JWT). The JWT authentication is integrated with the Django user administration. For more info,
-      check out
-      the respective <a href="http://getblimp.github.io/django-rest-framework-jwt/">pip module</a>.
-      <br>
+                <img class="doc-img img-responsive" src="assets/images/rest_core.png"/>
 
+                <h3><a name="rest-frontend">Frontend API</a></h3>
 
-      <ul>
-        <li>Devices:</li>
-        <ul style="list-style-type: none">
-          <li>
-            <pre style="display: inline-block"><code>/api/device <br>GET: JSON list of devices [{device1},{device2},{device3}...] <br>POST: Create new device; PAYLOAD: JSON device object </code></pre>
-          </li>
-        </ul>
-        <br>
-        <li>Device details:</li>
-        <ul style="list-style-type: none">
-          <li>
-            <pre style="display: inline-block"><code>/api/device/{device-uuid} <br>GET: device details in JSON <br>POST: Alter device details; PAYLOAD: JSON device object <br>DELETE: Delete device</code></pre>
-          </li>
-        </ul>
-        <br>
-        <li>Statuses:</li>
-        <ul style="list-style-type: none">
-          <li>
-            <pre style="display: inline-block"><code>/api/statuses <br>GET: return JSON list of statuses </code></pre>
-          </li>
-        </ul>
-        <br>
-        <li>Commands:</li>
-        <ul style="list-style-type: none">
-          <li>
-            <pre style="display: inline-block"><code>/api/commands <br>GET: return JSON list of commands <br>POST: Create new command; PAYLOAD: command JSON object</code></pre>
-          </li>
-        </ul>
-        <br>
-        <li>Command details:</li>
-        <ul style="list-style-type: none">
-          <li>
-            <pre style="display: inline-block"><code>/api/commands/{uuid} <br>GET: return JSON representation of command object <br>POST: update command result and status; PAYLOAD: JSON representation of command with new values</code></pre>
-          </li>
-        </ul>
-        <br>
-        <li>Commandtemplates:</li>
-        <ul style="list-style-type: none">
-          <li>
-            <pre style="display: inline-block"><code>/api/commandtemplates <br>GET: return JSON list of commandtemplates <br>POST: create new command template; PAYLOAD: JSON representation of commandtemplate object </code></pre>
-          </li>
-        </ul>
-        <br>
-        <li>Commandtemplate details:</li>
-        <ul style="list-style-type: none">
-          <li>
-            <pre style="display: inline-block"><code>/api/commandtemplates <br>GET: return JSON representation of commandtemplate object <br>POST: update commandtemplate parameters; PAYLOAD: PAYLOAD: JSON representation of commandtemplate with new values</code></pre>
-          </li>
-        </ul>
-        <br>
+                <p>
+                    The endpoints starting with api/ are accessed by the probr-core web frontend. Those can only be accessed with a
+                    valid
+                    JSON WebToken (JWT). The JWT authentication is integrated with the Django user administration. For more info,
+                    check out
+                    the respective <a href="http://getblimp.github.io/django-rest-framework-jwt/">pip module</a>.
+                </p>
 
-      </ul>
+                <h3>Devices</h3>
+                <small>
+                    <pre><code>GET: /api/device | [{device1},{device2},{device3}...]</code></pre>
+                    <pre><code>POST: /api/device | Payload: {JSON-Device}</code></pre>
+                    <pre><code>GET: /api/device/{device-uuid} | {device}</code></pre>
+                    <pre><code>PUT: /api/device/{device-uuid} | Payload: {JSON-Device}</code></pre>
+                    <pre><code>DELETE: /api/device/{device-uuid}</code></pre>
+                </small>
 
-      <h3><a name="rest-devices">API endpoints devices</a></h3>
-      The API endpoints starting with api-device/ are the ones that are accessed solely by the sniffing devices. Those
-      can only be accessed with a valid api-key. A sniffing device receives an api-key on set-up through the device
-      wizard
-      in the web frontend. Setting up a device is only possible if the user is logged in via Django user administration/JWTAuth. The api-key also identifies the device
-      that sends the requests.
-      <br>
-      <br>
+                <h3>Statuses</h3>
+                <small>
+                    <pre><code>GET: /api/statuses/ | [{status1},{status2},{status3}...]</code></pre>
+                </small>
 
-      <h3>API endpoints devices</h3>
-      <ul>
-        <li>Captures:</li>
-        <ul style="list-style-type: none">
-          <li>
-            <pre style="display: inline-block"><code>/api-device/captures <br>POST: Upload capture together with pcap file </code></pre>
-          </li>
-        </ul>
-        <br>
-        <li>Statuses:</li>
-        <ul style="list-style-type: none">
-          <li>
-            <pre style="display: inline-block"><code>/api-device/statuses <br>GET: return JSON list of statuses <br>POST: create new status; PAYLOAD: JSON representation of status object</code></pre>
-          </li>
-        </ul>
-        <br>
-        <li>Commands:</li>
-        <ul style="list-style-type: none">
-          <li>
-            <pre style="display: inline-block"><code>/api-device/commands <br>GET: return JSON list of commands <br>POST: create new command; PAYLOAD: JSON representation of command object</code></pre>
-          </li>
-        </ul>
-        <br>
-        <li>Command details:</li>
-        <ul style="list-style-type: none">
-          <li>
-            <pre style="display: inline-block"><code>/api-device/commands/{command-uuid} <br>GET: command details in JSON <br>POST: Alter command details; PAYLOAD: JSON command object </code></pre>
-          </li>
-        </ul>
-        <br>
-      </ul>
-    </div>
+                <h3>Commands</h3>
+                <small>
+                    <pre><code>GET: /api/commands/ | [{command1},{command2},{command3}...]</code></pre>
+                    <pre><code>POST: /api/commands/ | Payload: {JSON-Status}</code></pre>
+                    <pre><code>GET: /api/commands/{command-uuid} | {command}</code></pre>
+                    <pre><code>PUT: /api/commands/{command-uuid} | Payload: {JSON-Status}</code></pre>
+                </small>
 
-    <div class="row">
-      <h2><a name="authentication">Authentication</a></h2>
+                <h3>Command Templates</h3>
+                <small>
+                    <pre><code>GET: /api/commandtemplates/ | [{commandtemplate1},{commandtemplate2},{commandtemplate3}...]</code></pre>
+                    <pre><code>POST: /api/commandtemplates/ | Payload: {JSON-CommandTemplate}</code></pre>
+                    <pre><code>GET: /api/commandtemplates/{commandtemplates-uuid} | {commandtemplate}</code></pre>
+                    <pre><code>PUT: /api/commandtemplates/{commandtemplates-uuid} | Payload: {JSON-CommandTemplate}</code></pre>
+                </small>
+
+                <h3><a name="rest-devices">Devices API</a></h3>
+
+                <p>
+                    The API endpoints starting with api-device/ are the ones that are accessed solely by the sniffing devices. Those
+                    can only be accessed with a valid api-key. A sniffing device receives an api-key on set-up through the device
+                    wizard in the web frontend. Setting up a device is only possible if the user is logged in via Django user administration/JWTAuth. The api-key also identifies the device
+                    that sends the requests.
+                </p>
+
+                <h3>Captures</h3>
+                <small>
+                    <pre><code>POST: /api-device/captures | Payload: Capture</code></pre>
+                </small>
+
+                <h3>Statuses</h3>
+                <small>
+                    <pre><code>GET: /api-device/statuses/ | [{statuses1},{statuses2},{statuses3}...]</code></pre>
+                    <pre><code>POST: /api-device/statuses/ | Payload: {JSON-Status}</code></pre>
+                </small>
+
+                <h3>Commands</h3>
+                <small>
+                    <pre><code>GET: /api-device/commands/ | [{commands1},{commands2},{commands3}...]</code></pre>
+                    <pre><code>POST: /api-device/commands/ | Payload: {JSON-Command}</code></pre>
+                    <pre><code>PUT: /api-device/commands/{command-uuid} | Payload: {JSON-Command}</code></pre>
+                </small>
+
+                <h2><a name="authentication">Authentication</a></h2>
+
+                <h2><a name="remote-execution">Remote command execution</a></h2>
+
+                <h2><a name="handlers">Writing custom handlers</a></h2>
+
+                <h2><a name="usage">Usage samples</a></h2>
+
+                <p>
+                    See <a ui-sref="usage-core">Usage-Core</a> for more details;
+                </p>
+
+            </div>
+
+        </div>
 
     </div>
-
-    <div class="row">
-      <h2><a name="remote-execution">Remote command execution</a></h2>
-
-    </div>
-
-    <div class="row">
-      <h2><a name="handlers">Writing custom handlers</a></h2>
-
-    </div>
-
-    <div class="row">
-      <h2><a name="usage">Usage samples</a></h2>
-
-        <h3><a name="add-device">Adding a sniffing device</a></h3>
-        The gif below shows how you can use the device wizard to add a sniffing device. The terminal on the right is a ssh connection to the device which shall be set up.
-        <br>
-        <br>
-        <img src="assets/images/gifs/add_device_wizard.gif" alt="Adding a device." style="display:block; margin:auto;" width="800" height="400"/>
-
-        <h3><a name="upload-capture">Upload capture by hand</a></h3>
-        <br>
-        <br>
-        <img src="assets/images/gifs/upload_pcap.gif" alt="Uploading a pcap by hand." style="  display:block; margin:auto;" width="800" height="400"/>
-
-
-    </div>
-
-  </div>
-
-  </div>
 </div>
 
 </div>

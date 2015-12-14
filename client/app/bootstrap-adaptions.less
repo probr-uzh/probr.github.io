@@ -91,6 +91,10 @@ p {
   text-align: justify;
 }
 
+ul {
+  line-height: 24px;
+}
+
 code {
   color: @brand-primary;
   background-color: darken(@brand-gray-light, 5%);
@@ -100,4 +104,12 @@ blockquote {
   font-size: 16px;
   border-left: 5px solid @brand-primary;
   margin-bottom: 10px;
+}
+
+.nav-pills > li:first-child {
+  border-right: none;
+}
+
+.nav-pills > li + li {
+  border-right: none;
 }
