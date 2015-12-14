@@ -18,9 +18,22 @@
     </div>
 
     <div class="row" ng-show="installation ==='docker'">
-        <marked>
-            TODO
-        </marked>
+        <h2>Requirements</h2>
+
+        <ul>
+            <li><a href="http://docker.com/" target="_blank">Docker</a></li>
+            <li><a href="https://docs.docker.com/compose/" target="_blank">Docker-Compose</a></li>
+            <li><a ui-sref="installation-core" target="_blank">Running Docker-Compose of Probr-Core</a></li>
+        </ul>
+
+        <h2>Installation</h2>
+
+        <p>Clone probr-analysis and head into its directory. Now let docker-compose start your probr-analysis instance:</p>
+
+        <pre><code>docker-compose up -d</code></pre>
+
+        <p>This will start probr-analysis, automatically linking with your existing probr-core containers.</p>
+
     </div>
 
     <div class="row" ng-show="installation ==='nodejs'">
@@ -48,34 +61,28 @@
 
       <p>Make sure your mongo deamon runs:</p>
 
-    <pre><code>mongod &amp;
-    </code></pre>
+    <pre><code>mongod &amp;</code></pre>
 
       <p>Also, start your redis server:</p>
 
-    <pre><code>redis-server &amp;
-    </code></pre>
+    <pre><code>redis-server &amp;</code></pre>
 
       <p>After cloning the repo and going into the <code>probr-analysis</code> directory:</p>
 
-    <pre><code>npm install
-    </code></pre>
+    <pre><code>npm install</code></pre>
 
       <p>After the installation of the npm dependencies has finished, install the bower dependencies:</p>
 
-    <pre><code>bower install
-    </code></pre>
+    <pre><code>bower install</code></pre>
 
       <p>These steps will also install <a href="http://gruntjs.com/">Grunt</a>. Our project comes with preconfigured grunt
         tasks, so you can run:</p>
 
-    <pre><code>grunt build
-    </code></pre>
+    <pre><code>grunt build</code></pre>
 
       <p>To start the application, run:</p>
 
-    <pre><code>grunt serve
-    </code></pre>
+    <pre><code>grunt serve</code></pre>
 
       <p>The application should now be reachable under <a href="http://localhost:9000">http://localhost:9000</a>.</p>
 
