@@ -103,7 +103,8 @@
         </small>
         <ul>
           <li>Displays an interactive map containing the locations as a heatmap.</li>
-          <li>The user can restrict or filter the data by setting a tag and a date/time range in the navigation bar.</li>
+          <li>The user can restrict or filter the data by setting a tag and a date/time range in the navigation bar.
+          </li>
         </ul>
         <small>
           Optional URL Parameters:
@@ -120,7 +121,8 @@
           <li>Displays a chart of the vendor statistics for the selected tag and time range.</li>
           <li>Displays a ranking of vendors based on identified device count and percentage.</li>
           <li>Displays statistics about MAC randomization in the identified device data.</li>
-          <li>The user can restrict or filter the data by setting a tag and a date/time range in the navigation bar.</li>
+          <li>The user can restrict or filter the data by setting a tag and a date/time range in the navigation bar.
+          </li>
         </ul>
         <small>
           Optional URL Parameters:
@@ -137,7 +139,8 @@
           <li>The user can add named aliases for MAC addresses to be tracked.</li>
           <li>The presence patterns of tracked aliases are displayed in a swimlane graph</li>
           <li>The user can zoom into the swimlane graph and move around in the date/time range</li>
-          <li>The user can restrict or filter the data by setting a tag and a date/time range in the navigation bar.</li>
+          <li>The user can restrict or filter the data by setting a tag and a date/time range in the navigation bar.
+          </li>
         </ul>
         <small>
           Optional URL Parameters:
@@ -149,7 +152,64 @@
 
         <h2><a name="rest">REST API</a></h2>
 
-        
+        <h3>Devices</h3>
+        <small>
+          <p>
+            Get devices identified in a certain time range and with a certain tag:
+          <pre><code>GET: /api/device/query?starTimestamp={timestamp}&endTimestamp={timestamp}&tags={tag}</code></pre>
+          </p>
+          <p>
+            Get devices seen in the last 5 minutes:
+          <pre><code>GET: /api/device/lastFive</code></pre>
+          </p>
+          <p>
+            Get devices seen in the last hour:
+          <pre><code>GET: /api/device/lastHour</code></pre>
+          </p>
+          <p>
+            Get devices seen in the last day:
+          <pre><code>GET: /api/device/lastDay</code></pre>
+          </p>
+        </small>
+
+        <h3>Locations</h3>
+        <small>
+          <p>
+            For the location endpoints, the backend expects a URL-encoded query object. The query object should be a
+            MongoDB JavaScript
+            query object and you should URL-encode it according to the
+            <a href="http://www.w3schools.com/tags/ref_urlencode.asp">standards.</a>
+          </p>
+
+          <p>
+          <pre><code>GET: /api/locations?query={URL-encoded MongoDB query object}</code></pre>
+          </p>
+          <p>
+            On this endpoint, you can choose what parameters you use. You can use arbitrary MongoDB query objects.
+          </p>
+        </small>
+
+        <h3>Sessions</h3>
+        <small>
+          <p>
+            For some of the session endpoints, the backend expects a URL-encoded query object. The query object should
+            be a
+            MongoDB JavaScript query object and you should URL-encode it according to the
+            <a href="http://www.w3schools.com/tags/ref_urlencode.asp">standards.</a>
+          </p>
+
+          <p>
+            On this endpoint, you can choose what parameters you use. You can use arbitrary MongoDB query objects and
+            can filter sessions
+            arbitrarily.
+          <pre><code>GET: /api/session?query={URL-encoded MongoDB query object}</code></pre>
+          </p>
+          <p>
+            Get the aggregated session data for the utilization view, according to the passed timestamps and tag:
+          <pre><code>GET: /api/session/reduce?startTimestamp={timestamp}&endTimestamp={timestamp}&tags={tag}</code></pre>
+          </p>
+        </small>
+
 
 
 
