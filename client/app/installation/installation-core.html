@@ -2,124 +2,205 @@
 
 <div class="container content">
 
-    <h1>Probr-Core: Installation</h1>
+  <h1>Probr-Core: Installation</h1>
 
-    <div class="row">
-        <div class="col-xs-6 install-block">
-            <a ng-click="installation = 'docker'">
-                <i class="icon-install icon-docker" ng-class="{ 'icon-active': installation === 'docker' }"></i>
-            </a>
-        </div>
-        <div class="col-xs-6 install-block" ng-click="installation == 'python'">
-            <a ng-click="installation = 'python'">
-                <i class="icon-install icon-python" ng-class="{ 'icon-active': installation === 'python' }"></i>
-            </a>
-        </div>
+  <div class="row">
+    <div class="col-xs-4 install-block">
+      <a ng-click="installation = 'docker'">
+        <i class="icon-install icon-docker" ng-class="{ 'icon-active': installation === 'docker' }"></i>
+      </a>
     </div>
-
-    <div class="row" ng-show="installation ==='docker'">
-        <h2>Requirements</h2>
-
-        <ul>
-            <li><a href="http://docker.com/" target="_blank">Docker</a></li>
-            <li><a href="https://docs.docker.com/compose/" target="_blank">Docker-Compose</a></li>
-        </ul>
-
-        <h2>Installation</h2>
-
-        <p>Clone probr-core and head into its directory. Now let docker-compose start your probr-core instance:</p>
-
-        <pre><code>docker-compose up -d</code></pre>
-
-        <p>This will setup a functioning probr-core installation, as well as MongoDB and InfluxDB and its corresponding handlers.</p>
-
-        <p>In order to have a login for probr-core, you have to set-up a superuser for the application:</p>
-
-        <pre><code>docker exec -ti probrcore_web_1 python manage.py createsuperuser</code></pre>
-
-        <p> Now you can log in to the probr-core web application and manage your devices or start sniffing.</p>
-
+    <div class="col-xs-4 install-block" ng-click="installation == 'vagrant'">
+      <a ng-class="{ 'svg-active': installation === 'vagrant'}" ng-click="installation = 'vagrant'">
+        <svg style="margin-top: 20px; height: 100px"  viewBox="0 0 256 270" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMinYMin meet">
+          <g>
+            <g>
+              <path d="M255.28,19.1658667 C253.437867,17.6554667 238.961067,9.89226667 238.961067,9.89226667 L223.5136,18.8672 L223.505067,18.8618667 L238.952533,9.888 L223.5104,0.6848 L223.505067,18.8618667 L207.394133,9.84426667 C207.394133,9.84426667 194.215467,17.5477333 187.816533,21.2405333 C179.762133,25.888 160.007467,37.6501333 160.007467,37.6501333 L160.007467,55.0197333 L143.733333,97.4197333 L143.733333,120.442667 L132.311467,127.109333 L127.7664,138.9984 L95.7386667,55.9136 L95.744,37.6928 L31.9146667,0.664533333 L0.0309333333,19.1210667 L0,19.1136 L0,37.8901333 L19.8837333,85.7813333 L31.9669333,92.8981333 L31.9776,114.738133 L79.8784,231.0816 L127.7504,258.477867 L127.7504,258.635733 L175.559467,230.9696 L255.4528,37.5082667 L255.28,19.1658667" fill-opacity="0.3"></path>
+              <path d="M127.7856,258.498133 L79.8784,231.0816 L31.9776,114.738133 L31.9669333,92.8981333 L19.8837333,85.7813333 L0,37.8901333 L0,19.1136 L15.7333333,28.2869333 L15.7333333,46.7712 L31.9946667,56.208 L31.9968,37.616 L63.7685333,55.9989333 L65.3002667,74.1973333 L111.489067,194.088533 L143.588267,212.7872 L143.588267,249.454933 L127.7408,240.133333 L127.7856,258.498133" fill-opacity="0.3"></path>
+              <path d="M95.7386667,55.9136 L127.7664,138.9984 L127.700267,184.7648 L111.466667,193.997867 L65.3002667,74.064 L63.7685333,55.9989333 L95.744,37.6928 L95.7386667,55.9136" fill-opacity="0.2"></path>
+              <path d="M15.7333333,28.2869333 L15.7333333,46.7712 L31.9968,37.616 L15.7333333,28.2869333" fill-opacity="0.2"></path>
+              <path d="M31.9946667,56.208 L31.9968,37.616 L15.7333333,46.7712 L31.9946667,56.208" fill-opacity="0.6"></path>
+              <path d="M127.700267,184.7648 L143.710933,193.9264 L161.537067,149.169067 L175.265067,157.3376 L175.265067,114.442667 L179.6448,104.0864 L191.333333,110.9312 L191.333333,92.7978667 L175.421867,83.5530667 L191.421867,74.2645333 L175.688533,65.1978667 L175.646933,46.768 L160.007467,37.6501333 L160.007467,55.0197333 L143.733333,97.4197333 L143.733333,120.442667 L132.311467,127.109333 L127.7664,138.9984 L127.700267,184.7648" fill-opacity="0.3"></path>
+              <path d="M127.480533,203.5008 L143.588267,212.7872 L143.508267,249.463467 L175.559467,230.9696 L255.4528,37.5082667 L255.28,19.1658667 L207.394133,46.768 L207.394133,83.5925333 L191.333333,92.7978667 L191.333333,110.9312 L179.6448,104.0864 L175.265067,114.442667 L175.265067,157.248 L153.0208,170.328533 L143.710933,193.9264 L127.480533,203.5008" fill-opacity="0.2"></path>
+              <path d="M63.6672,74.3978667 L79.7333333,65.0645333 L79.7333333,83.5306667 L63.6672,74.3978667" fill-opacity="0.6"></path>
+              <path d="M79.7333333,83.5306667 L95.6661333,92.5312 L95.6661333,74.3978667 L79.7333333,65.0645333 L79.7333333,83.5306667" fill-opacity="0.3"></path>
+              <path d="M47.8453333,120.196267 L47.8453333,138.795733 L63.9317333,129.5392 L47.8453333,120.196267" fill-opacity="0.2"></path>
+              <path d="M79.9882667,138.882133 L63.8453333,148.2816 L47.8453333,138.795733 L63.9317333,129.5392 L79.9882667,138.882133" fill-opacity="0.6"></path>
+              <path d="M79.7706667,194.133333 L79.7706667,212.890667 L95.9402667,203.541333 L79.7706667,194.133333" fill-opacity="0.2"></path>
+              <path d="M111.522133,230.8832 L127.809067,240.349867 L127.867733,221.298133 L111.522133,230.8832" fill-opacity="0.6"></path>
+              <path d="M127.7504,258.635733 L127.809067,240.349867 L143.508267,249.463467 L127.7504,258.635733" fill-opacity="0.2"></path>
+              <path d="M127.700267,184.7648 L111.466667,193.997867 L127.480533,203.5008 L143.710933,193.9264 L127.700267,184.7648" fill-opacity="0.6"></path>
+              <path d="M207.394133,83.5925333 L207.394133,46.768 L191.540267,37.7429333 L191.540267,56.0896 L175.688533,65.1978667 L207.394133,83.5925333" fill-opacity="0.3"></path>
+              <path d="M175.421867,83.5530667 L191.421867,74.2645333 L207.394133,83.5925333 L191.333333,92.7978667 L175.421867,83.5530667" fill-opacity="0.6"></path>
+              <path d="M175.688533,65.1978667 L191.540267,56.0896 L191.540267,37.7429333 L175.646933,46.768 L175.688533,65.1978667" fill-opacity="0.2"></path>
+              <path d="M223.505067,18.8629333 L223.5104,0.6848 L238.952533,9.888 L223.505067,18.8629333" fill-opacity="0.3"></path>
+              <path d="M255.28,19.1658667 L207.394133,46.768 L191.540267,37.7429333 L175.646933,46.768 L160.007467,37.6501333 C160.007467,37.6501333 179.762133,25.888 187.816533,21.2405333 C194.215467,17.5477333 207.394133,9.84426667 207.394133,9.84426667 L223.5136,18.8672 L238.961067,9.89226667 C238.961067,9.89226667 253.437867,17.6554667 255.28,19.1658667 C250.923733,21.7109333 255.28,19.1658667 255.28,19.1658667" fill-opacity="0.6"></path>
+              <path d="M95.744,37.6928 L63.7685333,55.9989333 L0.0309333333,19.1210667 L31.9146667,0.664533333 L95.744,37.6928" fill-opacity="0.6"></path>
+              <path d="M239.204267,46.3477333 L239.204267,28.432 L223.624533,37.4218667 L239.204267,46.3477333" fill-opacity="0.3"></path>
+              <path d="M191.979733,129.6384 L207.482667,120.744533 L207.482667,138.5824 L191.979733,129.6384" fill-opacity="0.3"></path>
+              <path d="M159.582933,203.378133 L159.582933,221.8624 L175.7312,212.520533 L159.582933,203.378133" fill-opacity="0.6"></path>
+              <path d="M175.831467,212.520533 L175.632,194.1856 L159.582933,203.378133 L175.831467,212.520533" fill-opacity="0.3"></path>
+            </g>
+          </g>
+        </svg>
+      </a>
     </div>
-
-    <div class="row" ng-show="installation ==='python'">
-
-        <p>The frameworks, languages, tools and technologies used and required in the probr-core project are:</p>
-
-        <ul>
-            <li>Python 2.7</li>
-            <li><a href="https://www.djangoproject.com/">Django</a></li>
-            <li><a href="http://bower.io/">Bower</a></li>
-            <li><a href="https://pip.pypa.io/en/latest/installing.html">PIP</a></li>
-        </ul>
-
-        <h3><a id="user-content-devices" class="anchor" href="#devices" aria-hidden="true"><span class="octicon octicon-link"></span></a>Devices</h3>
-
-        <p>The devices used for sniffing WiFi packets must fulfill the following requirements:</p>
-
-        <ul>
-            <li>*NIX operating system or simliar (Debian, Ubuntu, OpenWRT, Mac OS X, Raspbian etc.)</li>
-            <li>wget installed</li>
-            <li>tcpdump installed</li>
-            <li>internet access</li>
-            <li>wireless interface with monitor mode capabilities</li>
-        </ul>
-
-        <h2><a id="user-content-installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
-
-        <p>We highly recommended to use <a href="https://virtualenv.pypa.io/en/latest/">Virtualenv</a> to manage the python environment for probr-core.</p>
-
-        <p>After cloning the project, create a virtual environment for probr outside the probr-core directory:</p>
-
-        <pre><code>virtualenv .env_probr</code></pre>
-
-        <p>Activate the virtual python environment:</p>
-
-        <pre><code>source .env_probr/bin/activate</code></pre>
-
-        <p>Go into the
-        <pre><code>probr-core</code></pre>
-        directory.Now install the python dependencies of the project:</p>
-
-        <pre><code>pip install -r requirements.txt</code></pre>
-
-        <p>Now, install the frontend and web dependencies using bower:</p>
-
-        <pre><code>bower install</code></pre>
-
-        <p>You're pretty much set to start probr-core at this moment. What is left to do is:</p>
-
-        <p>Create the DB tables:</p>
-
-        <pre><code>python manage.py migrate</code></pre>
-
-        <p>Create an admin user for the Django webproject:</p>
-
-        <pre><code>python manage.py createsuperuser</code></pre>
-
-        <p>Make sure the mongodb deamon is running:</p>
-
-        <pre><code>mongod &amp; </code></pre>
-
-        <p>Also, the redis-server must be running before you can use probr-core</p>
-
-        <pre><code>redis-server &amp;</code></pre>
-
-        <h2><a id="user-content-start-up" class="anchor" href="#start-up" aria-hidden="true"><span class="octicon octicon-link"></span></a>Start-up</h2>
-
-        <p>Finally, you're ready to start your probr-core server by running:</p>
-
-        <pre><code>python manage.py runserver</code></pre>
-
-        <p>In order for the data to be processed and entered into the database, you need to start
-            the celery worker:</p>
-
-        <pre><code>celery worker -A probr</code></pre>
-
-        <p>And you can check it out by visiting
-        <pre><code>http://localhost:8000</code></pre>
-        .</p>
-
+    <div class="col-xs-4 install-block" ng-click="installation == 'python'">
+      <a ng-click="installation = 'python'">
+        <i class="icon-install icon-python" ng-class="{ 'icon-active': installation === 'python' }"></i>
+      </a>
     </div>
+  </div>
+
+  <div class="row" ng-show="installation ==='docker'">
+    <h2>Requirements</h2>
+
+    <ul>
+      <li><a href="http://docker.com/" target="_blank">Docker</a></li>
+      <li><a href="https://docs.docker.com/compose/" target="_blank">Docker-Compose</a></li>
+    </ul>
+
+    <h2>Installation</h2>
+
+    <p>Clone probr-core and head into its directory. Now let docker-compose start your probr-core instance:</p>
+
+    <pre><code>docker-compose up -d</code></pre>
+
+    <p>This will setup a functioning probr-core installation, as well as MongoDB and InfluxDB and its corresponding handlers.</p>
+
+    <p>In order to have a login for probr-core, you have to set-up a superuser for the application:</p>
+
+    <pre><code>docker exec -ti probrcore_web_1 python manage.py createsuperuser</code></pre>
+
+    <p> Now you can log in to the probr-core web application and manage your devices or start sniffing.</p>
+
+  </div>
+
+  <div class="row" ng-show="installation ==='python'">
+
+    <h2>Requirements</h2>
+
+    <ul>
+      <li><a href="https://git-scm.org/">Git</a></li>
+      <li><a href="https://www.python.org/">Python 2.7.x</a>, <a href="https://pypi.python.org/pypi/pip">pip</a></li>
+      <li><a href="https://nodejs.org/">Node, npm</a> >= 0.12</li>
+      <li><a href="http://www.postgresql.org/">PostgreSQL</a></li>
+      <li><a href="https://www.mongodb.org/">MongoDB</a></li>
+      <li><a href="http://redis.io/">Redis</a></li>
+    </ul>
+
+    <h3>OS Specific</h3>
+    <ul>
+      <li>OSX: Command Line Tools to build packages. Installed with Xcode.</li>
+      <li>Ubuntu/Debian: <br>
+        Python header files <code>apt-get install python-dev</code><br>
+        Postgres header files <code>apt-get install libpq-dev</code>
+      </li>
+    </ul>
+
+    <h2>Installation</h2>
+
+    <p>Make sure all the requirements are installed. We highly recommended to use <a href="https://virtualenv.pypa.io/en/latest/">Virtualenv</a> to manage the python environment for probr-core. This way you won't get any conflicts with preinstalled python packages. To install virtualenv do</p>
+
+    <pre><code>pip install virtualenv</code></pre>
+
+    <p>Create a new folder and create inside a new virtual python environment</p>
+
+    <pre><code>mkdir probr cd probr<br>virtualenv .env_probr </code></pre>
+
+    <p>Activate the virtual python environment:</p>
+
+    <pre><code>source .env_probr/bin/activate</code></pre>
+
+    <p>Clone the probr-core repository and go into the repository directory</p>
+
+    <pre><code>git clone https://github.com/probr/probr-core.git<br>cd probr-core</code></pre>
+
+    <p>Add (and modify) settings</p>
+    <pre><code>cp probr/settings.example.py probr/settings.py</code></pre>
+
+    <p>Install the python dependencies of the project:</p>
+
+    <pre><code>pip install -r requirements.txt</code></pre>
+
+    <p>If you have troubles installing a certain package, make sure you have the required header files installed (see requirements)</p>
+
+    <p>Now, install the frontend and web dependencies using bower:</p>
+
+    <pre><code>npm install -g bower<br> bower install</code></pre>
+
+    <p>You're pretty much set to start probr-core at this moment. What is left to do is:</p>
+
+    <p>Create the DB tables:</p>
+
+    <pre><code>python manage.py migrate</code></pre>
+
+    <p>Create an admin user for the Django webproject:</p>
+
+    <pre><code>python manage.py createsuperuser</code></pre>
+
+    <h3>Starting</h3>
+
+    <p>Make sure the mongodb deamon is running:</p>
+
+    <pre><code>mongod &amp; </code></pre>
+
+    <p>Also, the redis-server must be running before you can use probr-core</p>
+
+    <pre><code>redis-server &amp;</code></pre>
+
+    <p>Finally, you're ready to start your probr-core server by running:</p>
+
+    <pre><code>python manage.py runserver</code></pre>
+
+    <p>In order for the data to be processed and entered into the database, you need to start the celery worker:</p>
+
+    <pre><code>celery worker -A probr</code></pre>
+
+    <p>And you can check it out by visiting</p>
+    <pre><code>http://localhost:8000</code></pre>
+
+
+  </div>
+
+  <div class="row" ng-show="installation ==='vagrant'">
+    <h2>Requirements</h2>
+    <ul>
+      <li><a href="https://git-scm.org/">Git</a></li>
+      <li><a href="https://www.vagrantup.com/">Vagrant</a></li>
+    </ul>
+
+    <h2>Installation</h2>
+    <p>Clone the probr-core repository</p>
+    <pre><code>git clone https://github.com/probr/probr-core.git</code></pre>
+
+    <h2>Starting</h2>
+    <p>Go into the folder</p>
+    <pre><code>cd probr-core</code></pre>
+    <p>Start the Vagrant VM</p>
+    <pre><code>vagrant up</code></pre>
+    <p>Probr core is now running on 192.168.100.10:8000. Username and password for the admin user is admin/admin.</p>
+
+    <h2>Troubleshooting</h2>
+    <p>If you want to debug the worker or the web django app you can do by ssh'ing into the VM</p>
+    <pre><code>vagrant ssh</code></pre>
+    <p>and attaching to the screen session of the worker or backend</p>
+    <pre><code>screen -r probrcoreworker</code></pre>
+    <pre><code>screen -r probrcoreweb</code></pre>
+    <p>To de-attach press Ctrl-A Ctrl-D. Check <a href="https://www.gnu.org/software/screen/manual/">the official documentation</a> of screen for further information.</p>
+  </div>
+
+  <h2>Devices</h2>
+
+  <p>The devices used for sniffing WiFi packets must fulfill the following requirements:</p>
+
+  <ul>
+    <li>*NIX operating system or simliar (Debian, Ubuntu, OpenWRT, Mac OS X, Raspbian etc.)</li>
+    <li>wget installed</li>
+    <li>tcpdump installed</li>
+    <li>internet access</li>
+    <li>wireless interface with monitor mode capabilities</li>
+  </ul>
 </div>
 
 <footer></footer>
