@@ -2,22 +2,127 @@
 
 <div class="container content" id="whatisprobr">
 
-    <h1>Use-Cases</h1>
+  <div class="row">
+    <div class="col-lg-3 side-nav-col">
+      <section sticky-nav>
+        <h1>Contents</h1>
+        <ul class="nav nav-pills nav-stacked">
 
-    <h2>#1 - Room Utilization</h2>
+          <li><a href="/#/usecase#questions">Research Questions</a></li>
+          <li><a href="/#/usecase#utilization">Q1: Room Utilization</a></li>
+          <li><a href="/#/usecase#tracking">Q2: Tracking</a></li>
+          <li><a href="/#/usecase#devices">Q3: Device Statistics</a></li>
+        </ul>
+      </section>
+    </div>
+    <div class="col-lg-9">
+      <h1>Use-Cases</h1>
 
-    <p>
-        Our focus during the development of probr was to answer the following research question:
-    </p>
-    <blockquote>
-        Is it possible to determine room utilization, which means to determine the number of people in a room, using only passive wifi tracking?
-    </blockquote>
-    <p>
-        Also, we tried to enhance the capabilities of the system by building it in such a generic way that more possible use-cases and questions of interested can be answered. The developed tools,
-        probr-core and probr-analysis aim to not only answer the original research question but to answer more questions along the way. We have tested the system over a longer period of time, but
-        would like to share the results of a 2-day test during an internal conference at the University of Zurich. The probr-system had been deployed during the conference and been
-        used to collect data throughout the 2 days.
-    </p>
+      <p>
+        In order to evaluate the usability of the probr system, the system was tested with a specific use case. The test run
+        took place at a
+        university meeting room (around 35 square meters area), where a scientific project meeting of 20 to 25 persons took
+        place for two consecutive days. We will call this use case 'acelab' (after the room it took place in).
+      </p>
+
+      <p>
+        During the meeting, we set-up six sniffing devices to collect WiFi probe requests. The devices used for sniffing
+        were <a href="http://www.hardkernel.com/main/products/prdt_info.php?g_code=G141578608433">Odroid C1</a>
+        devices with the standard Odroid
+        <a href="http://www.hardkernel.com/main/products/prdt_info.php?g_code=G141630348024">WiFi Module 4</a>.
+      </p>
+
+      <h2><a name="questions">Research Questions</a></h2>
+
+      <p>
+        The data collected at mentioned meeting were used to showcase and evaluate the probr system and answer the following
+        research questions:
+      </p>
+
+      <p>
+        <b>Q1: Room Utilization</b>
+      </p>
+      <blockquote>
+        Is it possible to determine room utilization, which means to determine the number of people in a room, using only
+        passive wifi tracking?
+      </blockquote>
+
+      <p>
+        <b>Q2: Tracking</b>
+      </p>
+      <blockquote>
+        Can we track individual MAC addresses / persons ? What patterns are visible?
+      </blockquote>
+
+      <p>
+        <b>Q3: Device Statistics</b>
+      </p>
+      <blockquote>
+        What information can we get about the devices and vendors present during the examined period?
+      </blockquote>
+
+      <p>
+        In the following, we will examine each of those questions and discuss how probr answers them. The user navigation in the
+        probr-analysis application pays attention to the use cases we had in mind. Under the 'analysis' tab in the probr-analysis
+        front-end, the user is presented with the tools to explore the collected data and answer the posed questions. In the navigation bar,
+        the user has the possibility to define the "use case" or "experiment" by setting a tag and a date/time range globally. The defined
+        use case is then applied to all the analysis views. More info on the front-end can be found <a href="">here</a>.
+      </p>
+
+
+      <h2><a name="utilization">Q1: Room Utilization</a></h2>
+      <p>
+        After the development of probr-core and the first steps into the probr-analysis application, we noticed that just looking
+        at the probe count or packet frequency is not enough to determine room utilization. Packets might end up being collected by our
+        sniffing devices even if the device that originally sent out the packets just walked by shortly and didn't even enter the monitored
+        room at all. Hence we had to think about a more sophisticated data model that we could construct from the packet data, in order to be able
+        to say when someone has been present at a certain point in time and to determine how many MAC addresses or persons have been present
+        at a given time t. This lead us to the definition of <a href="">sessions</a>, which proved to be a powerful tool for use cases and questions
+        such as the one for  Q1.
+      </p>
+      <p>
+        Under the 'utilization' tab in the 'analysis' part of the probr-analysis <a href="">front-end</a>, the utilization graph is displayed.
+        It displays the number of concurrent sessions at each point in time.
+      </p>
+      <p>
+      <img class="img-responsive" src="assets/images/utilizations.png"/>
+      </p>
+      <p>
+        The time axis granularity at which the concurrent session counts are computed
+        is at 5 minute slots. Which means, the bar chart produces a bar for every five minutes on the time ranges, where the height of the bar is
+        equal to the number of concurrent sessions present at that time slot. So this graph shows us, how many unique MAC addresses or devices have
+        been present at different times in a room (defined by the tag).
+      </p>
+      <p>
+        One can clearly identify a pattern in the utilization graph. In order to be able to evaluate the correctness and accuracy of
+        probrs utilization results, we also recorded the real number of persons in the room during the acelab. The graphic below compares
+        both data sets.
+      </p>
+      <p>
+      <img class="img-responsive" src="assets/images/utilizations_comparison.png"/>
+      </p>
+      <p>
+        The comparison shows that the utilization computed by the probr system is satisfying and fairly accurate. The breaks and starting or end times
+        of the meeting days can be observed very clearly. It is important to note that the number of sessions will always be higher than the number
+        of real persons at each point in time, since one person normally has multiple devices with them (e.g. one notebook add one smartphone) which will
+        result in two sessions at the same time for that one person. But nevertheless, the patterns are detected, and one can conclude that probr
+        does a good job answering room utilization questions.
+      </p>
+      <p>
+        In addition to the utilization of a room equipped with sniffing devices, probr allows its users to also look at the geographical locations or positions
+        of the sniffed packets and devices. The locations are computed with a triangulation-based approach, as shown <a href="">here</a>. It provides
+        the user with the ability to explore the geographic distribution of devices or persons in the monitored room over a certain period of time. The location
+        view can be found under the 'location' tab in the analysis view. Below, we see a summary of the location heatmaps for the acelab experiment:
+      </p>
+      <p>
+        <img class="img-responsive" src="assets/images/gifs/locations.gif"/>
+      </p>
+
+    </div>
+
+  </div>
+
+
 
 </div>
 
