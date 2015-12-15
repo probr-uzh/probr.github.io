@@ -84,9 +84,9 @@
         Under the 'utilization' tab in the 'analysis' part of the probr-analysis <a href="">front-end</a>, the utilization graph is displayed.
         It displays the number of concurrent sessions at each point in time.
       </p>
-      <p>
-      <img class="img-responsive" src="assets/images/utilizations.png"/>
-      </p>
+
+      <img class="doc-img img-responsive" src="assets/images/utilizations.png"/>
+
       <p>
         The time axis granularity at which the concurrent session counts are computed
         is at 5 minute slots. Which means, the bar chart produces a bar for every five minutes on the time ranges, where the height of the bar is
@@ -98,9 +98,9 @@
         probrs utilization results, we also recorded the real number of persons in the room during the acelab. The graphic below compares
         both data sets.
       </p>
-      <p>
-      <img class="img-responsive" src="assets/images/utilizations_comparison.png"/>
-      </p>
+
+      <img class="doc-img img-responsive" src="assets/images/utilizations_comparison.png"/>
+
       <p>
         The comparison shows that the utilization computed by the probr system is satisfying and fairly accurate. The breaks and starting or end times
         of the meeting days can be observed very clearly. It is important to note that the number of sessions will always be higher than the number
@@ -114,9 +114,9 @@
         the user with the ability to explore the geographic distribution of devices or persons in the monitored room over a certain period of time. The location
         view can be found under the 'location' tab in the analysis view. Below, we see a summary of the location heatmaps for the acelab experiment:
       </p>
-      <p>
-        <img class="img-responsive" src="assets/images/gifs/locations_acelab.gif"/>
-      </p>
+
+        <img class="doc-img img-responsive" src="assets/images/gifs/locations_acelab.gif"/>
+
       <p>
         The heatmap generally is very similar to the actual positions of the participants in the acelab experiment during the experiment period. The upper part of
         the room (see figure above) was mainly used during the presentations at the meeting and hence the participants spent most of their time in that region. Occasionally,
@@ -129,6 +129,7 @@
         that are very uniform in movement the heatmaps will not notice smaller changes to the heatmap of the room.
       </p>
 
+
       <h2><a name="tracking">Q2: Tracking</a></h2>
       <p>
         For Q2, we wanted to find out if it is possible to track the presence patterns of single MAC addresses or persons. This could for example be employed to track
@@ -139,9 +140,9 @@
         visualization method to display the session data appropriately. As an example, we show the tracking information about one of our project
         team members on a selected day during the project. The member had sniffing devices set-up at home and we had sniffing set-up at our office.
       </p>
-      <p>
-        <img class="img-responsive" src="assets/images/tracking_example.png"/>
-      </p>
+
+      <img class="doc-img img-responsive" src="assets/images/tracking_example.png"/>
+
       <p>
         It is clearly visible when the member got up in the morning (shortly after 6 AM) and then spent the morning working from home. As you can see
         the system changes the color of the tracking bar depending on the location. Hence the bars/sessions starting at 1 PM to 2 PM are colored differently,
@@ -153,11 +154,52 @@
         placed appropriately and the person has a WiFi-capable device on them all the time.
       </p>
 
-      <h2><a name="devices">Device Statistics</a></h2>
+      <h2><a name="devices">Q3: Device Statistics</a></h2>
       <p>
-        
+        By using the MAC address vendor prefixes defined by the IEEE (see <a href="">device worker</a>), one can identify which vendor produced
+        the device that broadcast the respective probe request. This allows us to produces statistics about the vendor shares and segments in our data. Below, one can
+        see the device vendor distribution for the acelab experiment:
       </p>
 
+      <img class="doc-img img-responsive" src="assets/images/devices_acelab.png"/>
+
+      <p>
+        It is interesting to see that even a trivial thing such as the vendor share of the devices that were sniffed can allow statements about
+        the underlying persons or community. For instance, compare the chart above with the chart below, which displays the general vendor distribution
+        over all in our data:
+      </p>
+
+      <img class="doc-img img-responsive" src="assets/images/devices_overall.png">
+
+      <p>
+        The explanation of the differences may lie in the different kinds of communities. While the second pie chart is pretty similar to the general market share
+        of mobile device and notebook vendors in our country (Switzerland), the first pie chart displaying data only for the acelab experiment shows much smaller shares
+        for Apple and larger shares for some of the other vendors. We find an explanation for this in the fact that the audience at the acelab experiment consists almost
+        exclusively of senior researchers and professors, which has clearly an influence on their choice of devices. In contrast, the overall data are dominated by data about
+        students, which have different tastes in vendors.
+
+      </p>
+
+      <h2><a name="discussion">Discussion</a></h2>
+      <p>
+        In general, the observed results imply that adversaries employing WiFi sniffing can detect sensitive information about their target's location, daily behaviour, marketing information
+        or even things like cultural background and social status.Hence, vendors of WiFi-enabled devices recently have started to acknowledge the dangers of these kinds of privacy intrusions and are trying to
+        develop features that make it more difficult for the adversaries to gather sensitive data.
+      </p>
+      <p>
+        One of the most employed techniques for this is the introduction of MAC address randomization when broadcasting probe requests. In general, this means that a device
+        regularly changes its MAC address when probing for access points in order to avoid sending out a unique id by which it can be tracked and identified.
+        Once the device is connected, it uses its real MAC address again. Initially, this approach seems to be a very solid protection against WiFi sniffing systems
+        such as probr.
+      </p>
+      <p>
+        Through investigation of our data and review of related research in the field, we found out that it is indeed possible to still identify and fingerprint
+        users even with randomized MAC addresses. The WiFi probe requests carry a sequence number in their header. Even if the MAC address changes randomly,
+        it is possible to link probe requests to a certain device by matching sequence numbers. Another possibility emerges from the fact that devices send their
+        preferred SSIDs in the probe requests. These can be used to fingerprint users even with MAC randomization in place. It is worth noting though that
+        the major vendors have started to dramatically reduce the number of probe requests that contain SSID information in their latest systems, thus making
+        fingerprinting and sniffing more difficult.
+      </p>
 
 
     </div>
