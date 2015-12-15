@@ -7,57 +7,172 @@
 
       <div class="col-lg-3 side-nav-col">
         <section sticky-nav>
-            <h1>Contents</h1>
+          <h1>Contents</h1>
 
-            <ul class="nav nav-pills nav-stacked">
+          <ul class="nav nav-pills nav-stacked">
 
-              <li><a href="/#/docs/analysis#architecture">Architecture</a></li>
-              <li><a href="/#/docs/analysis#frontend">Front-End</a></li>
-              <li><a href="/#/docs/analysis#rest">REST API</a></li>
+            <li><a href="/#/docs/analysis#architecture">Architecture</a></li>
+            <li><a href="/#/docs/analysis#frontend">Front-End</a></li>
+            <li><a href="/#/docs/analysis#rest">REST API</a></li>
 
-              <h3>Async Workers</h3>
-              <li><a href="/#/docs/analysis#sessions-worker">Sessions</a></li>
-              <li><a href="/#/docs/analysis#locations-worker">Locations</a></li>
-              <li><a href="/#/docs/analysis#devices-worker">Devices</a></li>
+            <h3>Async Workers</h3>
+            <li><a href="/#/docs/analysis#sessions-worker">Sessions</a></li>
+            <li><a href="/#/docs/analysis#locations-worker">Locations</a></li>
+            <li><a href="/#/docs/analysis#devices-worker">Devices</a></li>
 
-              <h3>Usage</h3>
-              <li><a href="/#/docs/analysis#usage">Samples</a></li>
+            <h3>Usage</h3>
+            <li><a href="/#/docs/analysis#usage">Samples</a></li>
 
-            </ul>
+          </ul>
         </section>
       </div>
 
       <div class="col-lg-9">
 
-          <h1>probr-analysis</h1>
-          <h2><a name="architecture">Architecture</a></h2>
+        <h1>probr-analysis</h1>
+
+        <h2><a name="architecture">Architecture</a></h2>
+
+        <p>
+          The diagram below shows the architecture of the probr-analysis application.
+          Note that the database that serves as a storage and source for the packets is the same database that is
+          fed by the <a href="/#/docs/core">probr-core system</a> .
+        </p>
+
+        <img class="doc-img img-responsive" src="assets/images/architecture_analysis.png"/>
+
+        <p>
+          probr-analysis is a multi-tiered web application. The frontend is a standard HTML5 and JavaScript web
+          frontend. It provides the
+          graphical user interface that allows to explore the data collected in the first step by probr-core. The
+          backend is written in NodeJS and provides
+          the REST API endpoints for the frontend. A very important part of probr-analysis are the workers. The workers
+          are somewhat independent jobs that run asynchronously and
+          aggregate the raw packet data into more sophisticated data models such as sessions, locations or devices.
+
+        </p>
+
+        <h2><a name="frontend">Front-End</a></h2>
+
+        <h3>Live View</h3>
+        <small>
+          <pre><code>/live</code></pre>
+        </small>
+        <ul>
+          <li>Displays live incoming packets from the probr-core sniffers.</li>
+          <li>Displays identified devices in last five minutes, last hour and last day.</li>
+        </ul>
+
+        <h3>Log View</h3>
+        <small>
+          <pre><code>/packets</code></pre>
+        </small>
+        <ul>
+          <li>Displays a log of all sniffed packets.</li>
+          <li>The user can restrict or filter the data by setting a tag and a date/time range in the navigation bar.
+          </li>
+        </ul>
+        <small>
+          Optional URL Parameters:
+          <pre><code>startTimestamp: Start of the selected timerange, UNIX timestamp</code></pre>
+          <pre><code>endTimestamp: End of the selected timerange, UNIX timestamp</code></pre>
+          <pre><code>tags: the selected tag as a single string</code></pre>
+        </small>
+
+        <h3>Utilization View</h3>
+        <small>
+          <pre><code>/utilization</code></pre>
+        </small>
+        <ul>
+          <li>Displays the utilization graph for the chosen tag and date/time range.</li>
+          <li>Displays the loyalty graph for the chosen tag and date/time range.</li>
+          <li>Displays the swimlane graph for the current data of the utilization graph.</li>
+          <li>The user can zoom in the swimlane graph and move around in the date/time range.</li>
+          </li>
+        </ul>
+        <small>
+          Optional URL Parameters:
+          <pre><code>startTimestamp: Start of the selected timerange, UNIX timestamp</code></pre>
+          <pre><code>endTimestamp: End of the selected timerange, UNIX timestamp</code></pre>
+          <pre><code>tags: the selected tag as a single string</code></pre>
+        </small>
+
+        <h3>Location View</h3>
+        <small>
+          <pre><code>/heatmap</code></pre>
+        </small>
+        <ul>
+          <li>Displays an interactive map containing the locations as a heatmap.</li>
+          <li>The user can restrict or filter the data by setting a tag and a date/time range in the navigation bar.</li>
+        </ul>
+        <small>
+          Optional URL Parameters:
+          <pre><code>startTimestamp: Start of the selected timerange, UNIX timestamp</code></pre>
+          <pre><code>endTimestamp: End of the selected timerange, UNIX timestamp</code></pre>
+          <pre><code>tags: the selected tag as a single string</code></pre>
+        </small>
+
+        <h3>Stats View</h3>
+        <small>
+          <pre><code>/devices</code></pre>
+        </small>
+        <ul>
+          <li>Displays a chart of the vendor statistics for the selected tag and time range.</li>
+          <li>Displays a ranking of vendors based on identified device count and percentage.</li>
+          <li>Displays statistics about MAC randomization in the identified device data.</li>
+          <li>The user can restrict or filter the data by setting a tag and a date/time range in the navigation bar.</li>
+        </ul>
+        <small>
+          Optional URL Parameters:
+          <pre><code>startTimestamp: Start of the selected timerange, UNIX timestamp</code></pre>
+          <pre><code>endTimestamp: End of the selected timerange, UNIX timestamp</code></pre>
+          <pre><code>tags: the selected tag as a single string</code></pre>
+        </small>
+
+        <h3>Tracking View</h3>
+        <small>
+          <pre><code>/mac</code></pre>
+        </small>
+        <ul>
+          <li>The user can add named aliases for MAC addresses to be tracked.</li>
+          <li>The presence patterns of tracked aliases are displayed in a swimlane graph</li>
+          <li>The user can zoom into the swimlane graph and move around in the date/time range</li>
+          <li>The user can restrict or filter the data by setting a tag and a date/time range in the navigation bar.</li>
+        </ul>
+        <small>
+          Optional URL Parameters:
+          <pre><code>startTimestamp: Start of the selected timerange, UNIX timestamp</code></pre>
+          <pre><code>endTimestamp: End of the selected timerange, UNIX timestamp</code></pre>
+          <pre><code>tags: the selected tag as a single string</code></pre>
+        </small>
+
+
+        <h2><a name="rest">REST API</a></h2>
+
+        
 
 
 
-          <h2><a name="frontend">Front-end</a></h2>
+        <h2><a name="workers">Async workers</a></h2>
 
-          <h2><a name="rest">REST API</a></h2>
+        <h3><a name="sessions-worker">Session worker</a></h3>
 
-          <h2><a name="workers">Async workers</a></h2>
+        <h3><a name="locations-worker">Location worker</a></h3>
 
-          <h3><a name="sessions-worker">Session worker</a></h3>
-
-          <h3><a name="locations-worker">Location worker</a></h3>
-
-          <h3><a name="devices-worker">Device worker</a></h3>
+        <h3><a name="devices-worker">Device worker</a></h3>
 
 
-          <h2><a name="usage">Usage samples</a></h2>
+        <h2><a name="usage">Usage samples</a></h2>
 
-          <h3></h3>
+        <h3></h3>
 
-
-        </div>
 
       </div>
 
     </div>
+
   </div>
+</div>
 
 </div>
 <footer></footer>
