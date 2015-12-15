@@ -104,7 +104,7 @@
       <p>
         The comparison shows that the utilization computed by the probr system is satisfying and fairly accurate. The breaks and starting or end times
         of the meeting days can be observed very clearly. It is important to note that the number of sessions will always be higher than the number
-        of real persons at each point in time, since one person normally has multiple devices with them (e.g. one notebook add one smartphone) which will
+        of real persons at each point in time, since one person normally has multiple devices with them (e.g. one notebook and one smartphone) which will
         result in two sessions at the same time for that one person. But nevertheless, the patterns are detected, and one can conclude that probr
         does a good job answering room utilization questions.
       </p>
@@ -115,8 +115,25 @@
         view can be found under the 'location' tab in the analysis view. Below, we see a summary of the location heatmaps for the acelab experiment:
       </p>
       <p>
-        <img class="img-responsive" src="assets/images/gifs/locations.gif"/>
+        <img class="img-responsive" src="assets/images/gifs/locations_acelab.gif"/>
       </p>
+      <p>
+        The heatmap generally is very similar to the actual positions of the participants in the acelab experiment during the experiment period. The upper part of
+        the room (see figure above) was mainly used during the presentations at the meeting and hence the participants spent most of their time in that region. Occasionally,
+        participants spread across the lower parts of the room during coffee breaks.
+      </p>
+      <p>
+        The use of WiFi probe requests for positioning has been used outdoors in many previous scientific works about WiFi sniffing and privacy. When it comes to
+        indoors location, we come to the conclusion that computing locations via WiFi probe requests is only satisfying if the room / area that is monitored is rather
+        large and the movements of the tracked devices are irregular. A small room introduces problems with accurracy, signal strength and obstacles. If you have participants
+        that are very uniform in movement the heatmaps will not notice smaller changes to the heatmap of the room.
+      </p>
+
+      <h2><a name="tracking">Tracking</a></h2>
+
+
+
+      <h2><a name="devices">Device Statistics</a></h2>
 
     </div>
 
