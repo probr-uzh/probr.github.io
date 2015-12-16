@@ -12,6 +12,7 @@
           <ul class="nav nav-pills nav-stacked">
 
             <li><a href="/#/docs/analysis#architecture">Architecture</a></li>
+            <li><a href="/#/docs/analysis#data-model">Data Model</a></li>
             <li><a href="/#/docs/analysis#frontend">Front-End</a></li>
             <li><a href="/#/docs/analysis#rest">REST API</a></li>
 
@@ -20,8 +21,6 @@
             <li><a href="/#/docs/analysis#locations-worker">Locations</a></li>
             <li><a href="/#/docs/analysis#devices-worker">Devices</a></li>
 
-            <h3>Usage</h3>
-            <li><a href="/#/docs/analysis#usage">Samples</a></li>
 
           </ul>
         </section>
@@ -50,6 +49,16 @@
           are somewhat independent jobs that run asynchronously and
           aggregate the raw packet data into more sophisticated data models such as sessions, locations or devices.
 
+        </p>
+
+
+        <h2><a name="data-model">Data Model</a></h2>
+        The domain of probr-analysis deals essentially with four types of entities: packets, devices, locations, and sessions.
+        The packets are the main source of information in the system. They come from the probr-core sniffing component. The other
+        three entity types are aggregated and calculated by our <a href="/#/docs/analysis#sessions-worker">workers</a>. The diagram
+        below shows the main entities in probr-analysis:
+        <p>
+          <img class="doc-img img-responsive" src="assets/images/data_model.png"/>
         </p>
 
         <h2><a name="frontend">Front-End</a></h2>
