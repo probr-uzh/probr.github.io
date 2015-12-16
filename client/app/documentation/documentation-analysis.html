@@ -189,6 +189,7 @@
           </p>
         </small>
 
+
         <h3>Sessions</h3>
         <small>
           <p>
@@ -210,14 +211,123 @@
           </p>
         </small>
 
+        <h3>Packets</h3>
+        <small>
+          <p>
+            For some of the packet endpoints, the backend expects a URL-encoded query object. The query object should
+            be a
+            MongoDB JavaScript query object and you should URL-encode it according to the
+            <a href="http://www.w3schools.com/tags/ref_urlencode.asp">standards.</a>
+          </p>
 
+          <p>
+            On this endpoint, you can choose what parameters you use. You can use arbitrary MongoDB query objects and
+            can filter packets arbitrarily and also use MongoDB features like sorting.
+          <pre><code>GET: /api/packets?query={URL-encoded MongoDB query object}</code></pre>
+          </p>
+          <p>
+            Get the count of total packets fullfilling the query object. This is used in the pagination.
+          <pre><code>GET: /api/packets/count?query={URL-encoded MongoDB query object}</code></pre>
+          </p>
+        </small>
 
 
         <h2><a name="workers">Async workers</a></h2>
 
-        <h3><a name="sessions-worker">Session worker</a></h3>
+        <p>
+          In order to have aggregated information to answer more sophisticated questions (see <a
+          href="/#/usecase#questions">here</a>)
+          our system has to be able to compute the necessary aggregations. Since the amount of packet data which must be
+          used for the
+          aggregations is just too large, the aggregations cannot be done on-demand when the backend receives a
+          corresponding query from
+          the user. Hence, probr-analysis employs a worker system, that lets asynchronous tasks run in parallel in a
+          regular interval, in order
+          to aggregate the wanted information a priori.
+        </p>
 
-        <h3><a name="locations-worker">Location worker</a></h3>
+        <p>
+          There are three worker tasks in probr-analysis:
+        <ul>
+          <li>Session-Worker</li>
+          <li>Location-Worker</li>
+          <li>Device-Worker</li>
+        </ul>
+        </p>
+        <p>
+          The worker tasks are encapsulated in a separate node app, which can be started independently from the rest of
+          probr-analysis.
+          You can find the code for the worker tasks <a
+          href="https://github.com/probr/probr-analysis/tree/master/worker">here</a>. In the following, the computations
+          that are conducted by the
+          workers are explained.
+        </p>
+
+        <h3><a name="sessions-worker">Sessions</a></h3>
+
+        <p>
+          A session is defined as the time interval that a certain MAC address was present at a location monitored by
+          our
+          sniffing devices. Our definition of a MAC address being 'present' is: The device with said MAC address is
+          present if
+          we have collected probes for it with less than 5 minutes in between. Let's look at an example:
+        </p>
+        <img class="doc-img img-responsive" src="assets/images/sessions.png"/>
+
+        <p>
+          Here, the packets #1 and #2 belong to the same session, because they are less than 5 minutes apart. The next
+          packet, although
+          from the same MAC address, does not belong to the same session since the time between is too large. Hence, it
+          starts a new session
+          of its own. A session that consists only of one packet (and hence has a duration of 0) is not considered in
+          our system. Depending
+          on the use case, you might want to tweak the 5 minute session threshold and also decide to ignore sessions
+          below a certain length.
+        </p>
+
+        <p>
+          In the actual implementation, the session aggregation task is implemented as a MapReduce algorithm. You can
+          check out the
+          corresponding code <a
+          href="https://github.com/probr/probr-analysis/blob/master/worker/components/session/session.mapreduce.js">here</a>.
+        </p>
+
+
+        <h3><a name="locations-worker">Locations</a></h3>
+
+        <p>
+          How is it possible to compute geographical locations out of the sniffed probe requests/packets ? The fact that
+          the probe
+          requests contain the measured signal strength makes it possible to compute locations by <a
+          href="https://en.wikipedia.org/wiki/Trilateration">Trilateration</a>.
+        </p>
+        <p>
+          To employ trilateration, the user has to set a correct latitude and longitude for the sniffing devices when
+          initially setting up the probr-core sniffing system. These will in turn assign their lat/lng location data to each
+          of the packets they sniff. Now each packet contains a lat/lng location and a measured signal strength in dbM.
+        </p>
+        <p>
+          Now in the location worker task, all packets with the same MAC address and around the same timestamp are gathered
+          together. To be able to compute a valid location, the location task uses at least 3 packets for the same MAC address.
+          Now the location procedure starts. It consists of the following steps:
+          <ol>
+            <li>Repeat the following as long as there are less than 3 intersections:</li>
+            <li>For each packet in the computation do</li>
+            <ol>
+              <li>Compute a metric distance with the signal strength in the packet. This is the radius for the circle.</li>
+              <li>Compute intersection of the circle with all the intersections of previous packet's circles.</li>
+              <li>Increment number of intersecitons.</li>
+            </ol>
+            <li>Increase the size of the circles for each of the packets with a predefined multiplier.</li>
+          </ol>
+          When the repetitions are finished and we have an intersection of at least 3 circles, we compute the centroid of said intersection
+          and store it as the final location for the corresponding MAC address at the corresponding time.
+
+        </p>
+        <p>
+          This process is vizualized in the following animation:
+        </p>
+        <img class="doc-img img-responsive" src="assets/images/gifs/location.gif"/>
 
         <h3><a name="devices-worker">Device worker</a></h3>
 
