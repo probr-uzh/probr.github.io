@@ -8,7 +8,11 @@
             <h2>Which devices are supported?</h2>
 
             <p>
-                Probr was designed to support every device with a *NIX (Linux, Mac OS, UNIX) operating system, a wireless interface capable of monitor mode and internet access.
+                Probr is designed to support devices that
+                run a *NIX (Linux, Mac OS X, UNIX) operating system,
+                operate a wireless interface that can be set to monitor mode,
+                and also have access to the internet.
+
                 The system was tested with:
             </p>
 
@@ -21,12 +25,12 @@
             </ul>
 
             <p>
-                But Probr is not limited to these devices. Any device satisfying the requirements can be used:
+                However, Probr is not limited to these devices. Any device satisfying the following requirements can be used:
             </p>
 
             <ul>
-                <li>bash shell</li>
-                <li>wget</li>
+                <li>(ba)sh shell</li>
+                <li>wget (with https support)</li>
                 <li>tcpdump</li>
             </ul>
         </div>
@@ -37,7 +41,7 @@
             <h2>Which databases are supported?</h2>
 
             <p>
-                Out-of-the box, Probr supports the following databases for storage of sniffed packets:
+                Out-of-the box, Probr supports the following databases as a storage for sniffed packets:
             </p>
 
             <ul>
@@ -46,9 +50,9 @@
             </ul>
 
             <p>
-                If you want to use any other database for your use case, you can extend Probr easily to do so, just by adding a handler.
+                If you want to use any other database for your use case, you can easily extend Probr to do so, just by adding a handler.
                 You can take the handlers for the existing databases as an example (<a href="https://github.com/probr/probr-core/blob/master/handlers/handlers.py">here</a> ).
-                Then, you need to add your handler into the config variable "PROBR_HANDLERS" in <a href="https://github.com/probr/probr-core/blob/master/probr/base_settings.py">here</a>.
+                Then, you need to add your handler to the config variable "PROBR_HANDLERS" in <a href="https://github.com/probr/probr-core/blob/master/probr/base_settings.py">here</a>.
             </p>
 
         </div>
@@ -59,7 +63,7 @@
 
             <p>
                 No! That's the beauty of it. Probr comes with predefined command templates for sniffing WiFi probe requests and
-                uploading them to Probr's database, from where you can use the packets to do any analysis you want on them.
+                uploading them to Probr's backend database, from where you can start with your own analyses.
             </p>
 
         </div>

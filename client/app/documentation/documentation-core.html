@@ -46,26 +46,26 @@
                 <p>
                     probr-core is built mainly in Python as a Django web application. It serves a frontend for the user written in
                     HTML 5 and AngularJS. Through the front end interface, the user can set up sniffing devices, enter sniffing commands,
-                    upload existing pcap files containing packets and manage or check the status of the attached sniffing devices. The probr-core
+                    upload existing pcap files containing packets, and manage or check the status of the attached sniffing devices. The probr-core
                     Django application uses a PostgreSQL database internally as a backend to store and manage the different sniffing
-                    devices, commands, statuses and uploads.
+                    devices, commands, statuses, and uploads.
                 </p>
 
                 <p>
                     The Django back-end component provides the REST API endpoints for the front end, and
                     more importantly, also provides the REST API endpoints for the sniffing devices. Through those API endpoints the
-                    devices receive their commands to execute (e.g. start sniffing, start uploading packets, or any other unix command) and
-                    also report status data such as CPU and memory on a regular basis. The sniffing devices upload the sniffed data in pcap files
-                    to the capture endpoint on the Django back-end. There, the system takes the pcap files and gives them to the Celery
-                    worker handlers which entpack the pcap file into an appropriate structure for the respective storage. Out of the box,
+                    devices receive their commands to execute (e.g., start sniffing, start uploading packets, or any other unix command) and
+                    also report status data such as CPU load and memory usage on a regular basis. The sniffing devices upload the captured data via pcap files
+                    to the capture endpoint on the Django back-end. On receiving the pcap files, probr-core then feeds them to the Celery
+                    worker handlers which unpack each pcap file into an appropriate structure for the respective storage. Out of the box,
                     probr-core has built-in handlers for MongoDB and InfluxDB, but it is designed to be easily extensible. Instructions on how to
-                    write handlers for the data storage systems of your choosing can be found <a href="#/faq">here</a>.
+                    write handlers for the data storage systems of your choice can be found <a href="#/faq">here</a>.
                 </p>
 
                 <h2><a name="frontend">Front-end</a></h2>
 
-                The web frontend is the main component in contact with the user. It is written entirely in HTML5 and JavaScript
-                (with Angular).
+                The web frontend is the main component the user interacts with. It is written entirely in HTML5 and JavaScript
+                (using AngularJS).
                 It provides the following views:
 
                 <h3>Devices View</h3>
@@ -76,8 +76,8 @@
                     <li>Lets the user add new devices through the device wizard.</li>
                     <li>Lets the user see all registered devices and their status.</li>
                     <li>Lets the user open the device detail view of a device.</li>
-                    <li>Allows deletion devices from the probr system.</li>
-                    <li>Allows bulk-execution of a command on multiple devices at once</li>
+                    <li>Allows deletion of devices from the probr system.</li>
+                    <li>Allows bulk execution of a command on multiple devices</li>
                 </ul>
 
                 <h3>Devices Detail View</h3>
@@ -85,8 +85,8 @@
                     <pre><code>/web/device/{device-uuid}</code></pre>
                 </small>
                 <ul>
-                    <li>Lets the user to execute commands in the web terminal of a device</li>
-                    <li>Allows to start sniffing and upload packets from predefined command templates</li>
+                    <li>Lets the user execute commands in the web terminal of a device</li>
+                    <li>Allows to start sniffing and uploading packets from predefined command templates</li>
                     <li>Allows to update the device client code for probr.</li>
                 </ul>
 
@@ -149,10 +149,10 @@
                 <h3><a name="rest-devices">Devices API</a></h3>
 
                 <p>
-                    The API endpoints starting with api-device/ are the ones that are accessed solely by the sniffing devices. Those
-                    can only be accessed with a valid api-key. A sniffing device receives an api-key on set-up through the device
-                    wizard in the web frontend. Setting up a device is only possible if the user is logged in via Django user administration/JWTAuth. The api-key also identifies the device
-                    that sends the requests.
+                    The API endpoints starting with api-device/ are the ones that are accessed solely by the sniffing devices. These endpoints
+                    can only be accessed with a valid api-key which identifies a device.
+                    Every sniffing device receives an api-key when it is registered to probr-core through the device registration
+                    wizard in the web frontend. Registering a new device is only possible if the user is logged in via Django user administration/JWTAuth.
                 </p>
 
                 <h3>Captures</h3>
