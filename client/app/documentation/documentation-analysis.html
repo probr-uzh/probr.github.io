@@ -295,11 +295,14 @@
 
         <h3><a name="locations-worker">Locations</a></h3>
 
+        <link rel="stylesheet" href="components/pseudocode/pseudocode.min.css">
+        <script src="components/pseudocode/pseudocode.min.js"></script>
+
         <p>
           How is it possible to compute geographical locations out of the sniffed probe requests/packets ? The fact that
           the probe
           requests contain the measured signal strength makes it possible to compute locations by <a
-          href="https://en.wikipedia.org/wiki/Trilateration">Trilateration</a>.
+          href="https://en.wikipedia.org/wiki/Trilateration">trilateration</a>.
         </p>
         <p>
           To employ trilateration, the user has to set a correct latitude and longitude for the sniffing devices when
@@ -307,23 +310,20 @@
           of the packets they sniff. Now each packet contains a lat/lng location and a measured signal strength in dbM.
         </p>
         <p>
-          Now in the location worker task, all packets with the same MAC address and around the same timestamp are gathered
-          together. To be able to compute a valid location, the location task uses at least 3 packets for the same MAC address.
-          Now the location procedure starts. It consists of the following steps:
-          <ol>
-            <li>Repeat the following as long as there are less than 3 intersections:</li>
-            <li>For each packet in the computation do</li>
-            <ol>
-              <li>Compute a metric distance with the signal strength in the packet. This is the radius for the circle.</li>
-              <li>Compute intersection of the circle with all the intersections of previous packet's circles.</li>
-              <li>Increment number of intersecitons.</li>
-            </ol>
-            <li>Increase the size of the circles for each of the packets with a predefined multiplier.</li>
-          </ol>
-          When the repetitions are finished and we have an intersection of at least 3 circles, we compute the centroid of said intersection
-          and store it as the final location for the corresponding MAC address at the corresponding time.
-
+          The first step the location task performs is to extract raw locations from the sniffed packets. This is accomplished
+          through a MapReduce algorithm that runs directly on the MongoDB. The MapReduce algorithm first maps together all packets
+          that were sniffed within the same minute and have the same source MAC address. Then it extracts location and
+          signal strength for all packets in that minute/MAC address mapping. The raw loaction now links this array of
+          lat/lng locations and signal strength values to a time and MAC address key. These objects are then stored in a raw locations
+          collection.
         </p>
+        <p>
+          Then the algorithm iterates incrementally over the raw locations and performs the actual trilateration. The algorithm is
+          outlined in the following listing:
+        </p>
+        <img class="doc-img img-responsive" src="assets/images/location_algorithm.png"/>
+
+
         <p>
           This process is vizualized in the following animation:
         </p>
