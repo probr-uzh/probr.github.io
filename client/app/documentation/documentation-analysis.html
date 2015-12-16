@@ -329,14 +329,16 @@
         </p>
         <img class="doc-img img-responsive" src="assets/images/gifs/location.gif"/>
 
-        <h3><a name="devices-worker">Device worker</a></h3>
+        <h3><a name="devices-worker">Devices</a></h3>
 
-
-        <h2><a name="usage">Usage samples</a></h2>
-
-        <h3></h3>
-
-
+        <p>
+          The device task runs on a regular interval and takes into consideration all packets that have been added to the system since
+          the last time the task ran. On every run, the device task goes through all packets, and extracts unique MAC addresses.
+          If the MAC address is already identified as a device by a previous run of the task, only its last_seen property is updated to the
+          timestamp of the packet. If the MAC address is not yet identified, the device task consults the
+          <a href="http://standards-oui.ieee.org/oui.txt"> IEEE IOU</a> database for MAC address vendor prefixes. By querying the database
+          with the first three octets of the corresponding MAC address, we can gather information about the vendor of that device.
+        </p>
       </div>
 
     </div>
