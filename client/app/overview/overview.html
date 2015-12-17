@@ -14,15 +14,16 @@
     <h1>Welcome!</h1>
 
     <p>
-        Probr is a generic and distributed wifi-tracking system, built and developed over the course of a masters project at the University of Zurich. It's aim is to make it easier
-        to conduct research-project in the domain of wireless sniffing, tracking and analysis. The project is split into two completely independent parts.
+        Probr is a generic and distributed wifi-tracking system, designed and developed over the course of a master's project at the University of Zurich.
+        It's aim is to make it easier to conduct research projects in the domain of wireless sniffing (i.e., wireless tracking) by leveraging an existing platform for custom analyses.
+        The project is split into two independent parts.
     </p>
 
     <h2>Core</h2>
 
     <p>
         <a ui-sref="docs-core">probr-core</a> is a python-django based system for remote device administration. It allows to setup basic *NIX devices to use for various tasks, including
-        but not limited to sniffing
+        but not limited to sniffing.
     </p>
 
     <h2>Analysis</h2>
@@ -30,7 +31,7 @@
     <p>
         <a ui-sref="docs-analysis">probr-analysis</a> is a NodeJS based frontend that visualizes core concepts of our analysis of collected probe requests. It allows to track individual
         devices using
-        their MAC-Address, as well as monitor room utilization using an custom-made algorithm.
+        their MAC-Address, and monitor room utilization using an custom-made algorithm.
     </p>
 
     <h2>Get Started</h2>
@@ -42,14 +43,14 @@
     <h1>How It Works</h1>
 
     <p>
-        Probr uses a distributed architecture. The central component called probr-core serves as a management and storage server. First, all sniffing devices register themselves on the
-        server and can be remotely managed. They are able to relay their sniffing-results (or result of any other given task) to the server which will process the received payload through a
+        Probr follows a distributed architecture. The central component, called probr-core, serves as a management and storage server. First, all sniffing devices register themselves on the
+        server such that they can be remotely managed. They are able to submit their sniffing-results (or result of any other given task) to the server which will process the received payload through a
         flexible
         handler-system.
     </p>
 
     <p>
-        The system is currently able to process *.pcap files and to store its contents into a database of your choice. New database adapters can also be written easily and registered in
+        The system is currently able to process *.pcap files and store its contents into a database of your choice. New database adapters can also be written easily and registered in
         probr-core.
     </p>
 
@@ -70,7 +71,7 @@
         <li>Out-of-the-box WiFi sniffing and monitoring</li>
         <li>Included templates to sniff on a wide range of devices, given tcpdump is installed</li>
         <li>No knowledge about WiFi protocols required</li>
-        <li>Free to use and completely open-source</li>
+        <li>Free to use and entirely open-source</li>
         <li>Supports a range of different databases for storage, such as MongoDB or InfluxDB</li>
     </ul>
 

@@ -45,15 +45,13 @@
           frontend. It provides the
           graphical user interface that allows to explore the data collected in the first step by probr-core. The
           backend is written in NodeJS and provides
-          the REST API endpoints for the frontend. A very important part of probr-analysis are the workers. The workers
-          are somewhat independent jobs that run asynchronously and
-          aggregate the raw packet data into more sophisticated data models such as sessions, locations or devices.
-
+          the REST API endpoints for the frontend. A very important part of probr-analysis are the workers.
+          They asynchronously aggregate the raw packet data into more sophisticated data models such as sessions, locations, or devices.
         </p>
 
 
         <h2><a name="data-model">Data Model</a></h2>
-        The domain of probr-analysis deals essentially with four types of entities: packets, devices, locations, and sessions.
+        The domain of probr-analysis deals with four types of entities: packets, devices, locations, and sessions.
         The packets are the main source of information in the system. They come from the probr-core sniffing component. The other
         three entity types are aggregated and calculated by our <a href="/#/docs/analysis#sessions-worker">workers</a>. The diagram
         below shows the main entities in probr-analysis:
@@ -68,8 +66,8 @@
           <pre><code>/live</code></pre>
         </small>
         <ul>
-          <li>Displays live incoming packets from the probr-core sniffers.</li>
-          <li>Displays identified devices in last five minutes, last hour and last day.</li>
+          <li>Displays incoming packets from the probr-core sniffers in real time.</li>
+          <li>Displays identified devices in the intervals: last five minutes, last hour, and last day.</li>
         </ul>
 
         <h3>Log View</h3>
@@ -83,8 +81,8 @@
         </ul>
         <small>
           Optional URL Parameters:
-          <pre><code>startTimestamp: Start of the selected timerange, UNIX timestamp</code></pre>
-          <pre><code>endTimestamp: End of the selected timerange, UNIX timestamp</code></pre>
+          <pre><code>startTimestamp: Start of the selected time range, UNIX timestamp</code></pre>
+          <pre><code>endTimestamp: End of the selected time range, UNIX timestamp</code></pre>
           <pre><code>tags: the selected tag as a single string</code></pre>
         </small>
 
@@ -96,13 +94,13 @@
           <li>Displays the utilization graph for the chosen tag and date/time range.</li>
           <li>Displays the loyalty graph for the chosen tag and date/time range.</li>
           <li>Displays the swimlane graph for the current data of the utilization graph.</li>
-          <li>The user can zoom in the swimlane graph and move around in the date/time range.</li>
+          <li>The user can zoom within the swimlane graph and move around in the date/time range.</li>
           </li>
         </ul>
         <small>
           Optional URL Parameters:
-          <pre><code>startTimestamp: Start of the selected timerange, UNIX timestamp</code></pre>
-          <pre><code>endTimestamp: End of the selected timerange, UNIX timestamp</code></pre>
+          <pre><code>startTimestamp: Start of the selected time range, UNIX timestamp</code></pre>
+          <pre><code>endTimestamp: End of the selected time range, UNIX timestamp</code></pre>
           <pre><code>tags: the selected tag as a single string</code></pre>
         </small>
 
@@ -117,8 +115,8 @@
         </ul>
         <small>
           Optional URL Parameters:
-          <pre><code>startTimestamp: Start of the selected timerange, UNIX timestamp</code></pre>
-          <pre><code>endTimestamp: End of the selected timerange, UNIX timestamp</code></pre>
+          <pre><code>startTimestamp: Start of the selected time range, UNIX timestamp</code></pre>
+          <pre><code>endTimestamp: End of the selected time range, UNIX timestamp</code></pre>
           <pre><code>tags: the selected tag as a single string</code></pre>
         </small>
 
@@ -135,8 +133,8 @@
         </ul>
         <small>
           Optional URL Parameters:
-          <pre><code>startTimestamp: Start of the selected timerange, UNIX timestamp</code></pre>
-          <pre><code>endTimestamp: End of the selected timerange, UNIX timestamp</code></pre>
+          <pre><code>startTimestamp: Start of the selected time range, UNIX timestamp</code></pre>
+          <pre><code>endTimestamp: End of the selected time range, UNIX timestamp</code></pre>
           <pre><code>tags: the selected tag as a single string</code></pre>
         </small>
 
@@ -147,14 +145,14 @@
         <ul>
           <li>The user can add named aliases for MAC addresses to be tracked.</li>
           <li>The presence patterns of tracked aliases are displayed in a swimlane graph</li>
-          <li>The user can zoom into the swimlane graph and move around in the date/time range</li>
+          <li>The user can zoom within the swimlane graph and move around in the date/time range</li>
           <li>The user can restrict or filter the data by setting a tag and a date/time range in the navigation bar.
           </li>
         </ul>
         <small>
           Optional URL Parameters:
-          <pre><code>startTimestamp: Start of the selected timerange, UNIX timestamp</code></pre>
-          <pre><code>endTimestamp: End of the selected timerange, UNIX timestamp</code></pre>
+          <pre><code>startTimestamp: Start of the selected time range, UNIX timestamp</code></pre>
+          <pre><code>endTimestamp: End of the selected time range, UNIX timestamp</code></pre>
           <pre><code>tags: the selected tag as a single string</code></pre>
         </small>
 
@@ -244,15 +242,11 @@
         <h2><a name="workers">Async workers</a></h2>
 
         <p>
-          In order to have aggregated information to answer more sophisticated questions (see <a
-          href="/#/usecase#questions">here</a>)
-          our system has to be able to compute the necessary aggregations. Since the amount of packet data which must be
-          used for the
-          aggregations is just too large, the aggregations cannot be done on-demand when the backend receives a
-          corresponding query from
-          the user. Hence, probr-analysis employs a worker system, that lets asynchronous tasks run in parallel in a
-          regular interval, in order
-          to aggregate the wanted information a priori.
+          In order to answer more sophisticated questions (see <a href="/#/usecase#questions">here</a>) in a timely manner,
+          incremental preprocessing and aggregation of the raw packet data is required.
+          The amount of raw packet data is too large to perform aggregation queries on demand (i.e., when the user requests some data).
+          Therefore, probr-analysis employs a worker system that periodically runs asynchronous tasks in order
+          to aggregate the information of interest in advance.
         </p>
 
         <p>
@@ -286,9 +280,9 @@
         <p>
           Here, the packets #1 and #2 belong to the same session, because they are less than 5 minutes apart. The next
           packet, although
-          from the same MAC address, does not belong to the same session since the time between is too large. Hence, it
+          from the same MAC address, does not belong to the same session because the inter-packet time is too large. Hence, packet #3
           starts a new session
-          of its own. A session that consists only of one packet (and hence has a duration of 0) is not considered in
+          on its own. A session that consists only of one packet (thus having a duration of 0) is not considered in
           our system. Depending
           on the use case, you might want to tweak the 5 minute session threshold and also decide to ignore sessions
           below a certain length.
@@ -324,24 +318,24 @@
           collection.
         </p>
         <p>
-          Then the algorithm iterates incrementally over the raw locations and performs the actual trilateration. The algorithm is
-          outlined in the following listing:
+          Then the algorithm incrementally iterates over the raw locations and performs the actual trilateration.
+          The following listing outlines the algorithm:
         </p>
         <img class="doc-img img-responsive" src="assets/images/location_algorithm.png"/>
 
 
         <p>
-          This process is vizualized in the following animation:
+          This process is visualized in the following animation:
         </p>
         <img class="doc-img img-responsive" src="assets/images/gifs/location.gif"/>
 
         <h3><a name="devices-worker">Devices</a></h3>
 
         <p>
-          The device task runs on a regular interval and takes into consideration all packets that have been added to the system since
-          the last time the task ran. On every run, the device task goes through all packets, and extracts unique MAC addresses.
-          If the MAC address is already identified as a device by a previous run of the task, only its last_seen property is updated to the
-          timestamp of the packet. If the MAC address is not yet identified, the device task consults the
+          The device task runs on a regular interval and takes all packets into consideration that have been added to the system since
+          the previous pass. On every pass, the device task goes through all packets and extracts unique MAC addresses.
+          If the MAC address is already identified as a device by a previous pass of the task, only its last_seen property is updated to the
+          timestamp of the packet. Otherwise, if the MAC address is not yet identified, the device task consults the
           <a href="http://standards-oui.ieee.org/oui.txt"> IEEE IOU</a> database for MAC address vendor prefixes. By querying the database
           with the first three octets of the corresponding MAC address, we can gather information about the vendor of that device.
         </p>
