@@ -27,7 +27,7 @@
       </p>
 
       <p>
-        During the meeting, we set-up six sniffing devices to collect WiFi probe requests. The devices used for sniffing
+        During the meeting, we set up 6 sniffing devices to collect WiFi probe requests. The devices used for sniffing
         were <a href="http://www.hardkernel.com/main/products/prdt_info.php?g_code=G141578608433">Odroid C1</a>
         devices with the standard Odroid
         <a href="http://www.hardkernel.com/main/products/prdt_info.php?g_code=G141630348024">WiFi Module 4</a>.
@@ -36,7 +36,7 @@
       <h2><a name="questions">Research Questions</a></h2>
 
       <p>
-        The data collected at mentioned meeting were used to showcase and evaluate the probr system and answer the following
+        The data collected during this meeting was used to evaluate the probr system and answer the following
         research questions:
       </p>
 
@@ -66,7 +66,7 @@
         In the following, we will examine each of those questions and discuss how probr answers them. The user navigation in the
         probr-analysis application pays attention to the use cases we had in mind. Under the 'analysis' tab in the probr-analysis
         front-end, the user is presented with the tools to explore the collected data and answer the posed questions. In the navigation bar,
-        the user has the possibility to define the "use case" or "experiment" by setting a tag and a date/time range globally. The defined
+        the user can define the "use case" or "experiment" by setting a tag and a date/time range. The defined
         use case is then applied to all the analysis views. More info on the front-end can be found <a href="">here</a>.
       </p>
 
@@ -74,9 +74,9 @@
       <h2><a name="utilization">Q1: Room Utilization</a></h2>
       <p>
         After the development of probr-core and the first steps into the probr-analysis application, we noticed that just looking
-        at the probe count or packet frequency is not enough to determine room utilization. Packets might end up being collected by our
-        sniffing devices even if the device that originally sent out the packets just walked by shortly and didn't even enter the monitored
-        room at all. Hence we had to think about a more sophisticated data model that we could construct from the packet data, in order to be able
+        at the probe count or packet frequency is not sufficient to determine room utilization. Packets might end up being collected by our
+        sniffing devices even if the device that originally sent out the packets just shortly walked by and did not even enter the monitored
+        room at all. Therefore we had to think about a more sophisticated data model that we could construct from the packet data, in order to be able
         to say when someone has been present at a certain point in time and to determine how many MAC addresses or persons have been present
         at a given time t. This lead us to the definition of <a href="">sessions</a>, which proved to be a powerful tool for use cases and questions
         such as the one for  Q1.
@@ -90,14 +90,14 @@
 
       <p>
         The time axis granularity at which the concurrent session counts are computed
-        is at 5 minute slots. Which means, the bar chart produces a bar for every five minutes on the time ranges, where the height of the bar is
+        is at 5 minute slots. This means, the bar chart produces a bar for every five minutes on the time ranges, where the height of the bar is
         equal to the number of concurrent sessions present at that time slot. So this graph shows us, how many unique MAC addresses or devices have
         been present at different times in a room (defined by the tag).
       </p>
       <p>
         One can clearly identify a pattern in the utilization graph. In order to be able to evaluate the correctness and accuracy of
-        probrs utilization results, we also recorded the real number of persons in the room during the acelab. The graphic below compares
-        both data sets.
+        probrs utilization results, we also recorded the real number of persons in the room during the acelab. The figure below compares
+        both data sets:
       </p>
 
       <img class="doc-img img-responsive" src="assets/images/utilizations_comparison.png"/>
@@ -105,9 +105,9 @@
       <p>
         The comparison shows that the utilization computed by the probr system is satisfying and fairly accurate. The breaks and starting or end times
         of the meeting days can be observed very clearly. It is important to note that the number of sessions will always be higher than the number
-        of real persons at each point in time, since one person normally has multiple devices with them (e.g. one notebook and one smartphone) which will
-        result in two sessions at the same time for that one person. But nevertheless, the patterns are detected, and one can conclude that probr
-        does a good job answering room utilization questions.
+        of real persons at each point in time because one person potentially carries multiple devices (e.g., notebook and smartphone) which will
+        result in two sessions at the same time for the same person. But nevertheless, the patterns are detected, and one can conclude that probr
+        does a good job in assessing room utilization.
       </p>
       <p>
         In addition to the utilization of a room equipped with sniffing devices, probr allows its users to also look at the geographical locations or positions
@@ -116,30 +116,30 @@
         view can be found under the 'location' tab in the analysis view. Below, we see a summary of the location heatmaps for the acelab experiment:
       </p>
 
-        <img class="doc-img img-responsive" src="assets/images/gifs/locations_acelab.gif"/>
+        <img class="doc-img img-responsive" src="assets/images/localisation_example.png"/>
 
       <p>
-        The heatmap generally is very similar to the actual positions of the participants in the acelab experiment during the experiment period. The upper part of
+        The heatmap is very similar to the actual positions of the participants in the acelab experiment during the experiment period. The upper part of
         the room (see figure above) was mainly used during the presentations at the meeting and hence the participants spent most of their time in that region. Occasionally,
         participants spread across the lower parts of the room during coffee breaks.
       </p>
       <p>
         The use of WiFi probe requests for positioning has been used outdoors in many previous scientific works about WiFi sniffing and privacy. When it comes to
         indoors location, we come to the conclusion that computing locations via WiFi probe requests is only satisfying if the room / area that is monitored is rather
-        large and the movements of the tracked devices are irregular. A small room introduces problems with accurracy, signal strength and obstacles. If you have participants
+        large and the movements of the tracked devices are irregular. A small room introduces problems with accurracy, signal strength, and obstacles. If you have participants
         that are very uniform in movement the heatmaps will not notice smaller changes to the heatmap of the room.
       </p>
 
 
       <h2><a name="tracking">Q2: Tracking</a></h2>
       <p>
-        For Q2, we wanted to find out if it is possible to track the presence patterns of single MAC addresses or persons. This could for example be employed to track
-        employee presence in an office.
+        For Q2, we wanted to find out whether it is possible to track patterns of presence regarding single MAC addresses or persons. This could for example be employed to track
+        the presence of employees in an office.
       </p>
       <p>
-        Again, the definition of the session model proved to be very useful. Actually, the session map directly to the presence of said MAC address. Hence we can use a swimlane-like
+        Again, the definition of the session model proved to be very useful. Actually, the session map directly to the presence of said MAC address. Hence we can use a swimlane
         visualization method to display the session data appropriately. As an example, we show the tracking information about one of our project
-        team members on a selected day during the project. The member had sniffing devices set-up at home and we had sniffing set-up at our office.
+        team members on a selected day during the project. The member had sniffing devices set up at home and at his university office.
       </p>
 
       <img class="doc-img img-responsive" src="assets/images/tracking_example.png"/>
@@ -147,25 +147,25 @@
       <p>
         It is clearly visible when the member got up in the morning (shortly after 6 AM) and then spent the morning working from home. As you can see
         the system changes the color of the tracking bar depending on the location. Hence the bars/sessions starting at 1 PM to 2 PM are colored differently,
-        since the tracked person came to the office then. In the evening, again the tracking target went home again, and was captured by the
+        because the tracked person came to the office then. In the evening, again the tracking target went home again, and was captured by the
         sniffing devices there.
       </p>
       <p>
-        This example shows that it is easily possible to track the day-cycle of a person using WiFi probe requests, given that the sniffing devices are
-        placed appropriately and the person has a WiFi-capable device on them all the time.
+        This example shows that it is possible to track the day-cycle of a person using WiFi probe requests, given that the sniffing devices are
+        placed appropriately and the person carries a WiFi-capable device all the time.
       </p>
 
       <h2><a name="devices">Q3: Device Statistics</a></h2>
       <p>
-        By using the MAC address vendor prefixes defined by the IEEE (see <a href="">device worker</a>), one can identify which vendor produced
-        the device that broadcast the respective probe request. This allows us to produces statistics about the vendor shares and segments in our data. Below, one can
-        see the device vendor distribution for the acelab experiment:
+        By using the MAC address vendor prefixes defined by the IEEE (see <a href="">device worker</a>), we can map captured probe requests to a specific device vendor (e.g., Apple).
+        This allows us to produce statistics about the vendor shares and segments in our data.
+        The following figure illustrates the device vendor distribution as observed during the acelab experiment:
       </p>
 
       <img class="doc-img img-responsive" src="assets/images/devices_acelab.png"/>
 
       <p>
-        It is interesting to see that even a trivial thing such as the vendor share of the devices that were sniffed can allow statements about
+        It is interesting to see that even a trivial things such as the vendor share of the devices that were sniffed can allow statements about
         the underlying persons or community. For instance, compare the chart above with the chart below, which displays the general vendor distribution
         over all in our data:
       </p>
@@ -175,17 +175,14 @@
       <p>
         The explanation of the differences may lie in the different kinds of communities. While the second pie chart is pretty similar to the general market share
         of mobile device and notebook vendors in our country (Switzerland), the first pie chart displaying data only for the acelab experiment shows much smaller shares
-        for Apple and larger shares for some of the other vendors. We find an explanation for this in the fact that the audience at the acelab experiment consists almost
-        exclusively of senior researchers and professors, which has clearly an influence on their choice of devices. In contrast, the overall data are dominated by data about
-        students, which have different tastes in vendors.
-
-      </p>
+        for Apple and larger shares for some of the other vendors. We conclude the that audience at the acelab experiment, almost exclusively consisting of senior researchers and professors,
+        apparently has an influence on their choice of devices. In contrast, we attribute the overall data to devices owned by students who seem to have a different taste in vendors.
+        </p>
 
       <h2><a name="discussion">Discussion</a></h2>
       <p>
-        In general, the observed results imply that adversaries employing WiFi sniffing can detect sensitive information about their target's location, daily behaviour, marketing information
-        or even things like cultural background and social status.Hence, vendors of WiFi-enabled devices recently have started to acknowledge the dangers of these kinds of privacy intrusions and are trying to
-        develop features that make it more difficult for the adversaries to gather sensitive data.
+        In general, the observed results imply that adversaries employing WiFi sniffing can detect sensitive information about their target's location, daily behaviour, marketing information,
+        or even things such as cultural background and social status. Hence, vendors of WiFi-enabled devices recently have started to acknowledge the threats of these kinds of privacy intrusions and they are trying to develop features that hamper collection of sensitive data.
       </p>
       <p>
         One of the most employed techniques for this is the introduction of MAC address randomization when broadcasting probe requests. In general, this means that a device
