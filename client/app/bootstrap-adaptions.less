@@ -91,7 +91,7 @@ p {
   text-align: justify;
 }
 
-ul {
+ul > li {
   line-height: 24px;
 }
 
@@ -112,4 +112,23 @@ blockquote {
 
 .nav-pills > li + li {
   border-right: none;
+}
+
+.no-margin-row {
+  margin: 0;
+}
+
+.no-padding {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.no-padding:first-child {
+  padding-left: 0;
+  padding-right: 2px;
+}
+
+.no-padding:last-child {
+  padding-left: 2px;
+  padding-right: 0px;
 }

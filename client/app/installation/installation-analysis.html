@@ -21,6 +21,7 @@
         <h2>Requirements</h2>
 
         <ul>
+            <li><a href="https://git-scm.org/">Git</a></li>
             <li><a href="http://docker.com/" target="_blank">Docker</a></li>
             <li><a href="https://docs.docker.com/compose/" target="_blank">Docker-Compose</a></li>
             <li><a ui-sref="installation-core" target="_blank">Running Docker-Compose of Probr-Core</a></li>
@@ -28,7 +29,11 @@
 
         <h2>Installation</h2>
 
-        <p>Clone probr-analysis and head into its directory. Now let docker-compose start your probr-analysis instance:</p>
+        <p>Clone the probr-analysis repository and head into its directory.</p>
+        <pre><code>git clone https://github.com/probr/probr-analysis.git && cd probr-analysis</code></pre>
+
+        <h2>Starting</h2>
+        <p>Now let docker-compose start your probr-core instance:</p>
 
         <pre><code>docker-compose up -d</code></pre>
 
@@ -38,12 +43,13 @@
 
     <div class="row" ng-show="installation ==='nodejs'">
 
-      <h3><a id="user-content-technology" class="anchor" href="#technology" aria-hidden="true"><span
-        class="octicon octicon-link"></span></a>Technology</h3>
+      <h2><a id="user-content-technology" class="anchor" href="#technology" aria-hidden="true"><span
+        class="octicon octicon-link"></span></a>Requirements</h2>
 
       <p>To build and run the application you will need:</p>
 
       <ul>
+        <li><a href="https://git-scm.org/">Git</a></li>
         <li><a href="https://nodejs.org/en/">NodeJS version 0.10</a></li>
         <li><a href="https://www.npmjs.com/">NPM</a></li>
         <li><a href="http://bower.io/">Bower</a></li>
@@ -54,35 +60,37 @@
       <p>Also, to have the best user experience, including live modes and analysis, you should have a running set-up of
         probr-core, as described <a href="https://github.com/probr/probr-core">here</a>.</p>
 
-      <h2><a id="user-content-getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span
-        class="octicon octicon-link"></span></a>Getting started</h2>
+      <h2>Installation</h2>
 
-      <p>Make sure probr-core runs and collects data.</p>
+      <p>Clone the probr-analysis repository and head into its directory.</p>
+      <pre><code>git clone https://github.com/probr/probr-analysis.git && cd probr-analysis</code></pre>
 
-      <p>Make sure your mongo deamon runs:</p>
+      <h2>Starting</h2>
 
-    <pre><code>mongod &amp;</code></pre>
+      <p>Make sure probr-core runs and collects data. First make sure your mongo deamon runs:</p>
+
+      <pre><code>mongod &amp;</code></pre>
 
       <p>Also, start your redis server:</p>
 
-    <pre><code>redis-server &amp;</code></pre>
+      <pre><code>redis-server &amp;</code></pre>
 
       <p>After cloning the repo and going into the <code>probr-analysis</code> directory:</p>
 
-    <pre><code>npm install</code></pre>
+      <pre><code>npm install</code></pre>
 
       <p>After the installation of the npm dependencies has finished, install the bower dependencies:</p>
 
-    <pre><code>bower install</code></pre>
+      <pre><code>bower install</code></pre>
 
       <p>These steps will also install <a href="http://gruntjs.com/">Grunt</a>. Our project comes with preconfigured grunt
         tasks, so you can run:</p>
 
-    <pre><code>grunt build</code></pre>
+      <pre><code>grunt build</code></pre>
 
       <p>To start the application, run:</p>
 
-    <pre><code>grunt serve</code></pre>
+      <pre><code>grunt serve</code></pre>
 
       <p>The application should now be reachable under <a href="http://localhost:9000">http://localhost:9000</a>.</p>
 

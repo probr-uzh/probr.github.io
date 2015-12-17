@@ -18,47 +18,75 @@
         to conduct research-project in the domain of wireless sniffing, tracking and analysis. The project is split into two completely independent parts.
     </p>
 
-    <h2>Core</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Core</h2>
+
+            <p>
+                <a ui-sref="docs-core">probr-core</a> is a python-django based system for remote device administration. It allows to setup basic *NIX devices to use for various tasks, including
+                but not limited to sniffing. It processes *.pcap files and stores their content in numerous databases. You can write your own handlers to adjust probr-core to your use case.
+            </p>
+
+        </div>
+
+        <div class="col-md-6">
+            <h2>Analysis</h2>
+
+            <p>
+                <a ui-sref="docs-analysis">probr-analysis</a> is a NodeJS based frontend that visualizes core concepts of our analysis of collected probe requests. It allows to track individual
+                devices using their MAC-Address, as well as monitor room utilization using an custom-made algorithm.
+            </p>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="row no-margin-row">
+                <div class="col-xs-4 no-padding">
+                    <a ui-sref="installation-core">
+                        <button class="btn btn-primary btn-block">Getting Started</button>
+                    </a>
+                </div>
+                <div class="col-xs-4 no-padding">
+                    <a ui-sref="docs-core">
+                        <button class="btn btn-default btn-block">Documentation</button>
+                    </a>
+                </div>
+                <div class="col-xs-4 no-padding">
+                    <a href="https://github.com/probr/probr-core" target="_blank">
+                        <button class="btn btn-default btn-block"><i class="fa fa-github"></i> Github</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="row no-margin-row">
+                <div class="col-xs-4 no-padding">
+                    <a ui-sref="installation-analysis">
+                        <button class="btn btn-primary btn-block">Getting Started</button>
+                    </a>
+                </div>
+                <div class="col-xs-4 no-padding">
+                    <a ui-sref="docs-analysis">
+                        <button class="btn btn-default btn-block">Documentation</button>
+                    </a>
+                </div>
+                <div class="col-xs-4 no-padding">
+                    <a href="https://github.com/probr/probr-analysis    " target="_blank">
+                        <button class="btn btn-default btn-block"><i class="fa fa-github"></i> Github</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h1>
+        Motiviation
+    </h1>
 
     <p>
-        <a ui-sref="docs-core">probr-core</a> is a python-django based system for remote device administration. It allows to setup basic *NIX devices to use for various tasks, including
-        but not limited to sniffing
-    </p>
-
-    <h2>Analysis</h2>
-
-    <p>
-        <a ui-sref="docs-analysis">probr-analysis</a> is a NodeJS based frontend that visualizes core concepts of our analysis of collected probe requests. It allows to track individual
-        devices using
-        their MAC-Address, as well as monitor room utilization using an custom-made algorithm.
-    </p>
-
-    <h2>Get Started</h2>
-
-    <p>
-        To try out probr for yourself, simply follow our <a ui-sref="get-started">Get Started</a> guide.
-    </p>
-
-    <h1>How It Works</h1>
-
-    <p>
-        Probr uses a distributed architecture. The central component called probr-core serves as a management and storage server. First, all sniffing devices register themselves on the
-        server and can be remotely managed. They are able to relay their sniffing-results (or result of any other given task) to the server which will process the received payload through a
-        flexible
-        handler-system.
-    </p>
-
-    <p>
-        The system is currently able to process *.pcap files and to store its contents into a database of your choice. New database adapters can also be written easily and registered in
-        probr-core.
-    </p>
-
-    <h2>
-        Advantages
-    </h2>
-
-    <p>
-        Using probr-core gives you a headstart when building your own sniffing architecture. Data collection is therefore easy, and faulty devices can be remotely administrated. This allows
+        Using probr-core gives you a headstart when building your own sniffing architecture. Data collection therefore is easy, and faulty devices can be remotely administrated. This allows
         you to concentrate on your actual research project instead of rebuilding the same system for different use cases over and over again.
     </p>
 

@@ -56,24 +56,27 @@
     <h2>Requirements</h2>
 
     <ul>
+      <li><a href="https://git-scm.org/">Git</a></li>
       <li><a href="http://docker.com/" target="_blank">Docker</a></li>
       <li><a href="https://docs.docker.com/compose/" target="_blank">Docker-Compose</a></li>
     </ul>
 
     <h2>Installation</h2>
 
-    <p>Clone probr-core and head into its directory. Now let docker-compose start your probr-core instance:</p>
+    <p>Clone the probr-analysis repository and head into its directory.</p>
+    <pre><code>git clone https://github.com/probr/probr-core.git && cd probr-core</code></pre>
+
+    <h2>Starting</h2>
+    <p>Now let docker-compose start your probr-core instance:</p>
 
     <pre><code>docker-compose up -d</code></pre>
 
     <p>This will setup a functioning probr-core installation, as well as MongoDB and InfluxDB and its corresponding handlers.</p>
-
     <p>In order to have a login for probr-core, you have to set-up a superuser for the application:</p>
 
     <pre><code>docker exec -ti probrcore_web_1 python manage.py createsuperuser</code></pre>
 
-    <p> Now you can log in to the probr-core web application and manage your devices or start sniffing.</p>
-
+    <p>Probr core is now running on localhost:8000 (or the IP of your docker-machine). Now you can log in to the probr-core web application and manage your devices or start sniffing.</p>
   </div>
 
   <div class="row" ng-show="installation ==='python'">
@@ -114,7 +117,7 @@
 
     <p>Clone the probr-core repository and go into the repository directory</p>
 
-    <pre><code>git clone https://github.com/probr/probr-core.git<br>cd probr-core</code></pre>
+    <pre><code>git clone https://github.com/probr/probr-core.git && cd probr-core</code></pre>
 
     <p>Add (and modify) settings</p>
     <pre><code>cp probr/settings.example.py probr/settings.py</code></pre>
@@ -172,11 +175,9 @@
 
     <h2>Installation</h2>
     <p>Clone the probr-core repository</p>
-    <pre><code>git clone https://github.com/probr/probr-core.git</code></pre>
+    <pre><code>git clone https://github.com/probr/probr-core.git && cd probr-core</code></pre>
 
     <h2>Starting</h2>
-    <p>Go into the folder</p>
-    <pre><code>cd probr-core</code></pre>
     <p>Start the Vagrant VM</p>
     <pre><code>vagrant up</code></pre>
     <p>Probr core is now running on 192.168.100.10:8000. Username and password for the admin user is admin/admin.</p>
@@ -189,18 +190,6 @@
     <pre><code>screen -r probrcoreweb</code></pre>
     <p>To de-attach press Ctrl-A Ctrl-D. Check <a href="https://www.gnu.org/software/screen/manual/">the official documentation</a> of screen for further information.</p>
   </div>
-
-  <h2>Devices</h2>
-
-  <p>The devices used for sniffing WiFi packets must fulfill the following requirements:</p>
-
-  <ul>
-    <li>*NIX operating system or simliar (Debian, Ubuntu, OpenWRT, Mac OS X, Raspbian etc.)</li>
-    <li>wget installed</li>
-    <li>tcpdump installed</li>
-    <li>internet access</li>
-    <li>wireless interface with monitor mode capabilities</li>
-  </ul>
 </div>
 
 <footer></footer>
