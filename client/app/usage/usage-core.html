@@ -2,31 +2,151 @@
 
 <div class="container content">
 
-    <h1>Probr-Core: Usage Examples</h1>
+  <h1>Probr-Core: Usage Examples</h1>
 
-    <div class="row">
-        <div class="col-xs-12">
-            <h2>
-                Adding a new device
-            </h2>
-            The gif below shows how you can use the device wizard to add a sniffing device. The terminal on the right is a ssh connection to the device which shall be set up.
-            <p>
-                <img src="assets/images/gifs/add_device_wizard.gif" alt="Adding a device." class="usage-gif img-responsive" />
-            </p>
-        </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>
+        Adding a new capture device
+      </h2>
+
+      <p>Probr-Core has been developed with support of embedded devices in mind. The only dependencies a device has to
+        fulfil are:</p>
+      <ul>
+        <li>ability to execute <a target="_blank"
+                                  href="http://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.69/html_node/Portable-Shell.html">POSIX
+          compliant shell scripts</a></li>
+        <li>wget with POST (--post-data) support</li>
+        <li>sed with REGEX support</li>
+      </ul>
+      <p>This means a recent version of busybox covers all dependencies. The Probr-Core daemon script has been tested on
+        the following platforms:</p>
+      <ul>
+        <li>DD-WRT</li>
+        <li>OpenWRT</li>
+        <li>Ubuntu</li>
+        <li>Mac OS</li>
+        <li>Raspbian</li>
+      </ul>
+
+      <h3>Adding a Raspberry Pi to Probr-Core</h3>
+      <p>Raspberry Pi is a perfect match for Probr-Core, it's cheap, small and covers all requirements the daemon script
+        poses.
+        This tutorial starts with a Raspberry Pi that has no OS installed, we selected Raspbian as the OS but
+        considering
+        the
+        very basic dependencies every Raspberry Pi OS can be used.</p>
+      <h4>Installing Raspbian</h4>
+      <p>We start by downloading Raspbian from <a target="_blank"
+                                                  href="https://www.raspberrypi.org/downloads/raspbian/">here</a>
+        once you have the image file you can follow depending on the OS you are using one of the following official
+        tutorials
+        for installing the OS on your SD card:</p>
+      <ul>
+        <li><a target="_blank" href="https://www.raspberrypi.org/documentation/installation/installing-images/linux.md">Linux</a>
+        </li>
+        <li><a target="_blank" href="https://www.raspberrypi.org/documentation/installation/installing-images/mac.md">Mac
+          OS</a></li>
+        <li><a target="_blank"
+               href="https://www.raspberrypi.org/documentation/installation/installing-images/windows.md">Windows</a>
+        </li>
+      </ul>
+
+      <h4>SSHing to the freshly installed Raspberry</h4>
+      <p>The next step is to SSH to your freshly setup raspberry. This will be the last time you need a direct SSH
+        connection, so make it count ;) In Raspbian the default username/password
+        combination is pi/raspberry. After you connected successfully do a 'sudo su' (this will ask you for the
+        password,
+        the default is 'raspberry') to gain root access. You are now ready
+        to go to your Probr-Core installation and add a new device.</p>
+
+      <h4>Add your new device on Probr-Core</h4>
+      <p>The gif below shows how you can use the device wizard to add a sniffing device. The terminal on the right is a
+        ssh connection to the device which shall be set up.</p>
+      <p>
+        <img src="assets/images/gifs/add_device_wizard.gif" alt="Adding a device." class="usage-gif img-responsive"/>
+      </p>
+      <p>As you can see in the animation after copy/pasting the snippet to your device's root terminal, the device
+        should
+        appear
+        automagically in the web interface. From now on you can place your device wherever you want. As long as it has
+        internet it
+        can be controlled and monitored through Probr-Core, no port forwarding needed.</p>
+
+      <p>Note: The daemon script you installed by copy/pasting the snippet above will install itself as a @reboot
+        cronjob.
+        Furthermore
+        every command executed from the Probr-Core interface will have root privileges. It is highly recommended to
+        secure
+        your server
+        connections with HTTPS and strong passwords.</p>
+
+      <h4>Starting sniffing WiFi Packets</h4>
+      <p>Now that you can executed commands from the Probr-Core web interface, things start to get interesting. If you
+        want to start
+        WiFi packet collection (sniffing) the first thing you need to do is identify your WiFi network interface, the
+        easiest way
+        to achieve this is with a simple 'ifconfig'. Our WiFi interface is called 'wlan0'. Once identified you can start
+        sniffing
+        with the following script:</p>
+    <pre>
+sudo apt-get update
+sudo apt-get install -y tcpdump
+ifconfig wlan0 down
+iwconfig wlan0 mode monitor
+iwconfig wlan0 channel 6
+ifconfig wlan0 up
+mkdir -p captures
+tcpdump -e -ni wlan0 -s 0 -w captures/capture-%s.pcap -G 5 type mgt subtype probe-req
+    </pre>
+      <p>The script installs tcpdump without user interaction, sets the interface into monitor mode and collects/stores
+        probe requests
+        to captures/capture-*.pcap</p>
+      <p>The next step is to move these distributed capture files to a central place. We do this by watching the capture
+        folder
+        and uploading those pcaps to the server:</p>
+    <pre>
+apt-get install -y inotify-tools
+# Upload existing and future pcaps
+
+# Make sure output folder exists
+mkdir -p captures
+
+# Upload Existing
+for file in captures/*.pcap
+do
+    post_file '/api-device/device-captures/' "$file" && rm "$file"
+done
+
+# Upload future pcaps (blocking)
+inotifywait -m captures/ -e close_write -e move |
+    while read path action file; do
+        post_capture "$file" && rm "captures/$file"
+    done
+    </pre>
+      <p>The script installs inotify-tools without user interaction and watches the folder 'captures'. Whenever a new
+        file
+        is created this file is uploaded. After uploading those pcaps the handlers will process them and we can analyse
+        them in Probr-Analysis.</p>
+      <p>Note: Probr-Core comes preshipped with some command templates, the examples above are two of them.</p>
     </div>
+  </div>
 
-    <div class="row">
-        <div class="col-xs-12">
-            <h2>
-                Uploading a pcap from a different source:
-            </h2>
-
-            <p>
-                <img src="assets/images/gifs/upload_pcap.gif" alt="Uploading a pcap by hand." class="usage-gif img-responsive" />
-            </p>
-        </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>
+        Uploading a pcap from a different source:
+      </h2>
+      <p>If you want to perform historic analysis of WiFi captures and don't need a live stream of packets Probr-Core
+        gives you the option to manually upload pcaps. The following script shows you how you can easily upload many
+        pcaps with a simple drag and drop:</p>
+      <p>
+        <img src="assets/images/gifs/upload_pcap.gif" alt="Uploading a pcap by hand." class="usage-gif img-responsive"/>
+      </p>
+      <p>After uploading those pcaps the handlers will process them and we can analyse
+        them in Probr-Analysis.</p>
     </div>
+  </div>
 
 </div>
 
