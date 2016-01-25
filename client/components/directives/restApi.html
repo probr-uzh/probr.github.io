@@ -1,0 +1,6 @@
+<h3>{{name}}</h3>
+<p>
+    <span class="label" style="margin-right: 3px" ng-class="{'label-primary': method == 'GET' || method == 'GET/LIST', 'label-info': method == 'POST' || method == 'PUT', 'label-danger': method == 'DELETE', 'active-label': method == displayedMethod }" ng-repeat="method in methods"><a ng-click="switch(method)">{{method}}</a></span>
+    <pre><code><small>{{path | trimByMethod : displayedMethod}}</small></code></pre>
+    <pre ng-show="payload[displayedMethod]"><code><small>{{payload[displayedMethod] | prettyJSON }}</small></code></pre>
+</p>

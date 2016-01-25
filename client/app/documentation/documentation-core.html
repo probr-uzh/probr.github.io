@@ -12,19 +12,10 @@
 
                         <li><a href="/#/docs/core#architecture">Architecture</a></li>
                         <li><a href="/#/docs/core#frontend">Front-End</a></li>
-
-                        <h3>REST API</h3>
-                        <li><a href="/#/docs/core#rest-frontend">Frontend API</a></li>
-                        <li><a href="/#/docs/core#rest-device">Devices API</a></li>
+                        <li><a href="/#/docs/core#rest">REST API</a></li>
 
                         <h3>Customizing</h3>
-                        <li><a href="/#/docs/core#authentication">Authentication</a></li>
-                        <li><a href="/#/docs/core#remote-execution">Remote execution</a></li>
-                        <li><a href="/#/docs/core#handlers">Custom handlers</a></li>
-
-                        <h3>Usage</h3>
-                        <li><a href="/#/docs/core#add-device">Add device</a></li>
-                        <li><a href="/#/docs/core#upload-capture">Upload capture</a></li>
+                        <li><a href="/#/docs/core#handlers">Handlers</a></li>
 
                     </ul>
                 </section>
@@ -62,7 +53,7 @@
                     write handlers for the data storage systems of your choice can be found <a href="#/faq">here</a>.
                 </p>
 
-                <h2><a name="frontend">Front-end</a></h2>
+                <h2><a name="frontend">Front-End</a></h2>
 
                 The web frontend is the main component the user interacts with. It is written entirely in HTML5 and JavaScript
                 (using AngularJS).
@@ -100,51 +91,18 @@
                 </ul>
 
                 <h2><a name="rest">REST API</a></h2>
-
-                The diagram below shows the endpoints of the REST API available in probr-core:
-                <br>
-
-                <img class="doc-img img-responsive" src="assets/images/rest_core.png"/>
-
-                <h3><a name="rest-frontend">Frontend API</a></h3>
-
+                <h3>Authentication</h3>
                 <p>
-                    The endpoints starting with api/ are accessed by the probr-core web frontend. Those can only be accessed with a
-                    valid
-                    JSON WebToken (JWT). The JWT authentication is integrated with the Django user administration. For more info,
-                    check out
-                    the respective <a href="http://getblimp.github.io/django-rest-framework-jwt/">pip module</a>.
+                    Probr-core uses standard <a href="http://jwt.io/" target="_blank">JSON Web Token Authentication</a> to enable protected REST-Endpoints being queried. Further information can be
+                    found in the documentation of the plugin
+                    developer <a href="http://getblimp.github.io/django-rest-framework-jwt/" target="_blank">Django REST Framework JWT</a>
+                    as well as in their repository on <a href="https://github.com/GetBlimp/django-rest-framework-jwt" target="_blank">Github</a>.
                 </p>
 
-                <h3>Devices</h3>
-                <small>
-                    <pre><code>GET: /api/device | [{device1},{device2},{device3}...]</code></pre>
-                    <pre><code>POST: /api/device | Payload: {JSON-Device}</code></pre>
-                    <pre><code>GET: /api/device/{device-uuid} | {device}</code></pre>
-                    <pre><code>PUT: /api/device/{device-uuid} | Payload: {JSON-Device}</code></pre>
-                    <pre><code>DELETE: /api/device/{device-uuid}</code></pre>
-                </small>
-
-                <h3>Statuses</h3>
-                <small>
-                    <pre><code>GET: /api/statuses/ | [{status1},{status2},{status3}...]</code></pre>
-                </small>
-
-                <h3>Commands</h3>
-                <small>
-                    <pre><code>GET: /api/commands/ | [{command1},{command2},{command3}...]</code></pre>
-                    <pre><code>POST: /api/commands/ | Payload: {JSON-Status}</code></pre>
-                    <pre><code>GET: /api/commands/{command-uuid} | {command}</code></pre>
-                    <pre><code>PUT: /api/commands/{command-uuid} | Payload: {JSON-Status}</code></pre>
-                </small>
-
-                <h3>Command Templates</h3>
-                <small>
-                    <pre><code>GET: /api/commandtemplates/ | [{commandtemplate1},{commandtemplate2},{commandtemplate3}...]</code></pre>
-                    <pre><code>POST: /api/commandtemplates/ | Payload: {JSON-CommandTemplate}</code></pre>
-                    <pre><code>GET: /api/commandtemplates/{commandtemplates-uuid} | {commandtemplate}</code></pre>
-                    <pre><code>PUT: /api/commandtemplates/{commandtemplates-uuid} | Payload: {JSON-CommandTemplate}</code></pre>
-                </small>
+                <rest-api name="'Devices'" methods="['GET', 'GET/LIST', 'POST', 'PUT', 'DELETE']" , payload="deviceObj" path="'/api/device/:device-uuid'"></rest-api>
+                <rest-api name="'Statuses'" methods="['GET/LIST']" , payload="statusObj" path="'/api/statuses?device=device-uuid'"></rest-api>
+                <rest-api name="'Commands'" methods="['GET','GET/LIST','POST','PUT']" , payload="commandObj" path="'/api/commands/:command-uuid'"></rest-api>
+                <rest-api name="'Templates'" methods="['GET','GET/LIST','POST','PUT']" , payload="templateObj" path="'/api/commandtemplates/:commandtemplate-uuid'"></rest-api>
 
                 <h3><a name="rest-devices">Devices API</a></h3>
 
@@ -155,34 +113,13 @@
                     wizard in the web frontend. Registering a new device is only possible if the user is logged in via Django user administration/JWTAuth.
                 </p>
 
-                <h3>Captures</h3>
-                <small>
-                    <pre><code>POST: /api-device/captures | Payload: Capture</code></pre>
-                </small>
+                <rest-api name="'Captures'" methods="['POST']" , payload="deviceCaptureObj" path="'/api-device/captures'"></rest-api>
+                <rest-api name="'Statuses'" methods="['GET','POST']" , payload="deviceStatusObj" path="'/api-device/statuses'"></rest-api>
+                <rest-api name="'Commands'" methods="['GET','POST','PUT']" , payload="deviceCommandObj" path="'/api-device/commands'"></rest-api>
 
-                <h3>Statuses</h3>
-                <small>
-                    <pre><code>GET: /api-device/statuses/ | [{statuses1},{statuses2},{statuses3}...]</code></pre>
-                    <pre><code>POST: /api-device/statuses/ | Payload: {JSON-Status}</code></pre>
-                </small>
-
-                <h3>Commands</h3>
-                <small>
-                    <pre><code>GET: /api-device/commands/ | [{commands1},{commands2},{commands3}...]</code></pre>
-                    <pre><code>POST: /api-device/commands/ | Payload: {JSON-Command}</code></pre>
-                    <pre><code>PUT: /api-device/commands/{command-uuid} | Payload: {JSON-Command}</code></pre>
-                </small>
-
-                <h2><a name="authentication">Authentication</a></h2>
-
-                <h2><a name="remote-execution">Remote command execution</a></h2>
-
-                <h2><a name="handlers">Writing custom handlers</a></h2>
-
-                <h2><a name="usage">Usage samples</a></h2>
-
+                <h2><a name="handlers">Handlers</a></h2>
                 <p>
-                    See <a ui-sref="usage-core">Usage-Core</a> for more details;
+
                 </p>
 
             </div>
