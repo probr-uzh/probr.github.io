@@ -7,13 +7,24 @@ angular.module('probrSiteApp')
                 methods: "=",
                 path: "=",
                 payload: "=",
-                name: "="
+                name: "=",
+                description: "="
             },
             templateUrl: 'components/directives/restApi.html',
             link: function restApi(scope, element) {
+                scope.maxLimit = 300;
+                scope.limit = scope.maxLimit;
                 scope.displayedMethod = scope.methods[0];
                 scope.switch = function (method) {
                     scope.displayedMethod = method;
+                }
+
+                scope.extendLimit = function() {
+                    if (scope.limit <=  scope.maxLimit) {
+                        scope.limit = 50000;
+                    } else {
+                        scope.limit =  scope.maxLimit;
+                    }
                 }
             }
         };

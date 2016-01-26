@@ -8,9 +8,9 @@ angular.module('probrSiteApp')
                 top = 0;
 
             function toggleStickyNav() {
-                if (!element.hasClass('controls-fixed') && $window.pageYOffset > top + size) {
+                if (!element.hasClass('controls-fixed') && $window.pageYOffset > top + size && $window.innerWidth >= 1200) {
                     element.addClass('controls-fixed');
-                } else if (element.hasClass('controls-fixed') && $window.pageYOffset <= top + size) {
+                } else if (element.hasClass('controls-fixed') && $window.pageYOffset <= top + size && $window.innerWidth >= 1200) {
                     element.removeClass('controls-fixed');
                 }
             }
@@ -28,6 +28,7 @@ angular.module('probrSiteApp')
                 top = element[0].getBoundingClientRect().top + $window.pageYOffset;
                 toggleStickyNav();
             });
+
             w.bind('scroll', toggleStickyNav);
         }
 

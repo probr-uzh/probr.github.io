@@ -1,6 +1,7 @@
-<h3>{{name}}</h3>
+<h3 ng-if="name">{{name}}</h3>
 <p>
     <span class="label" style="margin-right: 3px" ng-class="{'label-primary': method == 'GET' || method == 'GET/LIST', 'label-info': method == 'POST' || method == 'PUT', 'label-danger': method == 'DELETE', 'active-label': method == displayedMethod }" ng-repeat="method in methods"><a ng-click="switch(method)">{{method}}</a></span>
+    <small><span ng-if="description">{{description}}</span></small>
     <pre><code><small>{{path | trimByMethod : displayedMethod}}</small></code></pre>
-    <pre ng-show="payload[displayedMethod]"><code><small>{{payload[displayedMethod] | prettyJSON }}</small></code></pre>
+    <pre ng-click="extendLimit()" ng-show="payload[displayedMethod]"><i class="fa fixed-caret" ng-class="{'fa-caret-left': limit <= maxLimit, 'fa-caret-down': limit > maxLimit}"></i><code><small>{{payload[displayedMethod] | prettyJSON | limitTo: limit}}</small></code></pre>
 </p>
