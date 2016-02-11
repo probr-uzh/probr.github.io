@@ -45,6 +45,10 @@ angular.module('probrSiteApp')
                 ]
             },
             {
+              'title': 'FAQ',
+              'link': 'faq',
+            },
+            {
                 'title': 'Usecase',
                 'link': 'usecase',
             }
