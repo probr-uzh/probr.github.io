@@ -99,10 +99,10 @@
                     as well as in their repository on <a href="https://github.com/GetBlimp/django-rest-framework-jwt" target="_blank">Github</a>.
                 </p>
 
-                <rest-api name="'Devices'" methods="['GET', 'GET/LIST', 'POST', 'PUT', 'DELETE']" , payload="deviceObj" path="'/api/device/:device-uuid'"></rest-api>
-                <rest-api name="'Statuses'" methods="['GET/LIST']" , payload="statusObj" path="'/api/statuses?device=device-uuid'"></rest-api>
-                <rest-api name="'Commands'" methods="['GET','GET/LIST','POST','PUT']" , payload="commandObj" path="'/api/commands/:command-uuid'"></rest-api>
-                <rest-api name="'Templates'" methods="['GET','GET/LIST','POST','PUT']" , payload="templateObj" path="'/api/commandtemplates/:commandtemplate-uuid'"></rest-api>
+                <rest-api name="'Devices'" methods="['GET', 'GET/LIST', 'POST', 'PUT', 'DELETE']" payload="deviceObj" path="'/api/device/:device-uuid'"/>
+                <rest-api name="'Statuses'" methods="['GET/LIST']" payload="statusObj" path="'/api/statuses?device=device-uuid'"/>
+                <rest-api name="'Commands'" methods="['GET','GET/LIST','POST','PUT']" payload="commandObj" path="'/api/commands/:command-uuid'"/>
+                <rest-api name="'Templates'" methods="['GET','GET/LIST','POST','PUT']" payload="templateObj" path="'/api/commandtemplates/:commandtemplate-uuid'"/>
 
                 <h3><a name="rest-devices">Devices API</a></h3>
 
@@ -113,14 +113,14 @@
                     wizard in the web frontend. Registering a new device is only possible if the user is logged in via Django user administration/JWTAuth.
                 </p>
 
-                <rest-api name="'Captures'" methods="['POST']" , payload="deviceCaptureObj" path="'/api-device/captures'"></rest-api>
-                <rest-api name="'Statuses'" methods="['GET','POST']" , payload="deviceStatusObj" path="'/api-device/statuses'"></rest-api>
-                <rest-api name="'Commands'" methods="['GET','POST','PUT']" , payload="deviceCommandObj" path="'/api-device/commands'"></rest-api>
+                <rest-api name="'Captures'" methods="['POST']" payload="deviceCaptureObj" path="'/api-device/captures'"/>
+                <rest-api name="'Statuses'" methods="['GET','POST']" payload="deviceStatusObj" path="'/api-device/statuses'"/>
+                <rest-api name="'Commands'" methods="['GET','POST','PUT']" payload="deviceCommandObj" path="'/api-device/commands'"/>
 
-                <h2><a name="handlers">Handlers</a></h2>
-                <p>
+                <!--<h2><a name="handlers">Handlers</a></h2>-->
+                <!--<p>-->
 
-                </p>
+                <!--</p>-->
 
             </div>
 

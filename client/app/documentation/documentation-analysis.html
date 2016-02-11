@@ -122,8 +122,8 @@
 
                 <h3>Devices</h3>
                 <p>
-                    <rest-api methods="['GET/LIST']" , payload="deviceObj" path="'/api/device/query?starTimestamp={timestamp}&endTimestamp={timestamp}&tags={tag}'"
-                              description="'Get devices identified in a certain time range and with a certain tag.'"></rest-api>
+                    <rest-api methods="['GET/LIST']" payload="deviceObj" path="'/api/device/query?starTimestamp={timestamp}&endTimestamp={timestamp}&tags={tag}'"
+                              description="'Get devices identified in a certain time range and with a certain tag.'"/>
                     <!-- not used anymore in analysis
                         <rest-api methods="['GET/LIST']" , payload="deviceObj" path="'/api/device/lastFive'"
                                   description="'Get devices seen in the last 5 minutes.'"></rest-api>
@@ -138,24 +138,24 @@
 
                 <h3>Locations</h3>
                 <p>
-                    <rest-api methods="['GET/LIST']" , payload="locationObj" path="'/api/locations?query={URL-encoded MongoDB query object}'"
-                              description="'You can use arbitrary MongoDB query objects.'"></rest-api>
+                    <rest-api methods="['GET/LIST']" payload="locationObj" path="'/api/locations?query={URL-encoded MongoDB query object}'"
+                              description="'You can use arbitrary MongoDB query objects.'"/>
                 </p>
 
 
                 <h3>Sessions</h3>
                 <p>
-                    <rest-api methods="['GET/LIST']" , payload="sessionObj" path="'/api/session?query={URL-encoded MongoDB query object}'"
-                              description="'You can use arbitrary MongoDB query objects.'"></rest-api>
+                    <rest-api methods="['GET/LIST']" payload="sessionObj" path="'/api/session?query={URL-encoded MongoDB query object}'"
+                              description="'You can use arbitrary MongoDB query objects.'"/>
                 <hr/>
-                <rest-api methods="['GET/LIST']" , payload="sessionReduceObj" path="'/api/session/reduce?startTimestamp={timestamp}&endTimestamp={timestamp}&tags={tag}'"
-                          description="'Gets the aggregated session data for the utilization view, according to the passed timestamps and tag.'"></rest-api>
+                <rest-api methods="['GET/LIST']" payload="sessionReduceObj" path="'/api/session/reduce?startTimestamp={timestamp}&endTimestamp={timestamp}&tags={tag}'"
+                          description="'Gets the aggregated session data for the utilization view, according to the passed timestamps and tag.'"/>
                 </p>
 
                 <h3>Packets</h3>
                 <p>
-                    <rest-api methods="['GET/LIST']" , payload="packetObj" path="'/api/packets/count?query={URL-encoded MongoDB query object}'"
-                              description="'On this endpoint, you can choose what parameters you use. You can use arbitrary MongoDB query objects and can filter packets arbitrarily and also use MongoDB features like sorting.'"></rest-api>
+                    <rest-api methods="['GET/LIST']" payload="packetObj" path="'/api/packets/count?query={URL-encoded MongoDB query object}'"
+                              description="'On this endpoint, you can choose what parameters you use. You can use arbitrary MongoDB query objects and can filter packets arbitrarily and also use MongoDB features like sorting.'"/>
                 </p>
 
                 <h2><a name="workers">Async workers</a></h2>
